@@ -1,5 +1,5 @@
 {
-  "name": "preflight",
+  "name": "@upleveled/preflight",
   "version": "1.0.0",
   "main": "index.js",
   "author": "josehower <josehowerupn@gmail.com>",
