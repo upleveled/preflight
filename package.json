@@ -36,10 +36,6 @@
   },
   "size-limit": [
     {
-      "path": "dist/preflight.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
       "path": "dist/preflight.esm.js",
       "limit": "10 KB"
     }
