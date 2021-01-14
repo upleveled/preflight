@@ -28,11 +28,6 @@
     "analyze": "size-limit --why"
   },
   "peerDependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
-  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
@@ -68,7 +63,6 @@
     "eslint-plugin-react-hooks": "4.0.8",
     "eslint-plugin-testing-library": "3.9.0",
     "eslint-plugin-unicorn": "25.0.1",
-    "husky": "4.3.7",
     "size-limit": "4.9.1",
     "tsdx": "0.14.1",
     "tslib": "2.1.0",
