@@ -1,10 +1,18 @@
-import { Listr, ListrContext } from 'listr2';
-import eslintTask from './checks/eslintTask';
-import noUnnecessaryFilesTask from './checks/noUnnecessaryFilesTask';
+import { Listr } from 'listr2';
+import * as eslint from './checks/eslint';
+import * as noSecretsCommittedToGit from './checks/noSecretsCommittedToGit';
+import * as noUselessFilesCommittedToGit from './checks/noUselessFilesCommittedToGit';
 
-const taskList = [eslintTask, noUnnecessaryFilesTask];
+const listrTasks = [
+  eslint,
+  noUselessFilesCommittedToGit,
+  noSecretsCommittedToGit,
+].map(module => ({
+  title: module.title,
+  task: module.default,
+}));
 
-await new Listr<ListrContext>(taskList, {
+await new Listr(listrTasks, {
   exitOnError: false,
   rendererOptions: { collapseErrors: false },
   concurrent: 5,
