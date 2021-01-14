@@ -6,7 +6,7 @@ import { DefaultRenderer } from 'listr2/dist/renderer/default.renderer';
 const title = 'EsLint check';
 
 async function eslintCheck(
-  _ctx: ListrContext,
+  ctx: ListrContext,
   task: ListrTaskWrapper<any, typeof DefaultRenderer>
 ): Promise<void> {
   try {
