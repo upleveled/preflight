@@ -23,7 +23,7 @@
     "build": "tsdx build --format esm",
     "test": "tsdx test",
     "lint": "tsdx lint src test --max-warnings 0",
-    "prepare": "tsdx build",
+    "prepare": "yarn build",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
