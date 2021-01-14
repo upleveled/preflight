@@ -1,3 +1,4 @@
+// git ls-tree --full-tree --name-only -r HEAD
 import execa from 'execa';
 import { ListrTaskWrapper, ListrContext } from 'listr2';
 import { DefaultRenderer } from 'listr2/dist/renderer/default.renderer';

@@ -7,7 +7,9 @@
     "Karl Horky <karl.horky@gmail.com>"
   ],
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/preflight.esm.js",
+  "module": "dist/preflight.esm.js",
+  "type": "module",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -17,7 +19,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "start": "tsdx watch",
+    "start": "tsdx watch --format esm",
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint src test --max-warnings 0",
@@ -37,7 +39,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "module": "dist/preflight.esm.js",
   "size-limit": [
     {
       "path": "dist/preflight.cjs.production.min.js",
@@ -50,6 +51,7 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "4.9.1",
+    "@types/listr": "^0.14.2",
     "@typescript-eslint/eslint-plugin": "4.13.0",
     "@typescript-eslint/parser": "4.13.0",
     "@upleveled/eslint-config-upleveled": "1.4.1",
@@ -76,6 +78,7 @@
     "eslint": "7.5.0"
   },
   "dependencies": {
+    "execa": "^5.0.0",
     "listr2": "3.2.3"
   }
 }
