@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "tsdx watch --format esm",
-    "build": "tsdx build",
+    "build": "tsdx build --format esm",
     "test": "tsdx test",
     "lint": "tsdx lint src test --max-warnings 0",
     "prepare": "tsdx build",
