@@ -7,11 +7,10 @@ export default async function eslintCheck() {
     await execa.command('yarn eslint . --max-warnings 0  --format compact');
   } catch (err) {
     throw new Error(
-      `ESLint errors in these files:
-      ${err.stdout
+      `Errors found in files:\n${err.stdout
         .split('\n')
-        .filter((line: string) => line.startsWith('/'))
-        .map((line: string) => line.match(/^([^:]+):/)?.[1])
+        .filter((line: string) => /^(\/|[A-Z]:\\)/.test(line))
+        .map((line: string) => line.match(/^(([A-Z]:)?[^:]+):/)?.[1])
         .reduce((linesWithoutDuplicates: string[], line: string) => {
           if (!linesWithoutDuplicates.includes(line)) {
             linesWithoutDuplicates.push(line);

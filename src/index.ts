@@ -1,4 +1,5 @@
 import { Listr } from 'listr2';
+import { VerboseRenderer } from 'listr2/dist/renderer/verbose.renderer';
 import * as eslint from './checks/eslint';
 import * as nodeModulesIgnoredFromGit from './checks/nodeModulesIgnoredFromGit';
 import * as noSecretsCommittedToGit from './checks/noSecretsCommittedToGit';
