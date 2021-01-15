@@ -1,5 +1,4 @@
 import execa from 'execa';
-import fs from 'fs';
 
 export const title = 'node_modules/ folder ignored from Git';
 
