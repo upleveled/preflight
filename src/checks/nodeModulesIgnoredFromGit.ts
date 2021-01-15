@@ -13,7 +13,7 @@ export default async function nodeModulesIgnoredFromGit() {
 
   if (nodeModulesResponse.stdout) {
     // TODO: Add command for removing them
-    throw Error(
+    throw new Error(
       `node_modules/ folder committed to Git:\n${nodeModulesResponse.stdout}`
     );
   }
