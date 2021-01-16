@@ -61,5 +61,9 @@
   },
   "resolutions": {
     "eslint": "7.17.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
