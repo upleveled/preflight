@@ -5,13 +5,13 @@ import wordWrap from '../throwError';
 export const title = 'No secrets committed to Git';
 
 export default async function noSecretsCommittedToGit() {
-  const response = await execa.command('git ls-files .env .env*.local');
+  const { stdout } = await execa.command('git ls-files .env .env*.local');
 
-  if (response.stdout !== '') {
+  if (stdout !== '') {
     throw Error(
       wordWrap(
         `Secrets committed to Git 😱:
-          ${response.stdout}
+          ${stdout}
           ${'‎'}
           Remove these files from your repo by installing BFG from the System Setup Guide (see Optional Software at the bottom) and running it on each of your files like this:
           ${commandExample('bfg --delete-files <filename here>')}
