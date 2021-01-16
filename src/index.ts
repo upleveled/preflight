@@ -4,8 +4,8 @@ import { URL } from 'url';
 import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit';
 import * as eslint from './checks/eslint';
 import * as nodeModulesIgnoredFromGit from './checks/nodeModulesIgnoredFromGit';
+import * as noExtraneousFilesCommittedToGit from './checks/noExtraneousFilesCommittedToGit';
 import * as noSecretsCommittedToGit from './checks/noSecretsCommittedToGit';
-import * as noUselessFilesCommittedToGit from './checks/noUselessFilesCommittedToGit';
 import * as preflightIsLatestVersion from './checks/preflightIsLatestVersion';
 import * as useSinglePackageManager from './checks/useSinglePackageManager';
 
@@ -20,7 +20,7 @@ const listrTasks = [
   // Git
   allChangesCommittedToGit,
   nodeModulesIgnoredFromGit,
-  noUselessFilesCommittedToGit,
+  noExtraneousFilesCommittedToGit,
   noSecretsCommittedToGit,
 
   // Package Managers
