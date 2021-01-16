@@ -7,7 +7,7 @@ export const title = 'Preflight is latest version';
 
 export default async function preflightIsLatestVersion() {
   const { stdout: remoteVersion } = await execa.command(
-    'npm show @upleveled/eslint-config-upleveled version',
+    'npm show @upleveled/preflight version',
   );
 
   const localVersion = JSON.parse(
