@@ -5,9 +5,21 @@ import wordWrap from '../wordWrap';
 export const title = 'No unused dependencies';
 
 export default async function noUnusedDependencies() {
+  const ignoredPackagePatterns = [
+    '@size-limit/*',
+    '@typescript-eslint/*',
+    '@upleveled/*',
+    'babel-*',
+    'depcheck',
+    'eslint',
+    'eslint-*',
+    'tslib',
+    'typescript',
+  ].join(',');
+
   try {
     await execa.command(
-      'yarn depcheck --ignores="eslint,depcheck,eslint-*,babel-*,tslib,typescript,@typescript-eslint/*,@upleveled/*,@size-limit/*"',
+      `yarn depcheck --ignores="${ignoredPackagePatterns}"`,
     );
   } catch (error) {
     throw Error(
