@@ -28,8 +28,7 @@ export default async function noUnusedDependencies() {
            ${error.stdout
              .split('\n')
              .filter((str: string) => str.includes('* '))
-             .map((str: string) => str + '\n')
-             .join('')}
+             .join('\n')}
            Remove these dependencies running the following command for each dependency:
            ${commandExample('yarn remove <dependency name here>')}
          `,
