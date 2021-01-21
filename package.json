@@ -31,7 +31,7 @@
     "prepare": "yarn build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "depcheck": "depcheck --ignores=\"eslint,eslint-*,babel-*,tslib,@typescript-eslint/*,@upleveled/*,@size-limit/*\""
+    "depcheck": "depcheck --ignores=\"eslint,eslint-*,babel-*,tslib,typescript,@typescript-eslint/*,@upleveled/*,@size-limit/*\""
   },
   "peerDependencies": {},
   "devDependencies": {
