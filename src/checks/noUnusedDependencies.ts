@@ -12,7 +12,7 @@ export default async function noUnusedDependencies() {
   } catch (error) {
     throw Error(
       wordWrap(
-        `Remove next unused dependencies:
+        `Unused dependencies found:
            ${error.stdout
              .split('\n')
              .filter((str: string) => str.includes('* '))
