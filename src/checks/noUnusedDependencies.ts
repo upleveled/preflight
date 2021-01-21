@@ -30,8 +30,9 @@ export default async function noUnusedDependencies() {
              .filter((str: string) => str.includes('* '))
              .map((str: string) => str + '\n')
              .join('')}
-             Remove these dependencies running the following command for each dependency:
-             ${commandExample('yarn remove <dependency name here>')}`,
+           Remove these dependencies running the following command for each dependency:
+           ${commandExample('yarn remove <dependency name here>')}
+         `,
       ),
     );
   }
