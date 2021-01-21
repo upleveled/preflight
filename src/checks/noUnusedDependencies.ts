@@ -23,13 +23,14 @@ export default async function noUnusedDependencies() {
     throw Error(
       wordWrap(
         `Unused dependencies found:
-           ${error.stdout
-             .split('\n')
-             .filter((str: string) => str.includes('* '))
-             .join('\n')}
-           Remove these dependencies running the following command for each dependency:
-           ${commandExample('yarn remove <dependency name here>')}
-         `,
+          ${error.stdout
+            .split('\n')
+            .filter((str: string) => str.includes('* '))
+            .join('\n')}
+          ${'‎'}
+          Remove these dependencies running the following command for each dependency:
+          ${commandExample('yarn remove <dependency name here>')}
+        `,
       ),
     );
   }
