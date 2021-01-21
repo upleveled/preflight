@@ -30,8 +30,7 @@
     "lint": "tsdx lint src test --max-warnings 0",
     "prepare": "yarn build",
     "size": "size-limit",
-    "analyze": "size-limit --why",
-    "depcheck": "depcheck --ignores=\"eslint,eslint-*,babel-*,tslib,typescript,@typescript-eslint/*,@upleveled/*,@size-limit/*\""
+    "analyze": "size-limit --why"
   },
   "peerDependencies": {},
   "devDependencies": {
