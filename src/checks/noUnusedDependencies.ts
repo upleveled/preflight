@@ -6,13 +6,9 @@ export const title = 'No unused dependencies';
 
 export default async function noUnusedDependencies() {
   try {
-    const { stdout } = await execa.command(
+    await execa.command(
       'yarn depcheck --ignores="eslint,depcheck,eslint-*,babel-*,tslib,typescript,@typescript-eslint/*,@upleveled/*,@size-limit/*"',
     );
-
-    if (stdout.includes('No depcheck issue')) {
-      return;
-    }
   } catch (error) {
     throw Error(
       wordWrap(
