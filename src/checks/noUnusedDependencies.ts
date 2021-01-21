@@ -18,9 +18,7 @@ export default async function noUnusedDependencies() {
   ].join(',');
 
   try {
-    await execa.command(
-      `yarn depcheck --ignores="${ignoredPackagePatterns}"`,
-    );
+    await execa.command(`yarn depcheck --ignores="${ignoredPackagePatterns}"`);
   } catch (error) {
     throw Error(
       wordWrap(
