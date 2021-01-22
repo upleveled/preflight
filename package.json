@@ -72,7 +72,7 @@
     "wrap-ansi": "7.0.0"
   },
   "resolutions": {
-    "eslint": "7.17.0"
+    "eslint": "7.18.0"
   },
   "prettier": {
     "singleQuote": true,
