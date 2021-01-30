@@ -3,6 +3,7 @@ import { existsSync, promises as fs } from 'fs';
 import { createRequire } from 'module';
 import fetch from 'node-fetch';
 import pReduce from 'p-reduce';
+import commandExample from '../../commandExample';
 
 const require = createRequire(import.meta.url);
 
@@ -23,10 +24,7 @@ export default async function noDependenciesWithoutTypes() {
 
   const dependenciesWithMissingTypes = await pReduce(
     Object.keys(dependencies),
-    async (
-      filteredDependencies: { [key: string]: string },
-      dependency: string,
-    ) => {
+    async (filteredDependencies: [string, string][], dependency: string) => {
       // If a matching `@types/<package name>` has been already installed in devDependencies, bail out
       if (Object.keys(devDependencies).includes(`@types/${dependency}`)) {
         return filteredDependencies;
@@ -79,16 +77,24 @@ export default async function noDependenciesWithoutTypes() {
         const definitelyTypedPackageName = (definitelyTypedImage.attr(
           'title',
         ) as string).replace(definitelyTypedPreamble, '');
-        filteredDependencies[dependency] = definitelyTypedPackageName;
+        filteredDependencies.push([dependency, definitelyTypedPackageName]);
       }
 
       return filteredDependencies;
     },
-    {},
+    [],
   );
 
-  if (Object.keys(dependenciesWithMissingTypes).length > 0) {
-    // TODO: Add proper error message here
-    throw new Error(JSON.stringify(dependenciesWithMissingTypes, null, 2));
+  if (dependenciesWithMissingTypes.length > 0) {
+    throw new Error(
+      `Dependencies found without types. Add the missing types with:
+
+      ${dependenciesWithMissingTypes
+        .map(([, definitelyTypedPackageName]) =>
+          commandExample(`yarn add --dev ${definitelyTypedPackageName}`),
+        )
+        .join('\n')}
+      `,
+    );
   }
 }
