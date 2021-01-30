@@ -25,11 +25,6 @@ export default async function noDependenciesWithoutTypes() {
   const dependenciesWithMissingTypes = await pReduce(
     Object.keys(dependencies),
     async (filteredDependencies: [string, string][], dependency: string) => {
-      // If a matching `@types/<package name>` has been already installed in devDependencies, bail out
-      if (Object.keys(devDependencies).includes(`@types/${dependency}`)) {
-        return filteredDependencies;
-      }
-
       try {
         const packageJsonPath = require.resolve(`${dependency}/package.json`);
 
@@ -77,6 +72,12 @@ export default async function noDependenciesWithoutTypes() {
         const definitelyTypedPackageName = (definitelyTypedImage.attr(
           'title',
         ) as string).replace(definitelyTypedPreamble, '');
+
+        // If a matching `@types/<package name>` has been already installed in devDependencies, bail out
+        if (Object.keys(devDependencies).includes(definitelyTypedPackageName)) {
+          return filteredDependencies;
+        }
+
         filteredDependencies.push([dependency, definitelyTypedPackageName]);
       }
 
