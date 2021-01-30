@@ -89,11 +89,11 @@ export default async function noDependenciesWithoutTypes() {
     throw new Error(
       `Dependencies found without types. Add the missing types with:
 
-      ${dependenciesWithMissingTypes
-        .map(([, definitelyTypedPackageName]) =>
-          commandExample(`yarn add --dev ${definitelyTypedPackageName}`),
-        )
-        .join('\n')}
+      ${commandExample(
+        `yarn add --dev ${dependenciesWithMissingTypes
+          .map(([, definitelyTypedPackageName]) => definitelyTypedPackageName)
+          .join(' ')}`,
+      )}
       `,
     );
   }
