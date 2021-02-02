@@ -12,22 +12,19 @@ async function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
 type Repo = {
   repoPath: string;
   dirName: string;
-  scripts?: {
-    install: string;
-    postinstall: string;
-  };
+  installCommands?: string[];
 };
 
 const testRepos: Repo[] = [
   {
     repoPath: 'upleveled/preflight-test-project-react-passing',
     dirName: 'react-passing',
-    scripts: {
+    installCommands: [
       // To install the latest version of the ESLint config
-      install: 'yarn upgrade --latest @upleveled/eslint-config-upleveled',
+      'yarn upgrade --latest @upleveled/eslint-config-upleveled',
       // Avoid any issues with uncommitted files
-      postinstall: 'git commit -a -m "Update ESLint Config"',
-    },
+      'git reset --hard HEAD',
+    ],
   },
 ];
 
@@ -41,21 +38,20 @@ beforeAll(
 
     await pMap(
       testRepos,
-      async ({ dirName, scripts }) => {
-        // Set the git user name and email
-        await execa.command(`git config --local user.name "Nobody"`);
-        await execa.command(
-          `git config --local user.email "nobody@example.com"`,
-        );
-
-        await execa.command(scripts?.install || 'yarn --frozen-lockfile', {
-          cwd: `${fixturesTempDir}/${dirName}`,
-        });
-        if (scripts?.postinstall) {
-          await execa.command(scripts.postinstall, {
+      async ({ dirName, installCommands }) => {
+        if (!installCommands) {
+          return execa.command('yarn --frozen-lockfile', {
             cwd: `${fixturesTempDir}/${dirName}`,
           });
         }
+
+        return Promise.all(
+          installCommands.map(command =>
+            execa.command(command, {
+              cwd: `${fixturesTempDir}/${dirName}`,
+            }),
+          ),
+        );
       },
       { concurrency: 1 },
     );
