@@ -1,7 +1,10 @@
 import execa from 'execa';
 import { promises as fs } from 'fs';
+import { createRequire } from 'module';
 import semver from 'semver';
 import commandExample from '../commandExample';
+
+const require = createRequire(import.meta.url);
 
 export const title = 'ESLint config is latest version';
 
@@ -10,8 +13,16 @@ export default async function eslintConfigIsLatestVersion() {
     'npm show @upleveled/eslint-config-upleveled version',
   );
 
-  const localVersion = JSON.parse(await fs.readFile('./package.json', 'utf-8'))
-    .devDependencies?.['@upleveled/eslint-config-upleveled'];
+  let localVersion;
+
+  try {
+    const eslintConfigPackageJsonPath = require.resolve(
+      '@upleveled/eslint-config-upleveled/package.json',
+    );
+    localVersion = JSON.parse(
+      await fs.readFile(eslintConfigPackageJsonPath, 'utf-8'),
+    ).version;
+  } catch (err) {}
 
   if (typeof localVersion === 'undefined') {
     throw new Error(
