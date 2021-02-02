@@ -42,6 +42,12 @@ beforeAll(
     await pMap(
       testRepos,
       async ({ dirName, scripts }) => {
+        // Set the git user name and email
+        await execa.command(`git config --local user.name "Nobody"`);
+        await execa.command(
+          `git config --local user.email "nobody@example.com"`,
+        );
+
         await execa.command(scripts?.install || 'yarn --frozen-lockfile', {
           cwd: `${fixturesTempDir}/${dirName}`,
         });
