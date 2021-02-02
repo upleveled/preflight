@@ -1,7 +1,6 @@
 import execa from 'execa';
 import { promises as fs } from 'fs';
 import semver from 'semver';
-
 import commandExample from '../commandExample';
 
 export const title = 'ESLint config is latest version';
@@ -12,7 +11,7 @@ export default async function eslintConfigIsLatestVersion() {
   );
 
   const localVersion = JSON.parse(await fs.readFile('./package.json', 'utf-8'))
-    .devDependencies?.['@upleveled/eslint-config-upleveled']?.version;
+    .devDependencies?.['@upleveled/eslint-config-upleveled'];
 
   if (typeof localVersion === 'undefined') {
     throw new Error(
