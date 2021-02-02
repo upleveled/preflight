@@ -51,7 +51,7 @@ beforeAll(
           });
         }
 
-        return Promise.all(
+        return await Promise.all(
           installCommands.map(command =>
             execa.command(command, {
               cwd: `${fixturesTempDir}/${dirName}`,
