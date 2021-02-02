@@ -24,9 +24,12 @@ beforeAll(
     await pMap(
       Object.values(repoPathsToFixtureDirNames),
       async dirName =>
-        execa.command('yarn --frozen-lockfile', {
-          cwd: `${fixturesTempDir}/${dirName}`,
-        }),
+        execa.command(
+          'yarn upgrade --latest @upleveled/eslint-config-upleveled',
+          {
+            cwd: `${fixturesTempDir}/${dirName}`,
+          },
+        ),
       { concurrency: 1 },
     );
   },

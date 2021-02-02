@@ -1,13 +1,19 @@
 import { promises as fs } from 'fs';
 import { Listr } from 'listr2';
 import { URL } from 'url';
+
 import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit';
 import * as eslint from './checks/eslint';
+import * as eslintConfigIsLatestVersion
+  from './checks/eslintConfigIsLatestVersion';
 import * as linkOnGithubAbout from './checks/linkOnGithubAbout';
 import * as nodeModulesIgnoredFromGit from './checks/nodeModulesIgnoredFromGit';
-import * as noDependenciesWithoutTypes from './checks/noDependencyProblems/noDependenciesWithoutTypes';
-import * as noUnusedDependencies from './checks/noDependencyProblems/noUnusedDependencies';
-import * as noExtraneousFilesCommittedToGit from './checks/noExtraneousFilesCommittedToGit';
+import * as noDependenciesWithoutTypes
+  from './checks/noDependencyProblems/noDependenciesWithoutTypes';
+import * as noUnusedDependencies
+  from './checks/noDependencyProblems/noUnusedDependencies';
+import * as noExtraneousFilesCommittedToGit
+  from './checks/noExtraneousFilesCommittedToGit';
 import * as noSecretsCommittedToGit from './checks/noSecretsCommittedToGit';
 import * as preflightIsLatestVersion from './checks/preflightIsLatestVersion';
 import * as useSinglePackageManager from './checks/useSinglePackageManager';
@@ -54,7 +60,8 @@ const listrTasks = [
   // Linting
   eslint,
 
-  // Preflight
+  // Version checks
+  eslintConfigIsLatestVersion,
   preflightIsLatestVersion,
 ].map(module => {
   if ('task' in module) return module;
