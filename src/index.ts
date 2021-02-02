@@ -20,13 +20,13 @@ const version = JSON.parse(
   await fs.readFile(new URL('../package.json', import.meta.url), 'utf-8'),
 ).version;
 
-const require = createRequire(process.cwd());
+const require = createRequire(process.cwd() + '/');
 console.log('process.cwd', process.cwd());
 const eslintConfigPackageJsonPath = require.resolve(
   '@upleveled/eslint-config-upleveled/package.json',
 );
 console.log('eslint package json path', eslintConfigPackageJsonPath);
-process.exit(0);
+
 console.log(`🚀 UpLeveled Preflight v${version}`);
 
 const listrTasks = [
