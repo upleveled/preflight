@@ -4,7 +4,7 @@ import { createRequire } from 'module';
 import semver from 'semver';
 import commandExample from '../commandExample';
 
-const require = createRequire(process.cwd());
+const require = createRequire(`${process.cwd()}/`);
 
 export const title = 'ESLint config is latest version';
 
