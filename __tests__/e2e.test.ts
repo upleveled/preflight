@@ -12,7 +12,10 @@ async function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
 type Repo = {
   repoPath: string;
   dirName: string;
-  scripts?: { install: string };
+  scripts?: {
+    install: string;
+    postinstall: string;
+  };
 };
 
 const testRepos: Repo[] = [
@@ -20,9 +23,10 @@ const testRepos: Repo[] = [
     repoPath: 'upleveled/preflight-test-project-react-passing',
     dirName: 'react-passing',
     scripts: {
-      // To install the latest version of the ESLint config but also avoid any issues with uncommitted files
-      install:
-        'yarn upgrade --latest @upleveled/eslint-config-upleveled && git reset --hard HEAD',
+      // To install the latest version of the ESLint config
+      install: 'yarn upgrade --latest @upleveled/eslint-config-upleveled',
+      // Avoid any issues with uncommitted files
+      postinstall: 'git reset --hard HEAD',
     },
   },
 ];
@@ -37,10 +41,16 @@ beforeAll(
 
     await pMap(
       testRepos,
-      async ({ dirName, scripts }) =>
-        execa.command(scripts?.install || 'yarn --frozen-lockfile', {
+      async ({ dirName, scripts }) => {
+        await execa.command(scripts?.install || 'yarn --frozen-lockfile', {
           cwd: `${fixturesTempDir}/${dirName}`,
-        }),
+        });
+        if (scripts?.postinstall) {
+          await execa.command(scripts.postinstall, {
+            cwd: `${fixturesTempDir}/${dirName}`,
+          });
+        }
+      },
       { concurrency: 1 },
     );
   },
