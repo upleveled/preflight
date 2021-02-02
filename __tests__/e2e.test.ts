@@ -26,7 +26,7 @@ const testRepos: Repo[] = [
       // To install the latest version of the ESLint config
       install: 'yarn upgrade --latest @upleveled/eslint-config-upleveled',
       // Avoid any issues with uncommitted files
-      postinstall: 'git commit -m "Update ESLint Config"',
+      postinstall: 'git commit -a -m "Update ESLint Config"',
     },
   },
 ];
