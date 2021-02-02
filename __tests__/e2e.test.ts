@@ -51,13 +51,13 @@ beforeAll(
           });
         }
 
-        return await Promise.all(
-          installCommands.map(command => {
-            console.log(command);
-            return execa.command(command, {
+        return pMap(
+          installCommands,
+          async command =>
+            execa.command(command, {
               cwd: `${fixturesTempDir}/${dirName}`,
-            });
-          }),
+            }),
+          { concurrency: 1 },
         );
       },
       { concurrency: 1 },
