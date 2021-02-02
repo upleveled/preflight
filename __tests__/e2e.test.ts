@@ -9,27 +9,38 @@ async function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
   );
 }
 
-const repoPathsToFixtureDirNames = {
-  'upleveled/preflight-test-project-react-passing': 'react-passing',
+type Repo = {
+  repoPath: string;
+  dirName: string;
+  scripts?: { install: string };
 };
+
+const testRepos: Repo[] = [
+  {
+    repoPath: 'upleveled/preflight-test-project-react-passing',
+    dirName: 'react-passing',
+    scripts: {
+      // To install the latest version of the ESLint config but also avoid any issues with uncommitted files
+      install:
+        'yarn upgrade --latest @upleveled/eslint-config-upleveled && git reset --hard HEAD',
+    },
+  },
+];
 
 beforeAll(
   async () => {
     await pMap(
-      Object.entries(repoPathsToFixtureDirNames),
-      async ([repoPath, dirName]) => cloneRepoToFixtures(repoPath, dirName),
+      testRepos,
+      async ({ repoPath, dirName }) => cloneRepoToFixtures(repoPath, dirName),
       { concurrency: 4 },
     );
 
     await pMap(
-      Object.values(repoPathsToFixtureDirNames),
-      async dirName =>
-        execa.command(
-          'yarn upgrade --latest @upleveled/eslint-config-upleveled',
-          {
-            cwd: `${fixturesTempDir}/${dirName}`,
-          },
-        ),
+      testRepos,
+      async ({ dirName, scripts }) =>
+        execa.command(scripts?.install || 'yarn --frozen-lockfile', {
+          cwd: `${fixturesTempDir}/${dirName}`,
+        }),
       { concurrency: 1 },
     );
   },
