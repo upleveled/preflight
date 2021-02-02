@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import { Listr } from 'listr2';
+import { createRequire } from 'module';
 import { URL } from 'url';
-
 import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit';
 import * as eslint from './checks/eslint';
 import * as eslintConfigIsLatestVersion from './checks/eslintConfigIsLatestVersion';
@@ -19,6 +19,13 @@ import { TaskParam } from './types/TaskParam';
 const version = JSON.parse(
   await fs.readFile(new URL('../package.json', import.meta.url), 'utf-8'),
 ).version;
+
+const require = createRequire(process.cwd());
+console.log('process.cwd', process.cwd());
+const eslintConfigPackageJsonPath = require.resolve(
+  '@upleveled/eslint-config-upleveled/package.json',
+);
+console.log('eslint package json path', eslintConfigPackageJsonPath);
 
 console.log(`🚀 UpLeveled Preflight v${version}`);
 
