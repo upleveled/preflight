@@ -15,6 +15,7 @@ export default async function eslintConfigIsLatestVersion() {
   try {
     const eslintConfigPackageJsonPath = require.resolve(
       '@upleveled/eslint-config-upleveled/package.json',
+      { paths: [process.cwd()] },
     );
 
     localVersion = JSON.parse(
