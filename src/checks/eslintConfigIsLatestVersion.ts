@@ -1,10 +1,7 @@
 import execa from 'execa';
 import { promises as fs } from 'fs';
-import { createRequire } from 'module';
 import semver from 'semver';
 import commandExample from '../commandExample';
-
-const require = createRequire(`${process.cwd()}/`);
 
 export const title = 'ESLint config is latest version';
 
@@ -19,6 +16,7 @@ export default async function eslintConfigIsLatestVersion() {
     const eslintConfigPackageJsonPath = require.resolve(
       '@upleveled/eslint-config-upleveled/package.json',
     );
+
     localVersion = JSON.parse(
       await fs.readFile(eslintConfigPackageJsonPath, 'utf-8'),
     ).version;
