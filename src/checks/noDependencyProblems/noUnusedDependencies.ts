@@ -17,6 +17,7 @@ export default async function noUnusedDependencies() {
     'autoprefixer',
     'postcss',
     'tailwindcss',
+    '@tailwindcss/jit',
 
     // ESLint configuration
     '@typescript-eslint/*',
