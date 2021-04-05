@@ -14,10 +14,10 @@ export default async function noUnusedDependencies() {
     'web-vitals',
 
     // Tailwind CSS
+    '@tailwindcss/jit',
     'autoprefixer',
     'postcss',
     'tailwindcss',
-    '@tailwindcss/jit',
 
     // ESLint configuration
     '@typescript-eslint/*',
