@@ -78,7 +78,7 @@
     "top-user-agents": "1.0.24"
   },
   "resolutions": {
-    "eslint": "7.24.0"
+    "eslint": "7.25.0"
   },
   "jest": {
     "transformIgnorePatterns": [
