@@ -37,7 +37,7 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "7.14.0",
     "@size-limit/preset-small-lib": "4.10.2",
-    "@types/node": "14.14.44",
+    "@types/node": "14.14.43",
     "@types/node-fetch": "2.5.10",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.3.5",
