@@ -1235,6 +1235,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@next/eslint-plugin-next@10.2.1-canary.6":
+  version "10.2.1-canary.6"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-10.2.1-canary.6.tgz#d9fd722f35ed5aca4bf48ab0667c9b25f303c3e4"
+  integrity sha512-yzg1G/lec6bf4CDtFnMM59mXdYesYCkXIIQ5n6KlIRnvVqoVNQX7Qyrfj7oxJ9rCUa0CZQXhORNhtDZNqbX5NQ==
+
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz#d4b3549a5db5de2683e0c1071ab4f140904bbf69"
