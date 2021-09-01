@@ -4,7 +4,6 @@ on: create
 jobs:
   build:
     if: ${{ github.event.ref_type == 'tag' }}
-    # This job only runs for issue comments
     name: Build and push Docker image
     runs-on: ubuntu-latest
     permissions:
