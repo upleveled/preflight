@@ -12,7 +12,7 @@ import execa from 'execa';
     process.exit(1);
   }
 
-  const repoPath = 'fixtures/checked-repo ';
+  const repoPath = 'repo-to-check';
 
   async function executeCommand(command: string, cwd?: string) {
     const res = await execa.command(command, {
