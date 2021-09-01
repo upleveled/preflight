@@ -14,7 +14,7 @@ import execa from 'execa';
 
   const repoPath = 'fixtures/checked-repo ';
 
-  async function executeCommand(command: string, cwd = repoPath) {
+  async function executeCommand(command: string, cwd?: string) {
     const res = await execa.command(command, {
       cwd,
       reject: false,
