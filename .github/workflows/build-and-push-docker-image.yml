@@ -6,9 +6,9 @@ jobs:
     # This job only runs for issue comments
     name: Build and push Docker image
     runs-on: ubuntu-latest
-    #     permissions:
-    #       contents: read
-    #       packages: write
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v2
