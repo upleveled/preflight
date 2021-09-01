@@ -1,9 +1,9 @@
 name: Build and push Docker image
-on: push
+on: create
 
 jobs:
   build:
-    # This job only runs for issue comments
+    if: ${{ github.event.ref_type == 'tag' }}
     name: Build and push Docker image
     runs-on: ubuntu-latest
     permissions:

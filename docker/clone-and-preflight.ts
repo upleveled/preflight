@@ -2,38 +2,37 @@
 
 import execa from 'execa';
 
-(async () => {
-  const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
+const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
 
-  if (!process.argv[2].match(regex)) {
-    console.error(`Argument doesn't match GitHub URL format. Example:
+if (!process.argv[2].match(regex)) {
+  console.error(`Argument doesn't match GitHub URL format. Example:
 
-  $ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-test-project-react-passing`);
+$ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-test-project-react-passing`);
+  process.exit(1);
+}
+
+const repoPath = 'repo-to-check';
+
+async function executeCommand(command: string, cwd?: string) {
+  const { all, exitCode } = await execa.command(command, {
+    cwd,
+    all: true,
+    reject: false,
+  });
+
+  if (exitCode !== 0) {
+    console.error(all);
     process.exit(1);
+  } else {
+    return all;
   }
+}
 
-  const repoPath = 'repo-to-check';
+await executeCommand(
+  `git clone --depth 1 --single-branch --branch=main ${process.argv[2]} ${repoPath} --config core.autocrlf=input`,
+);
 
-  async function executeCommand(command: string, cwd?: string) {
-    const { stdout, stderr, exitCode } = await execa.command(command, {
-      cwd,
-      reject: false,
-    });
+await executeCommand('yarn install --ignore-scripts', repoPath);
+const preflightCommand = await executeCommand('preflight', repoPath);
 
-    if (exitCode !== 0) {
-      console.error(stderr);
-      process.exit(1);
-    } else {
-      return stdout;
-    }
-  }
-
-  await executeCommand(
-    `git clone --depth 1 --single-branch ${process.argv[2]} ${repoPath} --config core.autocrlf=input`,
-  );
-
-  await executeCommand('yarn install --ignore-scripts', repoPath);
-  const preflightCommand = await executeCommand(`preflight`);
-
-  console.log(preflightCommand);
-})();
+console.log(preflightCommand);
