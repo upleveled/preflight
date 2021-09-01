@@ -39,7 +39,7 @@ import execa from 'execa';
     `git clone --depth 1 --single-branch --branch=main ${process.argv[2]} ${repoPath} --config core.autocrlf=input`,
   );
 
-  await executeCommand('yarn install --ignore-scripts', { cwd: repoPath });
+  await executeCommand('yarn install --ignore-scripts', repoPath);
   const preflightCommand = await executeCommand(`preflight`);
 
   console.log(preflightCommand);
