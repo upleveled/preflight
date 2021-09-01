@@ -35,7 +35,6 @@ import execa from 'execa';
 
   await executeCommand(
     `git clone --depth 1 --single-branch --branch=main ${process.argv[2]} ${repoPath} --config core.autocrlf=input`,
-    process.cwd(),
   );
 
   await executeCommand('yarn install --ignore-scripts');
