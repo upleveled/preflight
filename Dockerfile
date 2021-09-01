@@ -1,7 +1,7 @@
 # This stage installs our modules
 FROM node:16.8-alpine3.12
 WORKDIR /drone
-COPY ./docker/clone-and-preflight.js  ./docker/package.json ./docker/yarn.lock .docker/fixtures/README.md ./
+COPY ./docker/clone-and-preflight.js ./docker/package.json ./docker/yarn.lock ./
 RUN yarn install --frozen-lockfile
 RUN yarn global add @upleveled/preflight
 RUN apk add git
