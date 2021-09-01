@@ -1,10 +1,10 @@
-name: New Tag
+name: Build and push Docker image
 on: push
 
 jobs:
   build:
     # This job only runs for issue comments
-    name: Update package
+    name: build-and-push-docker-image.yml
     runs-on: ubuntu-latest
     #     permissions:
     #       contents: read
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set Node.js version 16
+      - name: Use Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 16
@@ -21,7 +21,7 @@ jobs:
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
 
-      - name: build image
+      - name: Compile TypeScript and build Docker imag
         run: yarn tsc --project docker/tsconfig.json
 
       # Publish to container registry

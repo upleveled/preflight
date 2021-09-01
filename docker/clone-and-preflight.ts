@@ -21,9 +21,11 @@ import execa from 'execa';
     const { stderr, stdout } = res;
 
     console.log(res);
+    console.log(res.exitCode);
+    console.log(res.exitCode !== 0);
     console.log('---------------------------------------> stderr', stderr);
 
-    if (stderr) {
+    if (false) {
       console.error(stderr);
       process.exit(1);
     } else {
