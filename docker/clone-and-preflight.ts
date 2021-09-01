@@ -12,7 +12,7 @@ import execa from 'execa';
     process.exit(1);
   }
 
-  const repoPath = 'fixtures/checked-repo ';
+  const repoPath = 'repo-to-check';
 
   async function executeCommand(command: string, cwd?: string) {
     const res = await execa.command(command, {
@@ -20,18 +20,11 @@ import execa from 'execa';
       reject: false,
     });
 
-    const { stderr, stdout } = res;
-
-    console.log(res);
-    console.log(res.exitCode);
-    console.log(res.exitCode !== 0);
-    console.log('---------------------------------------> stderr', stderr);
-
-    if (false) {
-      console.error(stderr);
+    if (res.exitCode !== 0) {
+      console.error(res.stderr);
       process.exit(1);
     } else {
-      return stdout;
+      return res.stdout;
     }
   }
 
