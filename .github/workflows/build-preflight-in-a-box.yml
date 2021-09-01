@@ -28,9 +28,7 @@ jobs:
         # 2. install dependencies of the repo
         # 3. test preflight inside
       - name: build image
-        run: |
-          cd docker
-          ../node_modules/.bin/tsc
+        run: yarn tsc --project docker/tsconfig.json
 
       # Publish to container registry
       - name: Log in to the Container registry
