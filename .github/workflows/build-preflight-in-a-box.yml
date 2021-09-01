@@ -21,12 +21,6 @@ jobs:
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
 
-        # 'TODO: get the ulr to pass to the sandbox
-
-        # # Use the sandbox to
-        # 1. clone the repo
-        # 2. install dependencies of the repo
-        # 3. test preflight inside
       - name: build image
         run: yarn tsc --project docker/tsconfig.json
 
@@ -49,57 +43,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      # # Pull and run from container registry
-      # # - name: Log in to the Container registry
-      # #   uses: docker/login-action@3f83d7b89cb3b72c3cb1c57dd6faaa722bb5895c
-      # #   with:
-      # #     registry: ghcr.io
-      # #     username: ${{ github.actor }}
-      # #     password: ${{ secrets.GITHUB_TOKEN }}
-      # # - name: Run image with Docker
-      # #   run: |
-      # #     docker pull ghcr.io/upleveled/upleveled-drone:main
-      # #     docker run ghcr.io/upleveled/upleveled-drone:main some-crazy-url-here
-      # #         run: |
-      # #           docker build -t foo .
-      # #           docker save foo > image.tar
-      # #           docker run -t foo
-      # #       - uses: actions/upload-artifact@v2
-      # #         with:
-      # #           name: image
-      # #           path: image.tar
-      # - name: Say Hello to mr. Roboto
-      #   run: yarn go
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     ISSUE_NUMBER: ${{ github.event.issue.number }}
-      #     COMMENT_ID: ${{ github.event.comment.id }}
-      #     COMMENT_BODY: ${{ toJSON(github.event.comment.body) }}
-      #   # id: random-color-generator
-
-      # - name: Get color
-      #   run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
-
-      # - name: run preflight
-      #   run: |
-      #     pwd
-      #     cd ./fixtures/__temp/react-passing
-      #     preflight
-
-      # - name: Create comment
-      #   uses: peter-evans/create-or-update-comment@v1
-      #   with:
-      #     issue-number: ${{ github.event.issue.number }}
-      #     body: |
-      #       This is a multi-line test comment
-      #       - With GitHub **Markdown** :sparkles:
-      #       - Created by [create-or-update-comment][1]
-
-      #       Text is: ${{ github.event.comment.body }}
-      #       preflight:
-      #       ```sh
-      #       ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}
-      #       ```
-      #       [1]: https://github.com/peter-evans/create-or-update-comment
-      #     reactions: '+1'
