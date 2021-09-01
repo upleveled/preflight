@@ -6,7 +6,9 @@ import execa from 'execa';
   const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
 
   if (!process.argv[2].match(regex)) {
-    console.error("checkedRepo URL don't match the expected format");
+    console.error(`Argument doesn't match GitHub URL format. Example:
+
+  $ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-test-project-react-passing`);
     process.exit(1);
   }
 
