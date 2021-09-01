@@ -16,12 +16,12 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16
+          node-version: '16'
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
 
-      - name: Compile TypeScript and build Docker images
+      - name: Compile TypeScript and build Docker imag
         run: yarn tsc --project docker/tsconfig.json
 
       # Publish to container registry
