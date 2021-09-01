@@ -32,8 +32,7 @@ jobs:
           cd docker
           ../node_modules/.bin/tsc
 
-
-      Publish to container registry
+      # Publish to container registry
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
