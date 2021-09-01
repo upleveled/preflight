@@ -4,7 +4,7 @@ on: push
 jobs:
   build:
     # This job only runs for issue comments
-    name: build-and-push-docker-image.yml
+    name: Build and push Docker image
     runs-on: ubuntu-latest
     #     permissions:
     #       contents: read
