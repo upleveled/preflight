@@ -15,16 +15,16 @@ import execa from 'execa';
   const repoPath = 'repo-to-check';
 
   async function executeCommand(command: string, cwd?: string) {
-    const res = await execa.command(command, {
+    const { stdout, stderr, exitCode } = await execa.command(command, {
       cwd,
       reject: false,
     });
 
-    if (res.exitCode !== 0) {
-      console.error(res.stderr);
+    if (exitCode !== 0) {
+      console.error(stderr);
       process.exit(1);
     } else {
-      return res.stdout;
+      return stdout;
     }
   }
 
