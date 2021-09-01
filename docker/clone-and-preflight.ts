@@ -39,12 +39,6 @@ import execa from 'execa';
   );
 
   await executeCommand('yarn install --ignore-scripts');
-  await executeCommand(
-    'yarn upgrade --latest @upleveled/eslint-config-upleveled',
-  );
-
-  await executeCommand('git reset --hard HEAD', 'GIT_RESET_COMMAND');
-
   const preflightCommand = await executeCommand(`preflight`);
 
   console.log(preflightCommand);
