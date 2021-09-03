@@ -33,6 +33,19 @@ await executeCommand(
 );
 
 await executeCommand('yarn install --ignore-scripts', repoPath);
-const preflightCommand = await executeCommand('preflight', repoPath);
+const preflightOutput = await executeCommand('preflight', repoPath);
 
-console.log(preflightCommand);
+if (preflightOutput) {
+  console.log(
+    preflightOutput
+      // node-fetch@3 (dependency in Preflight) uses experimental Node.js
+      // APIs. Until these are no longer experimental, remove the warning
+      // from the output manually.
+      .replace(
+        `(node:27528) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use \`node --trace-warnings ...\` to show where the warning was created)
+`,
+        '',
+      ),
+  );
+}
