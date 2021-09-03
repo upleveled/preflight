@@ -42,9 +42,7 @@ if (preflightOutput) {
       // APIs. Until these are no longer experimental, remove the warning
       // from the output manually.
       .replace(
-        `(node:27528) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
-(Use \`node --trace-warnings ...\` to show where the warning was created)
-`,
+        /\(node:\d+\) ExperimentalWarning: stream\/web is an experimental feature\. This feature could change at any time\n\(Use `node --trace-warnings \.\.\.` to show where the warning was created\)\n/,
         '',
       ),
   );
