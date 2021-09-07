@@ -12,6 +12,10 @@ export default async function noUnusedAndMissingDependencies() {
     '@babel/cli',
     '@upleveled/babel-plugin-remove-node-prefix',
 
+    // next Portfolios portfolio-cms
+    '@babel/core',
+    '@babel/preset-react',
+
     // Unused dependency detected in create-react-app
     '@testing-library/jest-dom',
     '@testing-library/react',
