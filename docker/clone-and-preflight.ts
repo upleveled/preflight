@@ -2,6 +2,9 @@
 
 import execa from 'execa';
 
+import os from 'node:os';
+throw new Error(os.version());
+
 const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
 
 if (!process.argv[2].match(regex)) {
