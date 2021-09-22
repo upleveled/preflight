@@ -2,8 +2,7 @@
 
 import execa from 'execa';
 
-import os from 'node:os';
-console.log('>>>>>', os.version());
+console.log(await execa.command('cat /etc/os-release'));
 
 const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
 
