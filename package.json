@@ -82,11 +82,13 @@
   },
   "resolutions": {
     "tsdx/**/node-notifier": "10.0.0",
+    "tsdx/jest": "27.4.4",
+    "tsdx/ts-jest": "27.1.1",
     "eslint": "8.4.1"
   },
   "jest": {
     "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!aggregate-error|clean-stack|escape-string-regexp|indent-string|p-map).+\\.(js|jsx)$"
+      "[/\\\\]node_modules[/\\\\](?!aggregate-error|clean-stack|escape-string-regexp|execa|human-signals|indent-string|is-stream|mimic-fn|npm-run-path|onetime|p-map|path-key|strip-final-newline).+\\.(js|jsx)$"
     ]
   }
 }
