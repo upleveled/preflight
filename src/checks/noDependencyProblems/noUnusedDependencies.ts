@@ -6,7 +6,7 @@ export const title = 'No unused dependencies';
 
 export default async function noUnusedAndMissingDependencies() {
   const ignoredPackagePatterns = [
-    // Unused dependency detected in next-portfolio-dev
+    // Unused dependency detected in https://github.com/upleveled/next-portfolio-dev
     '@graphql-codegen/cli',
 
     // Unused dependency detected in create-react-app
