@@ -28,7 +28,6 @@ export default async function noUnusedAndMissingDependencies() {
     // Testing
     'babel-jest',
     'jest',
-    'cypress',
     'jest-puppeteer',
     'puppeteer',
 
