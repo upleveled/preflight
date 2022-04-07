@@ -27,10 +27,10 @@ export default async function noUnusedAndMissingDependencies() {
 
     // Testing
     'babel-jest',
+    'cypress',
     'jest',
     'jest-puppeteer',
     'puppeteer',
-    'cypress',
 
     // TypeScript
     'typescript',
