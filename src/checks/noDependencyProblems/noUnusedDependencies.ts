@@ -30,6 +30,7 @@ export default async function noUnusedAndMissingDependencies() {
     'jest',
     'jest-puppeteer',
     'puppeteer',
+    'cypress',
 
     // TypeScript
     'typescript',
