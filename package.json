@@ -90,6 +90,7 @@
     "tsdx/**/node-notifier": "10.0.1",
     "tsdx/jest": "29.1.2",
     "tsdx/ts-jest": "29.0.3",
+    "tsdx/typescript": "4.8.4",
     "@typescript-eslint/eslint-plugin": "5.39.0",
     "@typescript-eslint/parser": "5.39.0",
     "eslint": "8.25.0",
