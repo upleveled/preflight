@@ -18,7 +18,7 @@ export default async function noUnusedAndMissingDependencies() {
     'postcss',
     'tailwindcss',
 
-    // Sass (eg. in create-react-app)
+    // Sass (eg. in create-react-app and Next.js)
     'sass',
 
     // Stylelint configuration
