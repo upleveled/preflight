@@ -26,6 +26,7 @@ export default async function noUnusedAndMissingDependencies() {
     'stylelint-config-recommended-scss',
 
     // ESLint configuration
+    '@typescript-eslint/utils',
     'babel-eslint',
     'eslint-config-next',
 
