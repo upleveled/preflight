@@ -21,6 +21,10 @@ export default async function noUnusedAndMissingDependencies() {
     // Sass (eg. in create-react-app)
     'sass',
 
+    // Stylelint configuration
+    'stylelint-config-css-modules',
+    'stylelint-config-recommended-scss',
+
     // ESLint configuration
     'babel-eslint',
     'eslint-config-next',
