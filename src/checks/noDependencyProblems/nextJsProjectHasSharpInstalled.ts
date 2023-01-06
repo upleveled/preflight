@@ -12,7 +12,7 @@ export default function nextJsProjectHasSharpInstalled() {
     !dependenciesPackageNames.includes('sharp')
   ) {
     throw new Error(
-      `Next.js projects require the sharp package. Install it with:
+      `Next.js projects should have sharp installed for better image optimization. Install it with:
 
         ${commandExample('yarn add sharp')}
       `,
