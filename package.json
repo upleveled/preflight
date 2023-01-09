@@ -88,7 +88,8 @@
     "prettier": "2.8.1",
     "readdirp": "3.6.0",
     "semver": "7.3.8",
-    "top-user-agents": "1.0.50"
+    "top-user-agents": "1.0.50",
+    "patch-package": "6.5.1"
   },
   "resolutions": {
     "tsdx/**/node-notifier": "10.0.1",
