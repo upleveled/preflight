@@ -76,8 +76,10 @@ export default async function noUnusedAndMissingDependencies() {
     }
 
     /**
-     * Filter out @upleveled/eslint-config-upleveled peer dependencies not listed in package.json and flagged as missing dependencies by depcheck
-     * TODO: Remove the filter once the issue 789 is fixed in depcheck
+     * Temporary workaround to filter out @upleveled/eslint-config-upleveled peer dependencies
+     * not listed in `package.json`, which are flagged as missing dependencies by depcheck
+     *
+     * TODO: Remove this variable once this depcheck issue is fixed:
      * https://github.com/depcheck/depcheck/issues/789
      */
     const missingDependenciesStdoutFiltered = missingDependenciesStdout
