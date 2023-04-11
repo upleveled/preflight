@@ -75,15 +75,41 @@ export default async function noUnusedAndMissingDependencies() {
       `);
     }
 
-    if (
-      // Don't run if the only missing dependencies are coming from the .eslintrc.cjs file
-      missingDependenciesStdout
-        .trim()
-        .split('\n')
-        .filter((str) => !str.includes('./.eslintrc.cjs')).length
-    ) {
+    /** Filter out @upleveled/eslint-config-upleveled peer dependencies not listed in package.json and flagged as missing dependencies by depcheck
+     * TODO: Remove this codeblock once the issue 789 is fixed in depcheck
+     * https://github.com/depcheck/depcheck/issues/789
+     */
+    const missingDependenciesStdoutFiltered = missingDependenciesStdout
+      .split('\n')
+      .filter(
+        (missingDependency) =>
+          !(
+            missingDependency.includes('./.eslintrc.cjs') &&
+            [
+              '@typescript-eslint/parser',
+              '@next/eslint-plugin-next',
+              '@typescript-eslint/eslint-plugin',
+              '@upleveled/eslint-plugin-upleveled',
+              'eslint-plugin-import',
+              'eslint-plugin-jsx-a11y',
+              'eslint-plugin-jsx-expressions',
+              'eslint-plugin-react',
+              'eslint-plugin-react-hooks',
+              'eslint-plugin-security',
+              'eslint-plugin-sonarjs',
+              'eslint-plugin-unicorn',
+              'eslint-config-react-app',
+              'eslint-import-resolver-typescript',
+            ].some((excludedDependency) =>
+              missingDependency.includes(excludedDependency),
+            )
+          ),
+      )
+      .join('\n');
+
+    if (missingDependenciesStdoutFiltered) {
       messages.push(`Missing dependencies found:
-        ${missingDependenciesStdout
+        ${missingDependenciesStdoutFiltered
           .split('\n')
           .filter((str: string) => str.includes('* '))
           .join('\n')}
