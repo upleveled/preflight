@@ -84,30 +84,29 @@ export default async function noUnusedAndMissingDependencies() {
      */
     const missingDependenciesStdoutFiltered = missingDependenciesStdout
       .split('\n')
-      .filter(
-        (missingDependency) =>
-          !(
-            missingDependency.includes('./.eslintrc.cjs') &&
-            [
-              '@typescript-eslint/parser',
-              '@next/eslint-plugin-next',
-              '@typescript-eslint/eslint-plugin',
-              '@upleveled/eslint-plugin-upleveled',
-              'eslint-plugin-import',
-              'eslint-plugin-jsx-a11y',
-              'eslint-plugin-jsx-expressions',
-              'eslint-plugin-react',
-              'eslint-plugin-react-hooks',
-              'eslint-plugin-security',
-              'eslint-plugin-sonarjs',
-              'eslint-plugin-unicorn',
-              'eslint-config-react-app',
-              'eslint-import-resolver-typescript',
-            ].some((excludedDependency) =>
-              missingDependency.includes(excludedDependency),
-            )
-          ),
-      )
+      .filter((missingDependency) => {
+        return !(
+          missingDependency.includes('./.eslintrc.cjs') &&
+          [
+            '@typescript-eslint/parser',
+            '@next/eslint-plugin-next',
+            '@typescript-eslint/eslint-plugin',
+            '@upleveled/eslint-plugin-upleveled',
+            'eslint-plugin-import',
+            'eslint-plugin-jsx-a11y',
+            'eslint-plugin-jsx-expressions',
+            'eslint-plugin-react',
+            'eslint-plugin-react-hooks',
+            'eslint-plugin-security',
+            'eslint-plugin-sonarjs',
+            'eslint-plugin-unicorn',
+            'eslint-config-react-app',
+            'eslint-import-resolver-typescript',
+          ].some((excludedDependency) =>
+            missingDependency.includes(excludedDependency),
+          )
+        );
+      })
       .join('\n');
 
     if (missingDependenciesStdoutFiltered) {
