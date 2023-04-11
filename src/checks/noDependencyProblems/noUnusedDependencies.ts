@@ -118,7 +118,7 @@ export default async function noUnusedAndMissingDependencies() {
 
         Add these missing dependencies by running the following command for each dependency:
 
-        ${commandExample('yarn add <dependency name here>')}
+        ${commandExample('pnpm add <dependency name here>')}
       `);
     }
 
