@@ -75,7 +75,13 @@ export default async function noUnusedAndMissingDependencies() {
       `);
     }
 
-    if (missingDependenciesStdout) {
+    if (
+      // Don't run if the only missing dependencies are coming from the .eslintrc.cjs file
+      missingDependenciesStdout
+        .trim()
+        .split('\n')
+        .filter((str) => !str.includes('./.eslintrc.cjs')).length
+    ) {
       messages.push(`Missing dependencies found:
         ${missingDependenciesStdout
           .split('\n')
