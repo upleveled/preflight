@@ -2,7 +2,7 @@ import { execaCommand } from 'execa';
 
 export const title = 'StyleLint';
 
-export default async function eslintCheck() {
+export default async function stylelintCheck() {
   try {
     await execaCommand(
       'pnpm stylelint ./**/*.{css,scss,sass} --max-warnings 0',
