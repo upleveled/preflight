@@ -110,7 +110,7 @@ export default async function noUnusedAndMissingDependencies() {
         })
         .join('\n');
 
-      missingDependenciesStdoutFiltered &&
+      if (missingDependenciesStdoutFiltered) {
         messages.push(`Missing dependencies found:
         ${missingDependenciesStdoutFiltered
           .split('\n')
@@ -121,6 +121,7 @@ export default async function noUnusedAndMissingDependencies() {
 
         ${commandExample('pnpm add <dependency name here>')}
       `);
+      }
     }
 
     if (messages.length > 0) throw new Error(messages.join('\n\n'));
