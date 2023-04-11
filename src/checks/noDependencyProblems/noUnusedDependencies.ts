@@ -121,7 +121,6 @@ export default async function noUnusedAndMissingDependencies() {
       `);
     }
 
-    // TODO: Remove the condition once the issue 789 is fixed in depcheck
     if (messages.length) throw new Error(messages.join('\n\n'));
   }
 }
