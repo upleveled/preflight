@@ -71,7 +71,7 @@ export default async function noUnusedAndMissingDependencies() {
 
         Remove these dependencies by running the following command for each dependency:
 
-        ${commandExample('yarn remove <dependency name here>')}
+        ${commandExample('pnpm remove <dependency name here>')}
       `);
     }
 
