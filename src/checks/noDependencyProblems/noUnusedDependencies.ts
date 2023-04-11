@@ -121,6 +121,6 @@ export default async function noUnusedAndMissingDependencies() {
       `);
     }
 
-    if (messages.length) throw new Error(messages.join('\n\n'));
+    if (messages.length > 0) throw new Error(messages.join('\n\n'));
   }
 }
