@@ -88,20 +88,20 @@ export default async function noUnusedAndMissingDependencies() {
         return !(
           missingDependency.includes('./.eslintrc.cjs') &&
           [
-            '@typescript-eslint/parser',
             '@next/eslint-plugin-next',
             '@typescript-eslint/eslint-plugin',
+            '@typescript-eslint/parser',
             '@upleveled/eslint-plugin-upleveled',
+            'eslint-config-react-app',
+            'eslint-import-resolver-typescript',
             'eslint-plugin-import',
             'eslint-plugin-jsx-a11y',
             'eslint-plugin-jsx-expressions',
-            'eslint-plugin-react',
             'eslint-plugin-react-hooks',
+            'eslint-plugin-react',
             'eslint-plugin-security',
             'eslint-plugin-sonarjs',
             'eslint-plugin-unicorn',
-            'eslint-config-react-app',
-            'eslint-import-resolver-typescript',
           ].some((excludedDependency) =>
             missingDependency.includes(excludedDependency),
           )
