@@ -33,10 +33,10 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Test
-        run: yarn test --ci --maxWorkers=2
+        run: pnpm test --ci --maxWorkers=2

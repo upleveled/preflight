@@ -29,7 +29,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Compile TypeScript and build Docker images
-        run: yarn build-docker-ts
+        run: pnpm build-docker-ts
 
       # Publish to container registry
       - name: Log in to the Container registry
