@@ -1,6 +1,6 @@
 import { execaCommand } from 'execa';
 
-export const title = 'StyleLint';
+export const title = 'Stylelint';
 
 export default async function stylelintCheck() {
   try {
@@ -11,7 +11,7 @@ export default async function stylelintCheck() {
     const { stdout } = error as { stdout: string };
     const lines = stdout.split('\n');
 
-    // If no StyleLint problems detected, throw the error
+    // If no Stylelint problems detected, throw the error
     if (
       !/^\d+ problems \(\d+ errors, \d+ warnings\)$/.test(
         lines[lines.length - 2],
@@ -21,7 +21,7 @@ export default async function stylelintCheck() {
     }
 
     throw new Error(
-      `StyleLint problems found in the following files:
+      `Stylelint problems found in the following files:
 
       ${lines
         .filter((line) => {
