@@ -91,7 +91,10 @@
     "top-user-agents": "1.0.52"
   },
   "overrides": {
-    "tsdx/**/node-notifier": "10.0.1"
+    "tsdx/**/node-notifier": "10.0.1",
+    "tsdx": {
+      "typescript": "5.0.3"
+    }
   },
   "jest": {
     "transformIgnorePatterns": [
