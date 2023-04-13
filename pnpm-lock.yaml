@@ -51,9 +51,6 @@ devDependencies:
   '@babel/plugin-transform-modules-commonjs':
     specifier: 7.21.2
     version: 7.21.2(@babel/core@7.21.4)
-  '@next/eslint-plugin-next':
-    specifier: 13.3.0
-    version: 13.3.0
   '@size-limit/file':
     specifier: 8.2.4
     version: 8.2.4(size-limit@8.2.4)
