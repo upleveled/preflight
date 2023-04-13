@@ -88,11 +88,10 @@
     "semver": "7.3.8",
     "top-user-agents": "1.0.52"
   },
-  "overrides": {
-    "tsdx/**/node-notifier": "10.0.1",
-    "tsdx/jest": "29.5.0",
-    "tsdx/ts-jest": "29.1.0",
-    "tsdx/typescript": "5.0.3"
+  "pnpm": {
+    "overrides": {
+      "typescript": "5.0.3"
+    }
   },
   "jest": {
     "transformIgnorePatterns": [
