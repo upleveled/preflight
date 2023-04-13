@@ -91,17 +91,7 @@
     "top-user-agents": "1.0.52"
   },
   "overrides": {
-    "tsdx/**/node-notifier": "10.0.1",
-    "tsdx/jest": "29.5.0",
-    "tsdx/ts-jest": "29.1.0",
-    "tsdx/typescript": "5.0.3",
-    "@typescript-eslint/eslint-plugin": "5.57.1",
-    "@typescript-eslint/parser": "5.57.1",
-    "eslint": "8.37.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jsx-a11y": "6.7.1",
-    "eslint-plugin-react": "7.32.2",
-    "eslint-plugin-react-hooks": "4.6.0"
+    "tsdx/**/node-notifier": "10.0.1"
   },
   "jest": {
     "transformIgnorePatterns": [

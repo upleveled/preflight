@@ -35,6 +35,8 @@ jobs:
 
       - run: pnpm install
 
+      - run: pnpm tsc
+
       - name: Lint
         run: pnpm lint
 
@@ -42,4 +44,4 @@ jobs:
         run: pnpm build
 
       - name: Test
-        run: pnpm run test --ci --maxWorkers=2
+        run: pnpm test --ci --maxWorkers=2
