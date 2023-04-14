@@ -81,9 +81,6 @@ devDependencies:
   '@typescript-eslint/parser':
     specifier: 5.58.0
     version: 5.58.0(eslint@8.38.0)(typescript@5.0.3)
-  '@upleveled/eslint-plugin-upleveled':
-    specifier: 2.1.6
-    version: 2.1.6(eslint@8.38.0)
   babel-jest:
     specifier: 29.5.0
     version: 29.5.0(@babel/core@7.21.4)
@@ -138,6 +135,9 @@ devDependencies:
   eslint-plugin-unicorn:
     specifier: 46.0.0
     version: 46.0.0(eslint@8.38.0)
+  eslint-plugin-upleveled:
+    specifier: 2.1.7
+    version: 2.1.7(eslint@8.38.0)
   p-map:
     specifier: 5.5.0
     version: 5.5.0
@@ -2533,14 +2533,6 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.58.0
       eslint-visitor-keys: 3.4.0
-    dev: true
-
-  /@upleveled/eslint-plugin-upleveled@2.1.6(eslint@8.38.0):
-    resolution: {integrity: sha512-TSJhqDg+EZNflHQGJbcqKbuwSY30iY3Q7EwUo7+SVzntlbXSwnrZzNWeyUqT+UUumedIpYgfcxi7rFlTVq+U5w==}
-    peerDependencies:
-      eslint: ^8.23.0
-    dependencies:
-      eslint: 8.38.0
     dev: true
 
   /@vue/compiler-core@3.2.47:
