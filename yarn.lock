@@ -3654,11 +3654,6 @@
     "@typescript-eslint/types" "5.58.0"
     eslint-visitor-keys "^3.3.0"
 
-"@upleveled/eslint-config-upleveled@4.0.10":
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/@upleveled/eslint-config-upleveled/-/eslint-config-upleveled-4.0.10.tgz#57b4c751a263808edfa066a6a1cf9073765d197a"
-  integrity sha512-qTla15vgnzm/SB6kXPQErBHIwfciUBXD77GvTBHEhP2ZGTurVIC3vFbK/M48qXlXGx8VosMCWVhIsTv4AL4jug==
-
 "@vue/compiler-core@3.2.11":
   version "3.2.11"
   resolved "https://registry.yarnpkg.com/@vue/compiler-core/-/compiler-core-3.2.11.tgz#10af3777dba303ee7aae668029f131cb90391bee"
@@ -5203,6 +5198,11 @@ eslint-config-react-app@^5.2.1:
   integrity sha512-pGIZ8t0mFLcV+6ZirRgYK6RVqUIKRIi9MmgzUEmrIknsn3AdO0I32asO86dJgloHq+9ZPl8UIg8mYrvgP5u2wQ==
   dependencies:
     confusing-browser-globals "^1.0.9"
+
+eslint-config-upleveled@4.0.12:
+  version "4.0.12"
+  resolved "https://registry.yarnpkg.com/eslint-config-upleveled/-/eslint-config-upleveled-4.0.12.tgz#fe16b678702063e6c7b348d9c83e09a73c1885f8"
+  integrity sha512-kRUjvxlYkC41oaj1a5E3uYjKktSCdtzwF0RcMqJdc9SBKWzgpi6+kf1XZ1+Ad9R8q2tJjE4++NaEa33PhgIjhA==
 
 eslint-import-resolver-node@^0.3.7:
   version "0.3.7"
