@@ -11,5 +11,5 @@
     "**/*.cjs",
     "**/*.mjs"
   ],
-  "exclude": ["node_modules", "src"]
+  "exclude": ["node_modules", "__tests__", "bin", "docker", "src"]
 }
