@@ -1,6 +1,6 @@
 {
   "name": "@upleveled/preflight",
-  "version": "1.23.4",
+  "version": "1.23.6",
   "repository": "upleveled/preflight",
   "license": "MIT",
   "author": "UpLeveled (https://github.com/upleveled)",
@@ -43,7 +43,7 @@
     "cheerio": "1.0.0-rc.12",
     "depcheck": "1.4.3",
     "execa": "7.1.1",
-    "listr2": "5.0.8",
+    "listr2": "6.2.0",
     "node-fetch": "3.3.1",
     "p-reduce": "3.0.0",
     "patch-package": "6.5.1",
