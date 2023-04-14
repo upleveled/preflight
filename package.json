@@ -48,7 +48,7 @@
     "@typescript-eslint/eslint-plugin": "5.58.0",
     "@typescript-eslint/parser": "5.58.0",
     "eslint-config-upleveled": "4.0.12",
-    "@upleveled/eslint-plugin-upleveled": "2.1.6",
+    "eslint-plugin-upleveled": "2.1.7",
     "babel-jest": "29.5.0",
     "eslint": "8.38.0",
     "eslint-config-react-app": "7.0.1",
