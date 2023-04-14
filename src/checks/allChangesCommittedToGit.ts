@@ -25,7 +25,7 @@ export default async function allChangesCommittedToGit() {
         onlyPnpmLockModifiedOnDrone
           ? `
 
-          The only file with changes is the pnpm-lock.yaml file, indicating that npm was incorrectly used in addition to pnpm (eg. an "npm install" command was run). To fix this, force regeneration of the pnpm-lock.yaml file locally with the following command and then commit the changes:
+        The only file with changes is the pnpm-lock.yaml file, indicating that npm was incorrectly used in addition to pnpm (eg. an "npm install" command was run). To fix this, force regeneration of the pnpm-lock.yaml file locally with the following command and then commit the changes:
 
         ${commandExample('pnpm install --force')}`
           : ''
