@@ -1,8 +1,9 @@
 {
-  "extends": "../tsconfig.json",
-  "include": [".eslintrc.cjs", "./**/*.ts"],
-  "exclude": ["node_modules"],
+  "extends": "eslint-config-upleveled/tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "."
-  }
+    "module": "Node16",
+    "target": "ES2020"
+  },
+  "include": [".eslintrc.cjs", "./**/*.ts"],
+  "exclude": ["node_modules"]
 }

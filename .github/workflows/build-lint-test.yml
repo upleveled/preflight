@@ -39,7 +39,11 @@ jobs:
         run: pnpm lint
 
       - name: Check types
-        run: pnpm tsc --project tsconfig.config.json
+        run: |
+          pnpm tsc --project __tests__/tsconfig.json
+          pnpm tsc --project bin/tsconfig.json
+          pnpm tsc --project docker/tsconfig.json
+          pnpm tsc --project tsconfig.config.json
 
       - name: Build
         run: pnpm build
