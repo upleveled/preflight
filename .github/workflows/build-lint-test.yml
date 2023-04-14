@@ -38,6 +38,9 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Check types
+        run: pnpm tsc --project tsconfig.config.json
+
       - name: Build
         run: pnpm build
 
