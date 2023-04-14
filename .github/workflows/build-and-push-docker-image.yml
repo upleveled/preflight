@@ -24,9 +24,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'pnpm'
 
-      - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 'latest'
+      - run: pnpm install
+      - run: pnpm eslint . --max-warnings 0
+      - run: pnpm tsc
 
       - name: Compile TypeScript and build Docker images
         run: pnpm build-docker-ts
