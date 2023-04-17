@@ -10,14 +10,14 @@ export const title = 'ESLint config is latest version';
 
 export default async function eslintConfigIsValid() {
   const { stdout: remoteVersion } = await execaCommand(
-    'npm show @upleveled/eslint-config-upleveled version',
+    'npm show eslint-config-upleveled version',
   );
 
   let localVersion;
 
   try {
     const eslintConfigPackageJsonPath = require.resolve(
-      '@upleveled/eslint-config-upleveled/package.json',
+      'eslint-config-upleveled/package.json',
     );
 
     localVersion = JSON.parse(
@@ -27,14 +27,14 @@ export default async function eslintConfigIsValid() {
 
   if (typeof localVersion === 'undefined') {
     throw new Error(
-      `The UpLeveled ESLint config has not been installed. Please install using the instructions on https://www.npmjs.com/package/@upleveled/eslint-config-upleveled
+      `The UpLeveled ESLint config has not been installed. Please install using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
 
   if (semver.gt(remoteVersion, localVersion)) {
     throw new Error(
-      `Your current version of the UpLeveled ESLint config (${localVersion}) is out of date. The latest version is ${remoteVersion}. Upgrade by running all lines of the install instructions on https://www.npmjs.com/package/@upleveled/eslint-config-upleveled`,
+      `Your current version of the UpLeveled ESLint config (${localVersion}) is out of date. The latest version is ${remoteVersion}. Upgrade by running all lines of the install instructions on https://www.npmjs.com/package/eslint-config-upleveled`,
     );
   }
 
@@ -51,14 +51,14 @@ const config = {
 module.exports = config;`;
   } catch (err) {
     throw new Error(
-      `Error reading your .eslintrc.cjs file. Please reinstall the config using the instructions on https://www.npmjs.com/package/@upleveled/eslint-config-upleveled
+      `Error reading your .eslintrc.cjs file. Please reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
 
   if (!eslintConfigMatches) {
     throw new Error(
-      `Your ESLint config file .eslintrc.cjs does not match the configuration file template. Please reinstall the config using the instructions on https://www.npmjs.com/package/@upleveled/eslint-config-upleveled
+      `Your ESLint config file .eslintrc.cjs does not match the configuration file template. Please reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
