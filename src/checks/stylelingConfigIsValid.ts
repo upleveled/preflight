@@ -69,7 +69,7 @@ module.exports = config;`;
 
   for await (const { path } of readdirp('.', {
     directoryFilter: ['!.git', '!.next', '!node_modules'],
-    fileFilter: ['*.css', '*.scss', '*.sass'],
+    fileFilter: ['*.css', '*.scss', '*.sass', '*.less', '*.js', '*.tsx'],
   })) {
     const fileContents = await fs.readFile(path, 'utf-8');
     if (
