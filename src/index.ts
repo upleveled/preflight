@@ -12,6 +12,7 @@ import * as noSecretsCommittedToGit from './checks/noSecretsCommittedToGit.js';
 import * as preflightIsLatestVersion from './checks/preflightIsLatestVersion.js';
 import * as prettier from './checks/prettier.js';
 import * as projectFolderNameMatchesCorrectFormat from './checks/projectFolderNameMatchesCorrectFormat.js';
+import * as stylelintConfigIsValid from './checks/stylelingConfigIsValid.js';
 import * as stylelint from './checks/stylelint.js';
 import * as useSinglePackageManager from './checks/useSinglePackageManager.js';
 import { CtxParam } from './types/CtxParam.js';
@@ -73,6 +74,7 @@ const listrTasks = [
 
   // Version and configuration checks
   eslintConfigIsValid,
+  stylelintConfigIsValid,
   preflightIsLatestVersion,
 ].map((module) => {
   if ('task' in module) return module;

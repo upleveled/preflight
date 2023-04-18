@@ -5,7 +5,7 @@ export const title = 'Stylelint';
 export default async function stylelintCheck() {
   try {
     await execaCommand(
-      'pnpm stylelint ./**/*.{css,scss,sass} --max-warnings 0',
+      'pnpm stylelint **/*.{css,scss,less,js,tsx} --max-warnings 0',
     );
   } catch (error) {
     const { stdout } = error as { stdout: string };
@@ -13,8 +13,8 @@ export default async function stylelintCheck() {
 
     // If no Stylelint problems detected, throw the error
     if (
-      !/^\d+ problems \(\d+ errors, \d+ warnings\)$/.test(
-        lines[lines.length - 2],
+      !/^\d+ problems? \(\d+ errors?, \d+ warnings\)$/.test(
+        lines[lines.length - 2]!,
       )
     ) {
       throw error;
@@ -27,7 +27,7 @@ export default async function stylelintCheck() {
         .filter((line) => {
           return (
             line !== '' &&
-            !line.match(/^\d+ problems \(\d+ errors, \d+ warnings\)|\d+:\d+/)
+            !line.match(/^\d+ problems? \(\d+ errors?, \d+ warnings\)|\d+:\d+/)
           );
         })
         .map((line) => `${process.cwd()}/${line}`)
