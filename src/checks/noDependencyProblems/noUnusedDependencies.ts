@@ -25,10 +25,6 @@ export default async function noUnusedAndMissingDependencies() {
     'babel-eslint',
     'eslint-config-next',
 
-    // Stylelint configuration
-    'stylelint',
-    'stylelint-config-upleveled',
-
     // Testing
     'babel-jest',
     'cypress',
