@@ -6,7 +6,7 @@ import semver from 'semver';
 
 const require = createRequire(`${process.cwd()}/`);
 
-export const title = 'Stylelint Config is latest version';
+export const title = 'Stylelint config is latest version';
 
 export default async function stylelintConfigIsValid() {
   const { stdout: remoteVersion } = await execaCommand(
