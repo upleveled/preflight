@@ -28,7 +28,7 @@ export default async function noUnusedAndMissingDependencies() {
     //  TODO: Remove this once depcheck issue is fixed:
     //  PR: https://github.com/depcheck/depcheck/pull/790
     //  Issue: https://github.com/depcheck/depcheck/issues/791
-
+    //
     // Stylelint configuration
     'stylelint',
     'stylelint-config-upleveled',
