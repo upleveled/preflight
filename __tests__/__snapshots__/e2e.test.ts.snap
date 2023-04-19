@@ -2,38 +2,38 @@
 
 exports[`Passes in the react-passing test project 1`] = `
 "🚀 UpLeveled Preflight
-✔ All changes committed to Git
-✔ ESLint
-✔ ESLint config is latest version
-✔ GitHub repo has deployed project link under About
-✔ No dependencies without types
-✔ No dependency problems
-✔ No extraneous files committed to Git
-✔ No secrets committed to Git
-✔ No unused dependencies
-✔ Preflight is latest version
-✔ Prettier
-✔ Project folder name matches correct format
-✔ Stylelint
-✔ Stylelint config is latest version
-✔ Use single package manager
-✔ node_modules/ folder ignored in Git
-❯ All changes committed to Git
-❯ ESLint
-❯ ESLint config is latest version
-❯ GitHub repo has deployed project link under About
-❯ No dependencies without types
-❯ No dependency problems
-❯ No extraneous files committed to Git
-❯ No secrets committed to Git
-❯ No unused dependencies
-❯ Preflight is latest version
-❯ Prettier
-❯ Project folder name matches correct format
-❯ Stylelint
-❯ Stylelint config is latest version
-❯ Use single package manager
-❯ node_modules/ folder ignored in Git"
+[33m[STARTED][39m All changes committed to Git
+[33m[STARTED][39m ESLint
+[33m[STARTED][39m ESLint config is latest version
+[33m[STARTED][39m GitHub repo has deployed project link under About
+[33m[STARTED][39m No dependencies without types
+[33m[STARTED][39m No dependency problems
+[33m[STARTED][39m No extraneous files committed to Git
+[33m[STARTED][39m No secrets committed to Git
+[33m[STARTED][39m No unused dependencies
+[33m[STARTED][39m Preflight is latest version
+[33m[STARTED][39m Prettier
+[33m[STARTED][39m Project folder name matches correct format
+[33m[STARTED][39m Stylelint
+[33m[STARTED][39m Stylelint config is latest version
+[33m[STARTED][39m Use single package manager
+[33m[STARTED][39m node_modules/ folder ignored in Git
+[33m[SUCCESS][39m All changes committed to Git
+[33m[SUCCESS][39m ESLint
+[33m[SUCCESS][39m ESLint config is latest version
+[33m[SUCCESS][39m GitHub repo has deployed project link under About
+[33m[SUCCESS][39m No dependencies without types
+[33m[SUCCESS][39m No dependency problems
+[33m[SUCCESS][39m No extraneous files committed to Git
+[33m[SUCCESS][39m No secrets committed to Git
+[33m[SUCCESS][39m No unused dependencies
+[33m[SUCCESS][39m Preflight is latest version
+[33m[SUCCESS][39m Prettier
+[33m[SUCCESS][39m Project folder name matches correct format
+[33m[SUCCESS][39m Stylelint
+[33m[SUCCESS][39m Stylelint config is latest version
+[33m[SUCCESS][39m Use single package manager
+[33m[SUCCESS][39m node_modules/ folder ignored in Git"
 `;
 
 exports[`Passes in the react-passing test project 2`] = `""`;
