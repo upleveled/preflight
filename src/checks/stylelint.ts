@@ -33,7 +33,7 @@ export default async function stylelintCheck() {
         .map((line) => `${process.cwd()}/${line}`)
         .join('\n')}
 
-        Open these files in your editor - there should be problems to fix.
+        Open these files in your editor - there should be problems to fix
       `,
     );
   }
