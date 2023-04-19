@@ -25,6 +25,13 @@ export default async function noUnusedAndMissingDependencies() {
     'babel-eslint',
     'eslint-config-next',
 
+    /**
+     * The main reason to create this exception is that `stylelint` and `stylelint-config-upleveled`
+     * are being flagged as unused dependencies since stylelint is not a special in depcheck. Issue and PR created:
+     *
+     * https://github.com/depcheck/depcheck/issues/791
+     * https://github.com/depcheck/depcheck/pull/790
+     */
     // Stylelint configuration
     'stylelint',
     'stylelint-config-upleveled',
