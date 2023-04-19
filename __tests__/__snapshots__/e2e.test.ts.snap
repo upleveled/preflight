@@ -18,22 +18,22 @@ exports[`Passes in the react-passing test project 1`] = `
 [33m[STARTED][39m Stylelint config is latest version
 [33m[STARTED][39m Use single package manager
 [33m[STARTED][39m node_modules/ folder ignored in Git
-[[SUCCESS][39m All changes committed to Git
-[[SUCCESS][39m ESLint
-[[SUCCESS][39m ESLint config is latest version
-[[SUCCESS][39m GitHub repo has deployed project link under About
-[[SUCCESS][39m No dependencies without types
-[[SUCCESS][39m No dependency problems
-[[SUCCESS][39m No extraneous files committed to Git
-[[SUCCESS][39m No secrets committed to Git
-[[SUCCESS][39m No unused dependencies
-[[SUCCESS][39m Preflight is latest version
-[[SUCCESS][39m Prettier
-[[SUCCESS][39m Project folder name matches correct format
-[[SUCCESS][39m Stylelint
-[[SUCCESS][39m Stylelint config is latest version
-[[SUCCESS][39m Use single package manager
-[[SUCCESS][39m node_modules/ folder ignored in Git"
+[33m[SUCCESS][39m All changes committed to Git
+[33m[SUCCESS][39m ESLint
+[33m[SUCCESS][39m ESLint config is latest version
+[33m[SUCCESS][39m GitHub repo has deployed project link under About
+[33m[SUCCESS][39m No dependencies without types
+[33m[SUCCESS][39m No dependency problems
+[33m[SUCCESS][39m No extraneous files committed to Git
+[33m[SUCCESS][39m No secrets committed to Git
+[33m[SUCCESS][39m No unused dependencies
+[33m[SUCCESS][39m Preflight is latest version
+[33m[SUCCESS][39m Prettier
+[33m[SUCCESS][39m Project folder name matches correct format
+[33m[SUCCESS][39m Stylelint
+[33m[SUCCESS][39m Stylelint config is latest version
+[33m[SUCCESS][39m Use single package manager
+[33m[SUCCESS][39m node_modules/ folder ignored in Git"
 `;
 
 exports[`Passes in the react-passing test project 2`] = `""`;
