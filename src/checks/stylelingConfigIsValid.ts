@@ -27,7 +27,7 @@ export default async function stylelintConfigIsValid() {
 
   if (typeof localVersion === 'undefined') {
     throw new Error(
-      `The UpLeveled Stylelint config has not been installed. Please install using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `The UpLeveled Stylelint Config has not been installed. Please install using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
