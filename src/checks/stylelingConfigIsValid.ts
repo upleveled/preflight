@@ -84,7 +84,7 @@ module.exports = config;`;
       `Stylelint has been disabled in the following files:
         ${stylelintDisableOccurrences.join('\n')}
 
-        Remove all comments disabling or modifying Stylelint rule configuration (eg. stylelint-disable and stylelint-disable-next-line comments) and fix the problems.
+        Remove all comments disabling or modifying Stylelint rule configuration (eg. stylelint-disable and stylelint-disable-next-line comments) and fix the problems
       `,
     );
   }
