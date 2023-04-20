@@ -1,14 +1,22 @@
 import { execaCommand } from 'execa';
 import { LintResult } from 'stylelint';
 
-export const supportedExtensions = ['css', 'scss', 'less', 'js', 'tsx', 'jsx'];
+export const supportedFileExtensions = [
+  'css',
+  'sass',
+  'scss',
+  'less',
+  'js',
+  'tsx',
+  'jsx',
+];
 
 export const title = 'Stylelint';
 
 export default async function stylelintCheck() {
   try {
     await execaCommand(
-      `yarn stylelint **/*.{${supportedExtensions.join(
+      `yarn stylelint **/*.{${supportedFileExtensions.join(
         ',',
       )}} --max-warnings 0 --formatter json`,
     );

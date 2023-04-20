@@ -4,7 +4,7 @@ import { execaCommand } from 'execa';
 import readdirp from 'readdirp';
 import semver from 'semver';
 import { projectPackageJson } from '../util/packageJson';
-import { supportedExtensions } from './stylelint';
+import { supportedFileExtensions } from './stylelint';
 
 const require = createRequire(`${process.cwd()}/`);
 const projectDependencies = projectPackageJson.dependencies || {};
@@ -82,7 +82,7 @@ module.exports = config;`;
 
   for await (const { path } of readdirp('.', {
     directoryFilter: ['!.git', '!.next', '!node_modules'],
-    fileFilter: supportedExtensions.map((extension) => `*.${extension}`),
+    fileFilter: supportedFileExtensions.map((extension) => `*.${extension}`),
   })) {
     const fileContents = await fs.readFile(path, 'utf-8');
     if (fileContents.includes('stylelint-disable')) {
