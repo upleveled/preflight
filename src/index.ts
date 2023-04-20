@@ -68,14 +68,58 @@ const listrTasks = [
   linkOnGithubAbout,
 
   // Linting
-  eslint,
-  stylelint,
-  prettier,
+  {
+    title: 'No linting problems',
+    task: (ctx: CtxParam, task: TaskParam): Listr =>
+      task.newListr([
+        {
+          title: eslint.title,
+          task: eslint.default,
+        },
+        ...(!(
+          '@upleveled/react-scripts' in projectPackageJson.dependencies! ||
+          'next' in projectPackageJson.dependencies!
+        )
+          ? []
+          : [
+              {
+                title: stylelint.title,
+                task: stylelint.default,
+              },
+            ]),
+        {
+          title: prettier.title,
+          task: prettier.default,
+        },
+      ]),
+  },
 
   // Version and configuration checks
-  eslintConfigIsValid,
-  stylelintConfigIsValid,
-  preflightIsLatestVersion,
+  {
+    title: 'No version and configuration problems',
+    task: (ctx: CtxParam, task: TaskParam): Listr =>
+      task.newListr([
+        {
+          title: eslintConfigIsValid.title,
+          task: eslintConfigIsValid.default,
+        },
+        ...(!(
+          '@upleveled/react-scripts' in projectPackageJson.dependencies! ||
+          'next' in projectPackageJson.dependencies!
+        )
+          ? []
+          : [
+              {
+                title: stylelintConfigIsValid.title,
+                task: stylelintConfigIsValid.default,
+              },
+            ]),
+        {
+          title: preflightIsLatestVersion.title,
+          task: preflightIsLatestVersion.default,
+        },
+      ]),
+  },
 ].map((module) => {
   if ('task' in module) return module;
   return {
