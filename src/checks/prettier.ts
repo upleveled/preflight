@@ -1,4 +1,4 @@
-import { dirname } from 'node:path';
+import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execaCommand } from 'execa';
 import normalizeNewline from '../util/normalizeNewline';
@@ -41,7 +41,21 @@ export default async function prettierCheck() {
         // Make paths relative to the project instead of Preflight, eg:
         // before: ../../../../../../projects/random-color-generator-react-app/src/reportWebVitals.js
         // after: random-color-generator-react-app/src/reportWebVitals.js
-        file.replace(/^([A-Z]:|\.\.[/\\])[a-zA-Z0-9-_/.\\ ]*projects[/\\]/, ''),
+        // file.replace(/^([A-Z]:|\.\.[/\\])[a-zA-Z0-9-_/.\\ ]*projects[/\\]/, ''),
+        // path.relative(dirname(fileURLToPath(import.meta.url)), file),
+        // path
+        //   .resolve('../test-student-project/app/api/hello/route.js')
+        //   .replace(process.cwd(), '')
+        //   .slice(1),
+        path
+          .resolve(
+            file.replace(
+              /^([A-Z]:|\.\.[/\\])[a-zA-Z0-9-_/.\\ ]*projects[/\\]/,
+              '../',
+            ),
+          )
+          .replace(process.cwd(), '')
+          .slice(1),
       )
       .filter(
         (file) =>
