@@ -40,9 +40,9 @@ export default async function stylelintCheck() {
     if (stylelintResultsWithErrors.length > 0) {
       throw new Error(
         `Stylelint problems found in the following files:
-        ${stylelintResultsWithErrors.map(
-          (stylelintError) => stylelintError.source,
-        )}
+          ${stylelintResultsWithErrors
+            .map((stylelintResult) => stylelintResult.source)
+            .join('\n')}
 
           Open these files in your editor - there should be problems to fix
         `,
