@@ -8,7 +8,9 @@ export const title = 'Stylelint';
 export default async function stylelintCheck() {
   try {
     await execaCommand(
-      `yarn stylelint **/*.{${supportedExtensions.join()}} --max-warnings 0 --formatter json`,
+      `yarn stylelint **/*.{${supportedExtensions.join(
+        ',',
+      )}} --max-warnings 0 --formatter json`,
     );
   } catch (error) {
     const { stdout } = error as { stdout: string };
