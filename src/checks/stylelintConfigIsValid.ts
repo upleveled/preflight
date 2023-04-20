@@ -3,9 +3,11 @@ import { createRequire } from 'node:module';
 import { execaCommand } from 'execa';
 import readdirp from 'readdirp';
 import semver from 'semver';
+import { projectPackageJson } from '../util/packageJson';
 import { supportedExtensions } from './stylelint';
 
 const require = createRequire(`${process.cwd()}/`);
+const projectDependencies = projectPackageJson.dependencies || {};
 
 export const title = 'Stylelint config is latest version';
 
@@ -13,6 +15,16 @@ export default async function stylelintConfigIsValid() {
   const { stdout: remoteVersion } = await execaCommand(
     'npm show stylelint-config-upleveled version',
   );
+
+  // continue only if project is Next.js or UpLeveled React App
+  if (
+    !(
+      '@upleveled/react-scripts' in projectDependencies ||
+      'next' in projectDependencies
+    )
+  ) {
+    return;
+  }
 
   let localVersion;
 
