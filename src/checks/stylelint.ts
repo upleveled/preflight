@@ -1,6 +1,8 @@
 import { execaCommand } from 'execa';
 import { LintResult } from 'stylelint';
 
+const errorKey: keyof Pick<LintResult, 'errored'> = 'errored';
+
 export const supportedStylelintFileExtensions = [
   'css',
   'sass',
@@ -29,13 +31,13 @@ export default async function stylelintCheck() {
     );
 
     // If no Stylelint errors detected, throw the error
-    if (!/"errored":/.test(stylelintJSONOutput)) {
+    if (!new RegExp(`"${errorKey}":`).test(stylelintJSONOutput)) {
       throw error;
     }
 
     const stylelintResultsWithErrors = (
       JSON.parse(stylelintJSONOutput) as LintResult[]
-    ).filter((stylelintResult) => stylelintResult.errored === true);
+    ).filter((stylelintResult) => stylelintResult[errorKey] === true);
 
     if (stylelintResultsWithErrors.length > 0) {
       throw new Error(
