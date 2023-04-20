@@ -12,10 +12,6 @@ const projectDependencies = projectPackageJson.dependencies || {};
 export const title = 'Stylelint config is latest version';
 
 export default async function stylelintConfigIsValid() {
-  const { stdout: remoteVersion } = await execaCommand(
-    'npm show stylelint-config-upleveled version',
-  );
-
   // continue only if project is Next.js or UpLeveled React App
   if (
     !(
@@ -25,6 +21,10 @@ export default async function stylelintConfigIsValid() {
   ) {
     return;
   }
+
+  const { stdout: remoteVersion } = await execaCommand(
+    'npm show stylelint-config-upleveled version',
+  );
 
   let localVersion;
 
