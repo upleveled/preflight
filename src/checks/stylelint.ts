@@ -11,9 +11,10 @@ export default async function stylelintCheck() {
   } catch (error) {
     const { stdout } = error as { stdout: string };
 
-    const stylelintJSONOutput =
-      stdout.substring(stdout.indexOf('['), stdout.lastIndexOf(']') + 1) ||
-      stdout;
+    const stylelintJSONOutput = stdout.substring(
+      stdout.indexOf('['),
+      stdout.lastIndexOf(']') + 1,
+    );
 
     // If no Stylelint errors detected, throw the error
     if (!/\"errored\":/.test(stylelintJSONOutput)) {
