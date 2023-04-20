@@ -82,7 +82,9 @@ module.exports = config;`;
 
   for await (const { path } of readdirp('.', {
     directoryFilter: ['!.git', '!.next', '!node_modules'],
-    fileFilter: supportedFileExtensions.map((extension) => `*.${extension}`),
+    fileFilter: supportedFileExtensions.map(
+      (fileExtension) => `*.${fileExtension}`,
+    ),
   })) {
     const fileContents = await fs.readFile(path, 'utf-8');
     if (fileContents.includes('stylelint-disable')) {
