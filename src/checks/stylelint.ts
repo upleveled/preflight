@@ -1,8 +1,5 @@
 import { execaCommand } from 'execa';
 import { LintResult } from 'stylelint';
-import { projectPackageJson } from '../util/packageJson';
-
-const projectDependencies = projectPackageJson.dependencies || {};
 
 export const supportedStylelintFileExtensions = [
   'css',
@@ -17,16 +14,6 @@ export const supportedStylelintFileExtensions = [
 export const title = 'Stylelint';
 
 export default async function stylelintCheck() {
-  // Continue only if project is Next.js or UpLeveled React App
-  if (
-    !(
-      '@upleveled/react-scripts' in projectDependencies ||
-      'next' in projectDependencies
-    )
-  ) {
-    return;
-  }
-
   try {
     await execaCommand(
       `pnpm stylelint **/*.{${supportedStylelintFileExtensions.join(
@@ -53,9 +40,7 @@ export default async function stylelintCheck() {
     if (stylelintResultsWithErrors.length > 0) {
       throw new Error(
         `Stylelint problems found in the following files:
-          ${stylelintResultsWithErrors
-            .map(({ source }) => source)
-            .join('\n')}
+          ${stylelintResultsWithErrors.map(({ source }) => source).join('\n')}
 
           Open these files in your editor - there should be problems to fix
         `,

@@ -69,12 +69,33 @@ const listrTasks = [
 
   // Linting
   eslint,
-  stylelint,
+  ...(!(
+    '@upleveled/react-scripts' in projectPackageJson.dependencies! ||
+    'next' in projectPackageJson.dependencies!
+  )
+    ? []
+    : [
+        {
+          title: stylelint.title,
+          task: stylelint.default,
+        },
+      ]),
+
   prettier,
 
   // Version and configuration checks
   eslintConfigIsValid,
-  stylelintConfigIsValid,
+  ...(!(
+    '@upleveled/react-scripts' in projectPackageJson.dependencies! ||
+    'next' in projectPackageJson.dependencies!
+  )
+    ? []
+    : [
+        {
+          title: stylelintConfigIsValid.title,
+          task: stylelintConfigIsValid.default,
+        },
+      ]),
   preflightIsLatestVersion,
 ].map((module) => {
   if ('task' in module) return module;
