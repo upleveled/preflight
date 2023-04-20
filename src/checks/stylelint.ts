@@ -33,14 +33,16 @@ export default async function stylelintCheck() {
       throw error;
     }
 
-    const stylelintErrors = (
+    const stylelintResultsWithErrors = (
       JSON.parse(stylelintJSONOutput) as LintResult[]
-    ).filter((stylelintError) => stylelintError.errored);
+    ).filter((stylelintResult) => stylelintResult.errored);
 
-    if (stylelintErrors.length > 0) {
+    if (stylelintResultsWithErrors.length > 0) {
       throw new Error(
         `Stylelint problems found in the following files:
-        ${stylelintErrors.map((stylelintError) => stylelintError.source)}
+        ${stylelintResultsWithErrors.map(
+          (stylelintError) => stylelintError.source,
+        )}
 
           Open these files in your editor - there should be problems to fix
         `,
