@@ -6,7 +6,6 @@ import normalizeNewline from '../util/normalizeNewline';
 export const title = 'Prettier';
 
 export default async function prettierCheck() {
-  console.log(dirname(fileURLToPath(import.meta.url)))
   try {
     await execaCommand(
       `pnpm prettier --list-different ${process.cwd()}/**/*.{js,jsx,ts,jsx} --ignore-path ${process.cwd()}/.eslintignore --config ${process.cwd()}/prettier.config.cjs --end-of-line auto`,
