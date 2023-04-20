@@ -6,7 +6,7 @@ export const title = 'Stylelint';
 export default async function stylelintCheck() {
   try {
     await execaCommand(
-      'pnpm stylelint **/*.{css,scss,less,js,tsx} --max-warnings 0 --formatter json',
+      'yarn stylelint **/*.{css,scss,less,js,tsx} --max-warnings 0 --formatter json',
     );
   } catch (error) {
     const { stdout } = error as { stdout: string };
