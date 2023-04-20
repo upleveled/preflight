@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import { execaCommand } from 'execa';
 import readdirp from 'readdirp';
 import semver from 'semver';
+import { supportedExtensions } from './stylelint';
 
 const require = createRequire(`${process.cwd()}/`);
 
@@ -69,7 +70,7 @@ module.exports = config;`;
 
   for await (const { path } of readdirp('.', {
     directoryFilter: ['!.git', '!.next', '!node_modules'],
-    fileFilter: ['*.css', '*.scss', '*.sass', '*.less', '*.js', '*.tsx'],
+    fileFilter: supportedExtensions.map((extension) => `*.${extension}`),
   })) {
     const fileContents = await fs.readFile(path, 'utf-8');
     if (fileContents.includes('stylelint-disable')) {
