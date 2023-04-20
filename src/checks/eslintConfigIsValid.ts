@@ -52,7 +52,7 @@ const config = {
 module.exports = config;`;
   } catch (err) {
     throw new Error(
-      `Error reading your .eslintrc.cjs file - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `Error reading your .eslintrc.cjs file - please delete the file if it exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
