@@ -12,7 +12,7 @@ const projectDependencies = projectPackageJson.dependencies || {};
 export const title = 'Stylelint config is latest version';
 
 export default async function stylelintConfigIsValid() {
-  // continue only if project is Next.js or UpLeveled React App
+  // Continue only if project is Next.js or UpLeveled React App
   if (
     !(
       '@upleveled/react-scripts' in projectDependencies ||
