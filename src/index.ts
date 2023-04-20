@@ -80,7 +80,6 @@ const listrTasks = [
           task: stylelint.default,
         },
       ]),
-
   prettier,
 
   // Version and configuration checks
