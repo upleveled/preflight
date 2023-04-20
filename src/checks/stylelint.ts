@@ -30,18 +30,15 @@ export default async function stylelintCheck() {
       throw error;
     }
 
-    const stylelintResultsWithErrors = (
-      JSON.parse(stdout) as LintResult[]
-    ).filter((stylelintResult) => stylelintResult[errorKey] === true);
+    throw new Error(
+      `Stylelint problems found in the following files:
+        ${(JSON.parse(stdout) as LintResult[])
+          .filter((stylelintResult) => stylelintResult[errorKey] === true)
+          .map(({ source }) => source)
+          .join('\n')}
 
-    if (stylelintResultsWithErrors.length > 0) {
-      throw new Error(
-        `Stylelint problems found in the following files:
-            ${stylelintResultsWithErrors.map(({ source }) => source).join('\n')}
-
-            Open these files in your editor - there should be problems to fix
-          `,
-      );
-    }
+        Open these files in your editor - there should be problems to fix
+      `,
+    );
   }
 }
