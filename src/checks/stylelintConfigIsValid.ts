@@ -49,7 +49,7 @@ export default async function stylelintConfigIsValid() {
     throw new Error(
       `Your current version of the UpLeveled Stylelint Config (${localVersion}) is older than the latest version ${remoteVersion} - upgrade by running:
 
-      pnpm install stylelint-config-upleveled@${remoteVersion}`,
+      pnpm add stylelint-config-upleveled@${remoteVersion}`,
     );
   }
 
