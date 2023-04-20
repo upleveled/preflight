@@ -34,7 +34,12 @@ export default async function stylelintCheck() {
       `Stylelint problems found in the following files:
         ${(JSON.parse(stdout) as LintResult[])
           .filter((stylelintResult) => stylelintResult[errorKey] === true)
-          .map(({ source }) => source)
+          .map(({ source }) =>
+            // Make paths relative to the project:
+            // before: /home/projects/random-color-generator-react-app/src/index.css
+            // after: src/index.css
+            source!.replace(process.cwd(), '').slice(1),
+          )
           .join('\n')}
 
         Open these files in your editor - there should be problems to fix
