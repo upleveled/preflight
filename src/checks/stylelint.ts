@@ -4,7 +4,7 @@ import { projectPackageJson } from '../util/packageJson';
 
 const projectDependencies = projectPackageJson.dependencies || {};
 
-export const supportedFileExtensions = [
+export const supportedStylelintFileExtensions = [
   'css',
   'sass',
   'scss',
