@@ -1,5 +1,5 @@
 import { execaCommand } from 'execa';
-import { StylelintErrors } from '../types/stylelint';
+import { LintResult } from 'stylelint';
 
 export const title = 'Stylelint';
 
@@ -22,15 +22,13 @@ export default async function stylelintCheck() {
     }
 
     const stylelintErrors = (
-      JSON.parse(stylelintJSONOutput) as StylelintErrors
+      JSON.parse(stylelintJSONOutput) as LintResult[]
     ).filter((stylelintError) => stylelintError.errored);
 
     if (stylelintErrors.length > 0) {
       throw new Error(
         `Stylelint problems found in the following files:
-        ${stylelintErrors.map(
-          (stylelintError: { source: string }) => stylelintError.source,
-        )}
+        ${stylelintErrors.map((stylelintError) => stylelintError.source)}
 
           Open these files in your editor - there should be problems to fix
         `,

@@ -70,6 +70,7 @@
     "p-map": "5.5.0",
     "postinstall-postinstall": "2.1.0",
     "size-limit": "8.2.4",
+    "stylelint": "15.5.0",
     "tsdx": "0.14.1",
     "tslib": "2.5.0",
     "typescript": "5.0.4"
