@@ -72,9 +72,7 @@ module.exports = config;`;
     fileFilter: ['*.css', '*.scss', '*.sass', '*.less', '*.js', '*.tsx'],
   })) {
     const fileContents = await fs.readFile(path, 'utf-8');
-    if (
-      /stylelint-disable|stylelint [a-z0-9@/-]+: (0|off)/.test(fileContents)
-    ) {
+    if (fileContents.includes('stylelint-disable')) {
       stylelintDisableOccurrences.push(path);
     }
   }
