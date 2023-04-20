@@ -35,7 +35,7 @@ export default async function stylelintConfigIsValid() {
 
   if (semver.gt(remoteVersion, localVersion)) {
     throw new Error(
-      `Your current version of the UpLeveled styleLint config (${localVersion}) is out of date. The latest version is ${remoteVersion}. Upgrade by running:
+      `Your current version of the UpLeveled ESLint Config (${localVersion}) is older than the latest version ${remoteVersion} - upgrade by running:
 
       pnpm install stylelint-config-upleveled@${remoteVersion}`,
     );
