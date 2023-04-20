@@ -35,7 +35,7 @@ export default async function stylelintCheck() {
 
     const stylelintResultsWithErrors = (
       JSON.parse(stylelintJSONOutput) as LintResult[]
-    ).filter((stylelintResult) => stylelintResult.errored);
+    ).filter((stylelintResult) => stylelintResult.errored === true);
 
     if (stylelintResultsWithErrors.length > 0) {
       throw new Error(
