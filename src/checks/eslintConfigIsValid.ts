@@ -52,14 +52,14 @@ const config = {
 module.exports = config;`;
   } catch (err) {
     throw new Error(
-      `Error reading your .eslintrc.cjs file - please reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `Error reading your .eslintrc.cjs file - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
 
   if (!eslintConfigMatches) {
     throw new Error(
-      `Your ESLint config file .eslintrc.cjs does not match the configuration file template - please reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `Your ESLint config file .eslintrc.cjs does not match the configuration file template - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }

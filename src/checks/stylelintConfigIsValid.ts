@@ -54,14 +54,14 @@ const config = {
 module.exports = config;`;
   } catch (err) {
     throw new Error(
-      `Error reading your stylelint.config.cjs file. Please reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `Error reading your stylelint.config.cjs file - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
 
   if (!stylelintConfigMatches) {
     throw new Error(
-      `Your Stylelint config file stylelint.config.cjs does not match the configuration file template. Please reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `Your Stylelint config file stylelint.config.cjs does not match the configuration file template - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
