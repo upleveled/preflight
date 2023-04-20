@@ -1,40 +1,39 @@
 import { execaCommand } from 'execa';
+import { StylelintErrors } from '../types/stylelint';
 
 export const title = 'Stylelint';
 
 export default async function stylelintCheck() {
   try {
     await execaCommand(
-      'yarn stylelint **/*.{css,scss,less,js,tsx} --max-warnings 0',
+      'pnpm stylelint **/*.{css,scss,less,js,tsx} --max-warnings 0 --formatter json',
     );
   } catch (error) {
     const { stdout } = error as { stdout: string };
-    const lines = stdout.split('\n');
 
-    // If no Stylelint problems detected, throw the error
-    if (
-      !/^\d+ problems? \(\d+ errors?, \d+ warnings\)$/.test(
-        lines[lines.length - 2]!,
-      )
-    ) {
+    const stylelintJSONOutput =
+      stdout.substring(stdout.indexOf('['), stdout.lastIndexOf(']') + 1) ||
+      stdout;
+
+    // If no Stylelint errors detected, throw the error
+    if (!/\"errored\":/.test(stylelintJSONOutput)) {
       throw error;
     }
 
-    throw new Error(
-      `Stylelint problems found in the following files:
+    const stylelintErrors = (
+      JSON.parse(stylelintJSONOutput) as StylelintErrors
+    ).filter((stylelintError) => stylelintError.errored);
 
-      ${lines
-        .filter((line) => {
-          return (
-            line !== '' &&
-            !line.match(/^\d+ problems? \(\d+ errors?, \d+ warnings\)|\d+:\d+/)
-          );
-        })
-        .map((line) => `${process.cwd()}/${line}`)
-        .join('\n')}
+    if (stylelintErrors.length > 0) {
+      throw new Error(
+        `Stylelint problems found in the following files:
+        ${stylelintErrors.map(
+          (stylelintError: { source: string }) => stylelintError.source,
+        )}
 
-        Open these files in your editor - there should be problems to fix
-      `,
-    );
+          Open these files in your editor - there should be problems to fix
+        `,
+      );
+    }
   }
 }
