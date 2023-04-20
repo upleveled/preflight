@@ -29,7 +29,7 @@ export default async function stylelintCheck() {
 
   try {
     await execaCommand(
-      `yarn stylelint **/*.{${supportedStylelintFileExtensions.join(
+      `pnpm stylelint **/*.{${supportedStylelintFileExtensions.join(
         ',',
       )}} --max-warnings 0 --formatter json`,
     );
