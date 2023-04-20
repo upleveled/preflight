@@ -25,27 +25,22 @@ export default async function stylelintCheck() {
   } catch (error) {
     const { stdout } = error as { stdout: string };
 
-    const stylelintJsonOutput = stdout.slice(
-      stdout.indexOf('['),
-      stdout.lastIndexOf(']') + 1,
-    );
-
     // If no Stylelint errors detected, throw the error
-    if (!new RegExp(`"${errorKey}":`).test(stylelintJsonOutput)) {
+    if (!new RegExp(`"${errorKey}":`).test(stdout)) {
       throw error;
     }
 
     const stylelintResultsWithErrors = (
-      JSON.parse(stylelintJsonOutput) as LintResult[]
+      JSON.parse(stdout) as LintResult[]
     ).filter((stylelintResult) => stylelintResult[errorKey] === true);
 
     if (stylelintResultsWithErrors.length > 0) {
       throw new Error(
         `Stylelint problems found in the following files:
-          ${stylelintResultsWithErrors.map(({ source }) => source).join('\n')}
+            ${stylelintResultsWithErrors.map(({ source }) => source).join('\n')}
 
-          Open these files in your editor - there should be problems to fix
-        `,
+            Open these files in your editor - there should be problems to fix
+          `,
       );
     }
   }
