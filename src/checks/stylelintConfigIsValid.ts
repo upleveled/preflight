@@ -4,7 +4,7 @@ import { execaCommand } from 'execa';
 import readdirp from 'readdirp';
 import semver from 'semver';
 import { projectPackageJson } from '../util/packageJson';
-import { supportedFileExtensions } from './stylelint';
+import { supportedStylelintFileExtensions } from './stylelint';
 
 const projectDependencies = projectPackageJson.dependencies || {};
 const require = createRequire(`${process.cwd()}/`);
@@ -82,7 +82,7 @@ module.exports = config;`;
 
   for await (const { path } of readdirp('.', {
     directoryFilter: ['!.git', '!.next', '!node_modules'],
-    fileFilter: supportedFileExtensions.map(
+    fileFilter: supportedStylelintFileExtensions.map(
       (fileExtension) => `*.${fileExtension}`,
     ),
   })) {
