@@ -18,7 +18,7 @@ export default async function useSinglePackageManager() {
 
         ${commandExample('rm <filename>')}
 
-        The presence of this file indicates that an incorrect package manager was used in addition to pnpm (eg. "npm install" or "yarn add" was run). In order to avoid issues with the state of the pnpm-lock.yaml file, we suggest also forcing regeneration this file with the following command:
+        The presence of this file indicates that another package manager was used in addition to pnpm (eg. "npm install" or "yarn add" was run). In order to avoid issues with the state of the pnpm-lock.yaml file, we suggest also forcing regeneration this file with the following command:
 
         ${commandExample('pnpm install --force')}
       `,
