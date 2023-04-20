@@ -74,12 +74,7 @@ const listrTasks = [
     'next' in projectPackageJson.dependencies!
   )
     ? []
-    : [
-        {
-          title: stylelint.title,
-          task: stylelint.default,
-        },
-      ]),
+    : [stylelint]),
   prettier,
 
   // Version and configuration checks
@@ -89,12 +84,7 @@ const listrTasks = [
     'next' in projectPackageJson.dependencies!
   )
     ? []
-    : [
-        {
-          title: stylelintConfigIsValid.title,
-          task: stylelintConfigIsValid.default,
-        },
-      ]),
+    : [stylelintConfigIsValid]),
   preflightIsLatestVersion,
 ].map((module) => {
   if ('task' in module) return module;
