@@ -1,5 +1,8 @@
 import { execaCommand } from 'execa';
 import { LintResult } from 'stylelint';
+import { projectPackageJson } from '../util/packageJson';
+
+const projectDependencies = projectPackageJson.dependencies || {};
 
 export const supportedFileExtensions = [
   'css',
@@ -14,6 +17,16 @@ export const supportedFileExtensions = [
 export const title = 'Stylelint';
 
 export default async function stylelintCheck() {
+  // Continue only if project is Next.js or UpLeveled React App
+  if (
+    !(
+      '@upleveled/react-scripts' in projectDependencies ||
+      'next' in projectDependencies
+    )
+  ) {
+    return;
+  }
+
   try {
     await execaCommand(
       `yarn stylelint **/*.{${supportedFileExtensions.join(

@@ -6,8 +6,8 @@ import semver from 'semver';
 import { projectPackageJson } from '../util/packageJson';
 import { supportedFileExtensions } from './stylelint';
 
-const require = createRequire(`${process.cwd()}/`);
 const projectDependencies = projectPackageJson.dependencies || {};
+const require = createRequire(`${process.cwd()}/`);
 
 export const title = 'Stylelint config is latest version';
 
