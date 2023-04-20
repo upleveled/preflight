@@ -73,7 +73,7 @@ module.exports = config;`;
 
   if (!stylelintConfigMatches) {
     throw new Error(
-      `Your Stylelint config file stylelint.config.cjs does not match the configuration file template - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `Your stylelint.config.cjs file does not match the configuration file template - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }

@@ -59,7 +59,7 @@ module.exports = config;`;
 
   if (!eslintConfigMatches) {
     throw new Error(
-      `Your ESLint config file .eslintrc.cjs does not match the configuration file template - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
+      `Your .eslintrc.cjs file does not match the configuration file template - please delete the file if exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
     );
   }
