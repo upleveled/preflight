@@ -54,7 +54,7 @@ export default async function stylelintCheck() {
       throw new Error(
         `Stylelint problems found in the following files:
           ${stylelintResultsWithErrors
-            .map((stylelintResult) => stylelintResult.source)
+            .map(({ source }) => source)
             .join('\n')}
 
           Open these files in your editor - there should be problems to fix
