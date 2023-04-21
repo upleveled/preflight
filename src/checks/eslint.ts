@@ -26,8 +26,11 @@ export default async function eslintCheck() {
               !(eslintResult[errorKey] === 0 && eslintResult[warningKey] === 0),
           )
           // Make paths relative to the project:
-          // before: /home/projects/next-student-project/app/api/hello/route.js
-          // after: app/api/hello/route.js
+          // Before:
+          //   macOS / Linux: /home/projects/next-student-project/app/api/hello/route.js
+          //   Windows: C:\Users\Lukas\projects\random-color-generator-react-app\src\reportWebVitals.js
+          // after: src/reportWebVitals.js
+          // After: app/api/hello/route.js
           .map(({ filePath }) => filePath.replace(`${process.cwd()}${sep}`, ''))
           .join('\n')}
 
