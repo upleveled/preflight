@@ -2,6 +2,7 @@ import { ESLint } from 'eslint';
 import { execaCommand } from 'execa';
 
 const errorKey = 'errorCount' as const;
+const warningKey = 'warningCount' as const;
 
 export const title = 'ESLint';
 
@@ -12,7 +13,7 @@ export default async function eslintCheck() {
     const { stdout } = error as { stdout: string };
 
     // If no ESLint problems detected, throw the error
-    if (!new RegExp(`"${errorKey}":`).test(stdout)) {
+    if (!new RegExp(`"${errorKey}":|"${warningKey}":`).test(stdout)) {
       throw error;
     }
 
@@ -21,9 +22,7 @@ export default async function eslintCheck() {
         ${(JSON.parse(stdout) as ESLint.LintResult[])
           .filter(
             (eslintResult) =>
-              !(
-                eslintResult[errorKey] === 0 && eslintResult.warningCount === 0
-              ),
+              !(eslintResult[errorKey] === 0 && eslintResult[warningKey] === 0),
           )
           // Make paths relative to the project:
           // before: /home/projects/next-student-project/app/api/hello/route.js
