@@ -1,4 +1,4 @@
-import path, { dirname } from 'node:path';
+import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execaCommand } from 'execa';
 import normalizeNewline from '../util/normalizeNewline';
@@ -43,10 +43,7 @@ export default async function prettierCheck() {
         // after: src/reportWebVitals.js
         file
           .replace(
-            path.relative(
-              dirname(fileURLToPath(import.meta.url)),
-              process.cwd(),
-            ),
+            relative(dirname(fileURLToPath(import.meta.url)), process.cwd()),
             '',
           )
           .slice(1),
