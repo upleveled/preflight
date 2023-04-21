@@ -20,10 +20,9 @@ export default async function eslintCheck() {
       `ESLint problems found in the following files:
         ${(JSON.parse(stdout) as ESLint.LintResult[])
           .filter(
-            (stylelintResult) =>
+            (eslintResult) =>
               !(
-                stylelintResult[errorKey] === 0 &&
-                stylelintResult.warningCount === 0
+                eslintResult[errorKey] === 0 && eslintResult.warningCount === 0
               ),
           )
           .map(({ filePath }) =>
