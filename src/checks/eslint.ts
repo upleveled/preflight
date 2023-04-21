@@ -41,10 +41,14 @@ export default async function eslintCheck() {
       `ESLint problems found in the following files:
         ${eslintResults
           // Make paths relative to the project:
+          //
           // Before:
           //   macOS / Linux: /home/projects/next-student-project/app/api/hello/route.js
           //   Windows: C:\Users\Lukas\projects\next-student-project\app\api\hello\route.js
-          // After: app/api/hello/route.js
+          //
+          // After:
+          //   macOS / Linux: app/api/hello/route.js
+          //   Windows: app\api\hello\route.js
           .map(({ filePath }) => filePath.replace(`${process.cwd()}${sep}`, ''))
           .join('\n')}
 

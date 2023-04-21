@@ -46,10 +46,14 @@ export default async function stylelintCheck() {
         ${stylelintResults
           .filter((stylelintResult) => stylelintResult.errored === true)
           // Make paths relative to the project:
+          //
           // Before:
           //   macOS / Linux: /home/projects/random-color-generator-react-app/src/index.css
           //   Windows: C:\Users\Lukas\projects\random-color-generator-react-app\src\index.css
-          // After: src/index.css
+          //
+          // After:
+          //   macOS / Linux: src/index.css
+          //   Windows: src\index.css
           .map(({ source }) => source!.replace(`${process.cwd()}${sep}`, ''))
           .join('\n')}
 
