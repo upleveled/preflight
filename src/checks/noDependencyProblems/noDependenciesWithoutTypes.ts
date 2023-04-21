@@ -35,7 +35,8 @@ export default async function noDependenciesWithoutTypes() {
   const dependenciesWithMissingTypes = await pReduce(
     Object.keys(dependencies),
     async (filteredDependencies: [string, string][], dependency: string) => {
-      // It is not necessary check algolia for '@upleveled/react-scripts'
+      // Algolia reports "ObjectID does not exist" for `@upleveled/react-scripts`, and
+      // this package also has no types to install
       if (dependency === '@upleveled/react-scripts') {
         return filteredDependencies;
       }
