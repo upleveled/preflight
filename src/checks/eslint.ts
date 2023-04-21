@@ -13,19 +13,25 @@ export default async function eslintCheck() {
     let eslintResults;
 
     try {
-      eslintResults = JSON.parse(stdout) as ESLint.LintResult[];
-    } catch {
+      eslintResults = (JSON.parse(stdout) as ESLint.LintResult[])
+        // Filter out results with no problems, which the ESLint CLI
+        // still repots with the `--format json` flag
+        .filter((eslintResult) => {
+          return eslintResult.errorCount > 0 || eslintResult.warningCount > 0;
+        });
+    } catch (parseError) {
       throw error;
     }
 
     // If no ESLint problems detected, throw the error
     if (
+      eslintResults.length < 1 ||
       !eslintResults.every(
         (result) => 'errorCount' in result && 'warningCount' in result,
       )
     ) {
       throw new Error(
-        `ESLint results are missing 'errorCount' and 'warningCount' properties - please repport the following output to the UpLeveled team:
+        `Unexpected shape of ESLint JSON related to .errorCount and .warningCount properties - please report this to the UpLeveled engineering team, including the following output:
           ${stdout}
         `,
       );
@@ -34,10 +40,6 @@ export default async function eslintCheck() {
     throw new Error(
       `ESLint problems found in the following files:
         ${eslintResults
-          .filter(
-            (eslintResult) =>
-              eslintResult.errorCount > 0 || eslintResult.warningCount > 0,
-          )
           // Make paths relative to the project:
           // Before:
           //   macOS / Linux: /home/projects/next-student-project/app/api/hello/route.js
