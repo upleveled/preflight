@@ -40,15 +40,15 @@ export default async function prettierCheck() {
       .map((file) =>
         // Make paths relative to the project instead of Preflight, eg:
         // before: ../../../../../../projects/random-color-generator-react-app/src/reportWebVitals.js
-        // after: random-color-generator-react-app/src/reportWebVitals.js
-        path
-          .resolve(
-            file.replace(
-              /^([A-Z]:|\.\.[/\\])[a-zA-Z0-9-_/.\\ ]*projects[/\\]/,
-              '../',
+        // after: src/reportWebVitals.js
+        file
+          .replace(
+            path.relative(
+              dirname(fileURLToPath(import.meta.url)),
+              process.cwd(),
             ),
+            '',
           )
-          .replace(process.cwd(), '')
           .slice(1),
       )
       .filter(
