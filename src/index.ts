@@ -22,6 +22,8 @@ import {
   projectPackageJson,
 } from './util/packageJson.js';
 
+const projectDependencies = projectPackageJson.dependencies || {};
+
 console.log(`🚀 UpLeveled Preflight v${preflightPackageJson.version}`);
 
 const listrTasks = [
@@ -44,8 +46,7 @@ const listrTasks = [
     title: 'No dependency problems',
     task: (ctx: CtxParam, task: TaskParam): Listr =>
       task.newListr([
-        ...(!projectPackageJson.dependencies ||
-        !Object.keys(projectPackageJson.dependencies).includes('next')
+        ...(!Object.keys(projectDependencies).includes('next')
           ? []
           : [
               {
@@ -70,8 +71,8 @@ const listrTasks = [
   // Linting
   eslint,
   ...(!(
-    '@upleveled/react-scripts' in projectPackageJson.dependencies! ||
-    'next' in projectPackageJson.dependencies!
+    '@upleveled/react-scripts' in projectDependencies! ||
+    'next' in projectDependencies!
   )
     ? []
     : [stylelint]),
@@ -80,8 +81,8 @@ const listrTasks = [
   // Version and configuration checks
   eslintConfigIsValid,
   ...(!(
-    '@upleveled/react-scripts' in projectPackageJson.dependencies! ||
-    'next' in projectPackageJson.dependencies!
+    '@upleveled/react-scripts' in projectDependencies! ||
+    'next' in projectDependencies!
   )
     ? []
     : [stylelintConfigIsValid]),
