@@ -27,15 +27,19 @@ export default async function stylelintCheck() {
     let stylelintResults;
 
     try {
-      stylelintResults = JSON.parse(stdout) as LintResult[];
-    } catch {
+      stylelintResults = (JSON.parse(stdout) as LintResult[]).filter(
+        (stylelintResult) => stylelintResult.errored === true,
+      );
+    } catch (parseError) {
       throw error;
     }
 
-    // If no Stylelint errors detected, throw the error
-    if (!stylelintResults.every((result) => 'errored' in result)) {
+    if (
+      stylelintResults.length < 1 ||
+      !stylelintResults.every((result) => 'errored' in result)
+    ) {
       throw new Error(
-        `Stylelint results are missing 'errorCount' and 'warningCount' properties - please repport the following output to the UpLeveled team:
+        `Unexpected shape of Stylelint JSON related to .errored properties - please report this to the UpLeveled engineering team, including the following output:
           ${stdout}
         `,
       );
@@ -44,7 +48,6 @@ export default async function stylelintCheck() {
     throw new Error(
       `Stylelint problems found in the following files:
         ${stylelintResults
-          .filter((stylelintResult) => stylelintResult.errored === true)
           // Make paths relative to the project:
           //
           // Before:

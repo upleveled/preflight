@@ -23,7 +23,6 @@ export default async function eslintCheck() {
       throw error;
     }
 
-    // If no ESLint problems detected, throw the error
     if (
       eslintResults.length < 1 ||
       !eslintResults.every(
