@@ -18,6 +18,7 @@ export default async function eslintCheck() {
       throw error;
     }
 
+    // If no ESLint problems detected, throw the error
     if (
       !eslintResults.every(
         (result) => 'errorCount' in result && 'warningCount' in result,
@@ -30,13 +31,12 @@ export default async function eslintCheck() {
       );
     }
 
-    // If no ESLint problems detected, throw the error
     throw new Error(
       `ESLint problems found in the following files:
         ${eslintResults
           .filter(
             (eslintResult) =>
-              !(eslintResult.errorCount === 0 && eslintResult.warningCount),
+              eslintResult.errorCount > 0 || eslintResult.warningCount > 0,
           )
           // Make paths relative to the project:
           // Before:

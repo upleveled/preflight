@@ -2,8 +2,6 @@ import { sep } from 'node:path';
 import { execaCommand } from 'execa';
 import { LintResult } from 'stylelint';
 
-const errorKey = 'errored' as const;
-
 export const supportedStylelintFileExtensions = [
   'css',
   'sass',
@@ -26,15 +24,27 @@ export default async function stylelintCheck() {
   } catch (error) {
     const { stdout } = error as { stdout: string };
 
-    // If no Stylelint errors detected, throw the error
-    if (!new RegExp(`"${errorKey}":`).test(stdout)) {
+    let stylelintResults;
+
+    try {
+      stylelintResults = JSON.parse(stdout) as LintResult[];
+    } catch {
       throw error;
+    }
+
+    // If no Stylelint errors detected, throw the error
+    if (!stylelintResults.every((result) => 'errored' in result)) {
+      throw new Error(
+        `Stylelint results are missing 'errorCount' and 'warningCount' properties - please repport the following output to the UpLeveled team:
+          ${stdout}
+        `,
+      );
     }
 
     throw new Error(
       `Stylelint problems found in the following files:
-        ${(JSON.parse(stdout) as LintResult[])
-          .filter((stylelintResult) => stylelintResult[errorKey] === true)
+        ${stylelintResults
+          .filter((stylelintResult) => stylelintResult.errored === true)
           // Make paths relative to the project:
           // Before:
           //   macOS / Linux: /home/projects/random-color-generator-react-app/src/index.css
