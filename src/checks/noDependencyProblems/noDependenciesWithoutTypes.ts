@@ -30,10 +30,8 @@ export const title = 'No dependencies without types';
 //
 // https://learn.upleveled.io/courses/btcmp-l-webfs-gen-0/modules/122-cheatsheet-css-in-js/#eslint-errors-with-styled-components
 export default async function noDependenciesWithoutTypes() {
-  const { devDependencies = {}, dependencies = {} } = projectPackageJson;
-
   const dependenciesWithMissingTypes = await pReduce(
-    Object.keys(dependencies),
+    Object.keys(projectPackageJson.dependencies || {}),
     async (filteredDependencies: [string, string][], dependency: string) => {
       // Return early here because:
       // - Algolia reports "ObjectID does not exist" for `@upleveled/react-scripts`
@@ -74,7 +72,11 @@ export default async function noDependenciesWithoutTypes() {
 
       if (definitelyTypedPackageName) {
         // If a matching `@types/<package name>` has been already installed in devDependencies, bail out
-        if (Object.keys(devDependencies).includes(definitelyTypedPackageName)) {
+        if (
+          Object.keys(projectPackageJson.devDependencies || {}).includes(
+            definitelyTypedPackageName,
+          )
+        ) {
           return filteredDependencies;
         }
 
