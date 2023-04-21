@@ -1,3 +1,4 @@
+import { sep } from 'node:path';
 import { execaCommand } from 'execa';
 import { LintResult } from 'stylelint';
 
@@ -37,7 +38,7 @@ export default async function stylelintCheck() {
           // Make paths relative to the project:
           // before: /home/projects/random-color-generator-react-app/src/index.css
           // after: src/index.css
-          .map(({ source }) => source!.replace(process.cwd(), '').slice(1))
+          .map(({ source }) => source!.replace(`${process.cwd()}${sep}`, ''))
           .join('\n')}
 
         Open these files in your editor - there should be problems to fix

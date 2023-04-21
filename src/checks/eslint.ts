@@ -1,3 +1,4 @@
+import { sep } from 'node:path';
 import { ESLint } from 'eslint';
 import { execaCommand } from 'execa';
 
@@ -27,7 +28,7 @@ export default async function eslintCheck() {
           // Make paths relative to the project:
           // before: /home/projects/next-student-project/app/api/hello/route.js
           // after: app/api/hello/route.js
-          .map(({ filePath }) => filePath.replace(process.cwd(), '').slice(1))
+          .map(({ filePath }) => filePath.replace(`${process.cwd()}${sep}`, ''))
           .join('\n')}
 
         Open these files in your editor - there should be problems to fix
