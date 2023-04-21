@@ -25,12 +25,10 @@ export default async function eslintCheck() {
                 eslintResult[errorKey] === 0 && eslintResult.warningCount === 0
               ),
           )
-          .map(({ filePath }) =>
-            // Make paths relative to the project:
-            // before: /home/projects/next-student-project/app/api/hello/route.js
-            // after: app/api/hello/route.js
-            filePath.replace(process.cwd(), '').slice(1),
-          )
+          // Make paths relative to the project:
+          // before: /home/projects/next-student-project/app/api/hello/route.js
+          // after: app/api/hello/route.js
+          .map(({ filePath }) => filePath.replace(process.cwd(), '').slice(1))
           .join('\n')}
 
         Open these files in your editor - there should be problems to fix

@@ -37,10 +37,10 @@ export default async function prettierCheck() {
 
     const unformattedFiles = normalizeNewline(stdout)
       .split('\n')
+      // Make paths relative to the project instead of Preflight, eg:
+      // before: ../../../../../../projects/random-color-generator-react-app/src/reportWebVitals.js
+      // after: src/reportWebVitals.js
       .map((file) =>
-        // Make paths relative to the project instead of Preflight, eg:
-        // before: ../../../../../../projects/random-color-generator-react-app/src/reportWebVitals.js
-        // after: src/reportWebVitals.js
         file
           .replace(
             relative(dirname(fileURLToPath(import.meta.url)), process.cwd()),
