@@ -1,3 +1,4 @@
+import { sep } from 'node:path';
 import { execaCommand } from 'execa';
 import commandExample from '../../util/commandExample';
 import preflightBinPath from '../../util/preflightBinPath';
@@ -52,7 +53,7 @@ export default async function noUnusedAndMissingDependencies() {
 
   try {
     await execaCommand(
-      `${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}"`,
+      `${preflightBinPath}${sep}depcheck --ignores="${ignoredPackagePatterns}"`,
     );
   } catch (error) {
     const { stdout } = error as { stdout: string };
@@ -95,7 +96,7 @@ export default async function noUnusedAndMissingDependencies() {
         .split('\n')
         .filter((missingDependency) => {
           return !(
-            missingDependency.includes('./.eslintrc.cjs') &&
+            missingDependency.includes(`.${sep}.eslintrc.cjs`) &&
             [
               '@next/eslint-plugin-next',
               '@typescript-eslint/eslint-plugin',
