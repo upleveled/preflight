@@ -2,9 +2,6 @@ import { sep } from 'node:path';
 import { ESLint } from 'eslint';
 import { execaCommand } from 'execa';
 
-const errorKey = 'errorCount' as const;
-const warningKey = 'warningCount' as const;
-
 export const title = 'ESLint';
 
 export default async function eslintCheck() {
@@ -13,17 +10,33 @@ export default async function eslintCheck() {
   } catch (error) {
     const { stdout } = error as { stdout: string };
 
-    // If no ESLint problems detected, throw the error
-    if (!new RegExp(`"${errorKey}":|"${warningKey}":`).test(stdout)) {
+    let eslintResults;
+
+    try {
+      eslintResults = JSON.parse(stdout) as ESLint.LintResult[];
+    } catch {
       throw error;
     }
 
+    if (
+      !eslintResults.every(
+        (result) => 'errorCount' in result && 'warningCount' in result,
+      )
+    ) {
+      throw new Error(
+        `ESLint results are missing 'errorCount' and 'warningCount' properties - please repport the following output to the UpLeveled team:
+          ${stdout}
+        `,
+      );
+    }
+
+    // If no ESLint problems detected, throw the error
     throw new Error(
       `ESLint problems found in the following files:
-        ${(JSON.parse(stdout) as ESLint.LintResult[])
+        ${eslintResults
           .filter(
             (eslintResult) =>
-              !(eslintResult[errorKey] === 0 && eslintResult[warningKey] === 0),
+              !(eslintResult.errorCount === 0 && eslintResult.warningCount),
           )
           // Make paths relative to the project:
           // Before:
