@@ -15,7 +15,7 @@ export default async function eslintCheck() {
     try {
       eslintResults = (JSON.parse(stdout) as ESLint.LintResult[])
         // Filter out results with no problems, which the ESLint CLI
-        // still repots with the `--format json` flag
+        // still reports with the `--format json` flag
         .filter((eslintResult) => {
           return eslintResult.errorCount > 0 || eslintResult.warningCount > 0;
         });
