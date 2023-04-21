@@ -71,8 +71,8 @@ const listrTasks = [
   // Linting
   eslint,
   ...(!(
-    '@upleveled/react-scripts' in projectDependencies! ||
-    'next' in projectDependencies!
+    '@upleveled/react-scripts' in projectDependencies ||
+    'next' in projectDependencies
   )
     ? []
     : [stylelint]),
@@ -81,8 +81,8 @@ const listrTasks = [
   // Version and configuration checks
   eslintConfigIsValid,
   ...(!(
-    '@upleveled/react-scripts' in projectDependencies! ||
-    'next' in projectDependencies!
+    '@upleveled/react-scripts' in projectDependencies ||
+    'next' in projectDependencies
   )
     ? []
     : [stylelintConfigIsValid]),
