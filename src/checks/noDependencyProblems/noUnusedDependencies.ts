@@ -53,7 +53,7 @@ export default async function noUnusedAndMissingDependencies() {
 
   try {
     await execaCommand(
-      `${preflightBinPath}${sep}depcheck --ignores="${ignoredPackagePatterns}"`,
+      `${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}"`,
     );
   } catch (error) {
     const { stdout } = error as { stdout: string };
