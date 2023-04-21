@@ -1,4 +1,4 @@
-import { dirname } from 'node:path';
+import { dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execaCommand } from 'execa';
 import normalizeNewline from '../util/normalizeNewline';
@@ -37,12 +37,20 @@ export default async function prettierCheck() {
 
     const unformattedFiles = normalizeNewline(stdout)
       .split('\n')
-      .map((file) =>
-        // Make paths relative to the project instead of Preflight, eg:
-        // before: ../../../../../../projects/random-color-generator-react-app/src/reportWebVitals.js
-        // after: random-color-generator-react-app/src/reportWebVitals.js
-        file.replace(/^([A-Z]:|\.\.[/\\])[a-zA-Z0-9-_/.\\ ]*projects[/\\]/, ''),
-      )
+      // Make paths relative to the project instead of Preflight, eg:
+      // before:
+      //   macOS / Linux: ../../../../../../projects/random-color-generator-react-app/src/reportWebVitals.js
+      //   Windows: ..\..\..\..\..\..\..\..\..\..\..\projects\random-color-generator-react-app\src\reportWebVitals.js
+      // After: src/reportWebVitals.js
+      .map((file) => {
+        return file.replace(
+          `${relative(
+            dirname(fileURLToPath(import.meta.url)),
+            process.cwd(),
+          )}${sep}`,
+          '',
+        );
+      })
       .filter(
         (file) =>
           !ignoredFilePatterns.some((ignoredFilePattern) =>
