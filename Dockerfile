@@ -5,6 +5,7 @@ WORKDIR /preflight
 COPY ./docker/clone-and-preflight.js ./docker/package.json ./docker/pnpm-lock.yaml ./
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN apk add --no-cache python3 py3-pip
 RUN pnpm install --frozen-lockfile
 
 # Enable `pnpm add --global` on Alpine Linux by setting
@@ -14,8 +15,9 @@ ENV PNPM_HOME=/usr/local/bin
 
 RUN pnpm add --global @upleveled/preflight@latest
 
-# Allow `git clone` in the script
-RUN apk add git
+# Allow `git clone` and  in the script
+RUN apk add github
+
 
 RUN chmod +x ./clone-and-preflight.js
 ENTRYPOINT ["./clone-and-preflight.js"]
