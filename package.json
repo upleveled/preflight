@@ -24,7 +24,7 @@
     "analyze": "size-limit --why",
     "build": "tsdx build --format esm --target node",
     "docker-build": "docker build -t preflight .",
-    "docker-build-run": "pnpm docker-build-ts && docker build -t preflight . && docker run preflight",
+    "docker-build-run": "pnpm docker-build-ts && pnpm docker-build && pnpm docker-run",
     "docker-build-ts": "tsc --project docker/tsconfig.build.json",
     "docker-run": "docker run preflight",
     "postinstall": "patch-package",
