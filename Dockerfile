@@ -5,6 +5,11 @@ WORKDIR /preflight
 COPY ./docker/clone-and-preflight.js ./docker/package.json ./docker/pnpm-lock.yaml ./
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install python3 and py3-pip for building libpg_query
+# Dependencies required by libpg_query:
+#   - @mapbox/node-pre-gyp
+#   - node-addon-api
+#   - node-gyp
 RUN apk add --no-cache python3 py3-pip
 RUN pnpm install --frozen-lockfile
 
