@@ -39,6 +39,7 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - run: pnpm tsc
       - run: pnpm tsc --project bin/tsconfig.json
       - run: pnpm tsc --project docker/tsconfig.json
       - run: pnpm tsc --project tsconfig.nonsrc.json
