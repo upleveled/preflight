@@ -37,7 +37,7 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\](?!aggregate-error|clean-stack|escape-string-regexp|execa|human-signals|indent-string|is-stream|mimic-fn|npm-run-path|onetime|p-map|path-key|strip-final-newline).+\\.(js|jsx)$"
+      "node_modules/(?!execa)/"
     ]
   },
   "dependencies": {
