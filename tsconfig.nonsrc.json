@@ -16,5 +16,5 @@
     "**/*.cjs",
     "**/*.mjs"
   ],
-  "exclude": ["node_modules", "bin", "docker", "src"]
+  "exclude": ["node_modules", "bin", "dist", "docker", "src"]
 }
