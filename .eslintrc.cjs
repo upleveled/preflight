@@ -3,7 +3,11 @@ const config = {
   extends: ['upleveled'],
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json', './tsconfig.nonsrc.json'],
+    project: [
+      './tsconfig.json',
+      './tsconfig.nonsrc.json',
+      './bin/tsconfig.json',
+    ],
   },
 };
 
