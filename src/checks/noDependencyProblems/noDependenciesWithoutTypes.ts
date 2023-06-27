@@ -70,7 +70,7 @@ export default async function noDependenciesWithoutTypes() {
         });
       } catch (err) {
         // If Algolia returns an error e.g. "ObjectID does not exist" the dependency causing the error will be added to the error message
-        return `${dependency}: ${err}`;
+        throw new Error(`${dependency}: ${err}`);
       }
 
       const definitelyTypedPackageName = results.types?.definitelyTyped;
