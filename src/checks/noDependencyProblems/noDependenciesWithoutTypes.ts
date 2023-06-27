@@ -64,9 +64,14 @@ export default async function noDependenciesWithoutTypes() {
         return filteredDependencies;
       }
 
-      const results = await index.getObject<AlgoliaObj>(dependency, {
-        attributesToRetrieve: ['types'],
-      });
+      try {
+        const results = await index.getObject<AlgoliaObj>(dependency, {
+          attributesToRetrieve: ['types'],
+        });
+      } catch (err) {
+        // If Algolia returns an error e.g. "ObjectID does not exist" the dependency causing the error will be added to the error message
+        return `${dependency}: ${err}`;
+      }
 
       const definitelyTypedPackageName = results.types?.definitelyTyped;
 
