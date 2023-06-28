@@ -64,8 +64,10 @@ export default async function noDependenciesWithoutTypes() {
         return filteredDependencies;
       }
 
+      let results: AlgoliaObj;
+
       try {
-        const results = await index.getObject<AlgoliaObj>(dependency, {
+        results = await index.getObject<AlgoliaObj>(dependency, {
           attributesToRetrieve: ['types'],
         });
       } catch (err) {
