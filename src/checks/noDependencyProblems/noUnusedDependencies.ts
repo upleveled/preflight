@@ -6,7 +6,6 @@ import preflightBinPath from '../../util/preflightBinPath';
 export const title = 'No unused dependencies';
 
 export default async function noUnusedAndMissingDependencies() {
-  const ignoredFilePatterns = ['*.module.scss'].join(',');
   const ignoredPackagePatterns = [
     // Unused dependency detected in https://github.com/upleveled/next-portfolio-dev
     '@graphql-codegen/cli',
@@ -57,9 +56,11 @@ export default async function noUnusedAndMissingDependencies() {
     'sharp',
   ].join(',');
 
+  const ignoredPathPatterns = ['*.module.scss'].join(',');
+
   try {
     await execaCommand(
-      `${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}" --ignores-patterns="${ignoredFilePatterns}"`,
+      `${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}" --ignores-patterns="${ignoredPathPatterns}"`,
     );
   } catch (error) {
     const { stdout } = error as { stdout: string };
