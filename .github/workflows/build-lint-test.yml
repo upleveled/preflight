@@ -47,5 +47,8 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Add Preflight
+        run: pnpm add --global @upleveled/preflight
+
       - name: Test
         run: pnpm test -- --ci --maxWorkers=2

@@ -69,12 +69,9 @@ beforeAll(
 );
 
 test('Passes in the react-passing test project', async () => {
-  const { stdout, stderr } = await execaCommand(
-    `../../../../bin/preflight.js`,
-    {
-      cwd: `${fixturesTempDir}/react-passing`,
-    },
-  );
+  const { stdout, stderr } = await execaCommand(`preflight`, {
+    cwd: `${fixturesTempDir}/react-passing`,
+  });
 
   const stdoutSortedWithoutVersionNumber = stdout
     .replace(/(UpLeveled Preflight) v\d+\.\d+\.\d+(-\d+)?/, '$1')
