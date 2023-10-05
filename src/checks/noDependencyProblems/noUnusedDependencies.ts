@@ -59,6 +59,9 @@ export default async function noUnusedAndMissingDependencies() {
   const ignoredPathPatterns = ['*.module.scss'].join(',');
 
   try {
+    console.log(
+      `${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}"`,
+    );
     await execaCommand(
       `${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}" --ignores-patterns="${ignoredPathPatterns}"`,
     );
