@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-import { execaCommand } from 'execa';
+import { readFile } from 'node:fs/promises';
+import { execaCommand, Options } from 'execa';
+import YAML from 'yaml';
 
 const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
 
@@ -13,13 +15,13 @@ $ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-
 
 const repoPath = 'repo-to-check';
 
-async function executeCommand(command: string, cwd?: string) {
+async function executeCommand(command: string, options?: Pick<Options, 'cwd'>) {
   let all: string | undefined = '';
   let exitCode = 0;
 
   try {
     ({ all, exitCode } = await execaCommand(command, {
-      cwd,
+      cwd: options?.cwd,
       all: true,
     }));
   } catch (error) {
@@ -45,18 +47,56 @@ await executeCommand(
 );
 
 console.log('Installing dependencies...');
-await executeCommand('pnpm install', repoPath);
+await executeCommand('pnpm install', { cwd: repoPath });
 
-console.log(
-  'Install SafeQL if not yet installed (eg. on Windows dev machines)...',
-);
-await execaCommand(
-  "grep package.json -e '\"postgres\":' && (grep package.json -e '@ts-safeql/eslint-plugin' || pnpm add @ts-safeql/eslint-plugin libpg-query)",
-  { shell: true, reject: false, cwd: repoPath },
-);
+const projectUsesPostgresql =
+  (
+    await execaCommand('grep package.json -e \'"postgres":\'', {
+      cwd: repoPath,
+      reject: false,
+    })
+  ).exitCode === 0;
+
+if (projectUsesPostgresql) {
+  console.log('Setting up database...');
+  const databaseEnv = YAML.parse(
+    await readFile(
+      `${repoPath}/.github/workflows/test-playwright-and-deploy-to-fly-io.yml`,
+      'utf8',
+    ),
+  ).jobs['playwright-tests'].env;
+  await execaCommand('./scripts/postgresql-setup-and-start.sh', {
+    cwd: repoPath,
+    env: {
+      PGHOST: databaseEnv.PGHOST,
+      PGDATABASE: databaseEnv.PGDATABASE,
+      PGUSERNAME: databaseEnv.PGUSERNAME,
+      PGPASSWORD: databaseEnv.PGPASSWORD,
+    },
+  });
+
+  console.log('Running migrations...');
+  await executeCommand('pnpm migrate up', { cwd: repoPath });
+
+  console.log(
+    'Install SafeQL if not yet installed (eg. on Windows dev machines)...',
+  );
+  if (
+    (
+      await execaCommand("grep package.json -e '@ts-safeql/eslint-plugin'", {
+        cwd: repoPath,
+        reject: false,
+      })
+    ).exitCode !== 0
+  ) {
+    await executeCommand('pnpm add @ts-safeql/eslint-plugin libpg-query', {
+      cwd: repoPath,
+    });
+  }
+}
 
 console.log('Running Preflight...');
-const preflightOutput = await executeCommand('preflight', repoPath);
+const preflightOutput = await executeCommand('preflight', { cwd: repoPath });
 
 if (preflightOutput) {
   console.log(

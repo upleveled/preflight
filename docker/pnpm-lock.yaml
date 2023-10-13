@@ -8,6 +8,9 @@ dependencies:
   execa:
     specifier: 8.0.1
     version: 8.0.1
+  yaml:
+    specifier: 2.3.2
+    version: 2.3.2
 
 packages:
 
@@ -115,4 +118,9 @@ packages:
     hasBin: true
     dependencies:
       isexe: 2.0.0
+    dev: false
+
+  /yaml@2.3.2:
+    resolution: {integrity: sha512-N/lyzTPaJasoDmfV7YTrYCI0G/3ivm/9wdG0aHuheKowWQwGTsK0Eoiw6utmzAnI6pkJa0DUVygvp3spqqEKXg==}
+    engines: {node: '>= 14'}
     dev: false
