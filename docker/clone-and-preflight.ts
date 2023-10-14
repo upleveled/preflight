@@ -47,6 +47,10 @@ await executeCommand(
 console.log('Installing dependencies...');
 await executeCommand('pnpm install', { cwd: projectPath });
 
+// Exit code of grep will be 0 if the `"postgres":`
+// string is found in package.json, indicating that
+// Postgres.js is installed and the project uses
+// a PostgreSQL database
 const projectUsesPostgresql =
   (
     await execaCommand('grep package.json -e \'"postgres":\'', {
