@@ -20,26 +20,14 @@ const testRepos: Repo[] = [
   {
     repoPath: 'upleveled/preflight-test-project-react-passing',
     dirName: 'react-passing',
-    // To use install commands, for example to install or upgrade
-    // a package first, pass an installCommands array like this:
-    // installCommands: [
-    //   // To install the latest version of the ESLint config
-    //   'pnpm upgrade --latest @upleveled/eslint-config-upleveled',
-    //   // Avoid any issues with uncommitted files
-    //   'git reset --hard HEAD',
-    // ],
   },
   {
     repoPath: 'upleveled/preflight-test-project-next-js-passing',
     dirName: 'next-js-passing',
-    // To use install commands, for example to install or upgrade
-    // a package first, pass an installCommands array like this:
-    // installCommands: [
-    //   // To install the latest version of the ESLint config
-    //   'pnpm upgrade --latest @upleveled/eslint-config-upleveled',
-    //   // Avoid any issues with uncommitted files
-    //   'git reset --hard HEAD',
-    // ],
+    installCommands: [
+      // Run project database migrations
+      'pnpm migrate up',
+    ],
   },
 ];
 
@@ -107,12 +95,6 @@ test('Passes in the next-js-passing test project', async () => {
     `../../../../bin/preflight.js`,
     {
       cwd: `${fixturesTempDir}/next-js-passing`,
-      env: {
-        PGHOST: 'localhost',
-        PGUSERNAME: 'preflight_test_project_next_js_passing',
-        PGPASSWORD: 'preflight_test_project_next_js_passing',
-        PGDATABASE: 'preflight_test_project_next_js_passing',
-      },
     },
   );
 
