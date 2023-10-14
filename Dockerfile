@@ -5,8 +5,9 @@ WORKDIR /preflight
 COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
 
 # Install dependencies:
-# - Git to allow `git clone` in the clone-and-preflight script
-# - PostgreSQL for databases
+# - Git to allow `git clone` in the clone-and-preflight script (git)
+# - PostgreSQL for databases (postgresql15)
+# - Python and build tools for building libpg-query with node-gyp (python3, py3-pip, build-base, bash)
 RUN apk update
 RUN apk add --no-cache git postgresql15 python3 py3-pip build-base bash
 
