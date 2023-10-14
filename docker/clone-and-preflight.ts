@@ -70,7 +70,8 @@ if (projectUsesPostgresql) {
   await executeCommand('chown postgres:postgres /run/postgresql');
   await execaCommand('bash ./scripts/alpine-postgresql-setup-and-start.sh', {
     cwd: projectPath,
-    uid: 70, // postgres user, for initdb and pg_ctl
+    // postgres user, for initdb and pg_ctl
+    uid: 70,
     // Show output to simplify debugging
     stdout: 'inherit',
     stderr: 'inherit',
