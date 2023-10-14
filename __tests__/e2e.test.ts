@@ -30,6 +30,8 @@ const testRepos: Repo[] = [
             // `pnpm remove` also installs if node_modules doesn't
             // exist (no need to run `pnpm install` as well)
             'pnpm remove @ts-safeql/eslint-plugin libpg-query',
+            // Commit packages.json and pnpm-lock.yaml changes to
+            // avoid failing "All changes committed to Git" check
             'git config user.email github-actions[bot]@users.noreply.github.com',
             'git config user.name github-actions[bot]',
             'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
