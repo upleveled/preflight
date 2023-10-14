@@ -25,6 +25,13 @@ const testRepos: Repo[] = [
     repoPath: 'upleveled/preflight-test-project-next-js-passing',
     dirName: 'next-js-passing',
     installCommands: [
+      // Test if on Windows
+      ...(process.platform !== 'win32'
+        ? []
+        : [
+            'pnpm remove @ts-safeql/eslint-plugin libpg-query',
+            'git commit --all --message "Remove SafeSQL for Windows"',
+          ]),
       'pnpm install --frozen-lockfile',
       // Run project database migrations
       'pnpm migrate up',
