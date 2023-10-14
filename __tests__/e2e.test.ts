@@ -27,6 +27,8 @@ const testRepos: Repo[] = [
     installCommands:
       process.platform === 'win32'
         ? [
+            // `pnpm remove` also installs if node_modules doesn't
+            // exist (no need to run `pnpm install` as well)
             'pnpm remove @ts-safeql/eslint-plugin libpg-query',
             'git config user.email github-actions[bot]@users.noreply.github.com',
             'git config user.name github-actions[bot]',
