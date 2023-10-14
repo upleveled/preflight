@@ -92,11 +92,14 @@ if (projectUsesPostgresql) {
     // package.json, indicating that SafeQL has not been
     // installed
     (
-      await execaCommand("grep package.json -e '@ts-safeql/eslint-plugin'", {
-        cwd: projectPath,
-        shell: true,
-        reject: false,
-      })
+      await execaCommand(
+        'grep package.json -e \'"@ts-safeql/eslint-plugin":\'',
+        {
+          cwd: projectPath,
+          shell: true,
+          reject: false,
+        },
+      )
     ).exitCode !== 0
   ) {
     console.log(
