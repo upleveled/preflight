@@ -25,6 +25,7 @@ const testRepos: Repo[] = [
     repoPath: 'upleveled/preflight-test-project-next-js-passing',
     dirName: 'next-js-passing',
     installCommands: [
+      'pnpm install --frozen-lockfile',
       // Run project database migrations
       'pnpm migrate up',
     ],
