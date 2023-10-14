@@ -2,7 +2,7 @@ FROM node:lts-alpine
 
 WORKDIR /preflight
 
-COPY ./docker/clone-and-preflight.js ./docker/package.json ./docker/pnpm-lock.yaml ./
+COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
 
 # Install dependencies:
 # - Git to allow `git clone` in the clone-and-preflight script
@@ -20,5 +20,6 @@ ENV PNPM_HOME=/usr/local/bin
 
 RUN pnpm add --global @upleveled/preflight@latest
 
+COPY ./docker/clone-and-preflight.js ./
 RUN chmod +x ./clone-and-preflight.js
 ENTRYPOINT ["./clone-and-preflight.js"]
