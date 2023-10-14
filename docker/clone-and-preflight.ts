@@ -70,9 +70,21 @@ if (projectUsesPostgresql) {
   process.env.PGUSERNAME = 'project_to_check';
   process.env.PGPASSWORD = 'project_to_check';
 
+  // Create directory for PostgreSQL socket
   await executeCommand('mkdir /run/postgresql');
   await executeCommand('chown postgres:postgres /run/postgresql');
 
+  // Run script as postgres user to:
+  // - Create data directory
+  // - Init database
+  // - Start database
+  // - Create database
+  // - Create database user
+  // - Create schema
+  // - Grant permissions to database user
+  //
+  // Example script:
+  // https://github.com/upleveled/preflight-test-project-next-js-passing/blob/e65717f6951b5336bb0bd83c15bbc99caa67ebe9/scripts/alpine-postgresql-setup-and-start.sh
   const postgresUid = Number((await executeCommand('id -u postgres'))!);
   await execaCommand('bash ./scripts/alpine-postgresql-setup-and-start.sh', {
     cwd: projectPath,
