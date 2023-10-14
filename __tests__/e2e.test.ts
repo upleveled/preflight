@@ -25,6 +25,8 @@ const testRepos: Repo[] = [
     repoPath: 'upleveled/preflight-test-project-next-js-passing',
     dirName: 'next-js-passing',
     installCommands:
+      // libpg-query is not yet supported on Windows
+      // https://github.com/pganalyze/libpg_query/issues/44
       process.platform === 'win32'
         ? [
             // `pnpm remove` also installs if node_modules doesn't
