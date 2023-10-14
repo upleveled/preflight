@@ -35,6 +35,8 @@ jobs:
           cache: 'pnpm'
 
       - run: pnpm install
+      - run: pnpm install
+        working-directory: docker
 
       - name: Lint
         run: pnpm lint
