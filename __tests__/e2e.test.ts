@@ -30,7 +30,9 @@ const testRepos: Repo[] = [
         ? []
         : [
             'pnpm remove @ts-safeql/eslint-plugin libpg-query',
-            'git commit --amend --all --message Remove\\ SafeSQL\\ for\\ Windows',
+            'git config user.email github-actions[bot]@users.noreply.github.com',
+            'git config user.name github-actions[bot]',
+            'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
           ]),
       'pnpm install --frozen-lockfile',
       // Run project database migrations
