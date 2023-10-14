@@ -61,7 +61,7 @@ const projectUsesPostgresql =
   ).exitCode === 0;
 
 if (projectUsesPostgresql) {
-  console.log('Setting up database...');
+  console.log('Setting up PostgreSQL database...');
 
   // Set database connection environment variables (inherited in
   // all future execaCommand / executeCommand calls)
