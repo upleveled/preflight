@@ -67,23 +67,32 @@ if (projectUsesPostgresql) {
       'utf8',
     ),
   ).jobs['playwright-tests'].env;
-  await execaCommand('./scripts/postgresql-setup-and-start.sh', {
+
+  // Set database connection environment variables (inherited in
+  // all future execaCommand / executeCommand calls)
+  process.env.PGHOST = databaseEnv.PGHOST;
+  process.env.PGDATABASE = databaseEnv.PGDATABASE;
+  process.env.PGUSERNAME = databaseEnv.PGUSERNAME;
+  process.env.PGPASSWORD = databaseEnv.PGPASSWORD;
+
+  await executeCommand('mkdir /run/postgresql');
+  await executeCommand('chown postgres:postgres /run/postgresql');
+  await execaCommand('bash ./scripts/alpine-postgresql-setup-and-start.sh', {
     cwd: repoPath,
-    env: {
-      PGHOST: databaseEnv.PGHOST,
-      PGDATABASE: databaseEnv.PGDATABASE,
-      PGUSERNAME: databaseEnv.PGUSERNAME,
-      PGPASSWORD: databaseEnv.PGPASSWORD,
-    },
+    uid: 70, // postgres user, for initdb and pg_ctl
+    // Show output to simplify debugging
+    stdout: 'inherit',
+    stderr: 'inherit',
   });
 
   console.log('Running migrations...');
   await executeCommand('pnpm migrate up', { cwd: repoPath });
 
-  console.log(
-    'Install SafeQL if not yet installed (eg. on Windows dev machines)...',
-  );
   if (
+    // Exit code of grep will be non-zero if the
+    // `"@ts-safeql/eslint-plugin":` string is not found in
+    // package.json, indicating that SafeQL has not been
+    // installed
     (
       await execaCommand("grep package.json -e '@ts-safeql/eslint-plugin'", {
         cwd: repoPath,
@@ -92,6 +101,9 @@ if (projectUsesPostgresql) {
       })
     ).exitCode !== 0
   ) {
+    console.log(
+      'SafeQL ESLint plugin not yet installed (project created on Windows machine), installing...',
+    );
     await executeCommand('pnpm add @ts-safeql/eslint-plugin libpg-query', {
       cwd: repoPath,
     });
