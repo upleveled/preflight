@@ -29,6 +29,18 @@ const testRepos: Repo[] = [
     //   'git reset --hard HEAD',
     // ],
   },
+  {
+    repoPath: 'upleveled/preflight-test-project-next-js-passing',
+    dirName: 'next-js-passing',
+    // To use install commands, for example to install or upgrade
+    // a package first, pass an installCommands array like this:
+    // installCommands: [
+    //   // To install the latest version of the ESLint config
+    //   'pnpm upgrade --latest @upleveled/eslint-config-upleveled',
+    //   // Avoid any issues with uncommitted files
+    //   'git reset --hard HEAD',
+    // ],
+  },
 ];
 
 beforeAll(
@@ -89,3 +101,31 @@ test('Passes in the react-passing test project', async () => {
   expect(stdoutSortedWithoutVersionNumber).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
 }, 30000);
+
+test('Passes in the next-js-passing test project', async () => {
+  const { stdout, stderr } = await execaCommand(
+    `../../../../bin/preflight.js`,
+    {
+      cwd: `${fixturesTempDir}/next-js-passing`,
+      env: {
+        PGHOST: 'localhost',
+        PGUSERNAME: 'preflight_test_project_next_js_passing',
+        PGPASSWORD: 'preflight_test_project_next_js_passing',
+        PGDATABASE: 'preflight_test_project_next_js_passing',
+      },
+    },
+  );
+
+  const stdoutSortedWithoutVersionNumber = stdout
+    .replace(/(UpLeveled Preflight) v\d+\.\d+\.\d+(-\d+)?/, '$1')
+    .split('\n')
+    .sort((a: string, b: string) => {
+      if (b.includes('UpLeveled Preflight')) return 1;
+      return a < b ? -1 : 1;
+    })
+    .join('\n')
+    .trim();
+
+  expect(stdoutSortedWithoutVersionNumber).toMatchSnapshot();
+  expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
+}, 45000);

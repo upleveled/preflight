@@ -13,6 +13,11 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
+      - uses: ikalnytskyi/action-setup-postgres@v4
+        with:
+          username: preflight_test_project_next_js_passing
+          password: preflight_test_project_next_js_passing
+          database: preflight_test_project_next_js_passing
       # To avoid CRLF in Windows tests, which cause problems with Prettier:
       # https://github.com/upleveled/preflight/runs/1824397400
       #
