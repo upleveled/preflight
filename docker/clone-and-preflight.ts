@@ -53,12 +53,14 @@ const projectUsesPostgresql =
   (
     await execaCommand('grep package.json -e \'"postgres":\'', {
       cwd: repoPath,
+      shell: true,
       reject: false,
     })
   ).exitCode === 0;
 
 if (projectUsesPostgresql) {
   console.log('Setting up database...');
+
   const databaseEnv = YAML.parse(
     await readFile(
       `${repoPath}/.github/workflows/test-playwright-and-deploy-to-fly-io.yml`,
@@ -85,6 +87,7 @@ if (projectUsesPostgresql) {
     (
       await execaCommand("grep package.json -e '@ts-safeql/eslint-plugin'", {
         cwd: repoPath,
+        shell: true,
         reject: false,
       })
     ).exitCode !== 0
