@@ -72,10 +72,12 @@ if (projectUsesPostgresql) {
 
   await executeCommand('mkdir /run/postgresql');
   await executeCommand('chown postgres:postgres /run/postgresql');
+
+  const postgresUid = Number((await executeCommand('id -u postgres'))!);
   await execaCommand('bash ./scripts/alpine-postgresql-setup-and-start.sh', {
     cwd: projectPath,
     // postgres user, for initdb and pg_ctl
-    uid: 70,
+    uid: postgresUid,
     // Show output to simplify debugging
     stdout: 'inherit',
     stderr: 'inherit',
