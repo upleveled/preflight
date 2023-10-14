@@ -1,4 +1,4 @@
-// import { sep } from 'node:path';
+import { sep } from 'node:path';
 import { ESLint } from 'eslint';
 import { execaCommand } from 'execa';
 
@@ -36,25 +36,23 @@ export default async function eslintCheck() {
       );
     }
 
-    throw new Error(JSON.stringify(eslintResults, null, 2));
+    throw new Error(
+      `ESLint problems found in the following files:
+        ${eslintResults
+          // Make paths relative to the project:
+          //
+          // Before:
+          //   macOS / Linux: /home/projects/next-student-project/app/api/hello/route.js
+          //   Windows: C:\Users\Lukas\projects\next-student-project\app\api\hello\route.js
+          //
+          // After:
+          //   macOS / Linux: app/api/hello/route.js
+          //   Windows: app\api\hello\route.js
+          .map(({ filePath }) => filePath.replace(`${process.cwd()}${sep}`, ''))
+          .join('\n')}
 
-    // throw new Error(
-    //   `ESLint problems found in the following files:
-    //     ${eslintResults
-    //       // Make paths relative to the project:
-    //       //
-    //       // Before:
-    //       //   macOS / Linux: /home/projects/next-student-project/app/api/hello/route.js
-    //       //   Windows: C:\Users\Lukas\projects\next-student-project\app\api\hello\route.js
-    //       //
-    //       // After:
-    //       //   macOS / Linux: app/api/hello/route.js
-    //       //   Windows: app\api\hello\route.js
-    //       .map(({ filePath }) => filePath.replace(`${process.cwd()}${sep}`, ''))
-    //       .join('\n')}
-
-    //     Open these files in your editor - there should be problems to fix
-    //   `,
-    // );
+        Open these files in your editor - there should be problems to fix
+      `,
+    );
   }
 }
