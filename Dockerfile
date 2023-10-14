@@ -20,7 +20,8 @@ ENV PNPM_HOME=/usr/local/bin
 
 RUN pnpm add --global @upleveled/preflight@latest
 
-# Skip dotenv usage in migrations and ESLint
+# Skip dotenv usage in migrations and ESLint in
+# the project being tested
 ENV CI=true
 
 COPY ./docker/clone-and-preflight.js ./
