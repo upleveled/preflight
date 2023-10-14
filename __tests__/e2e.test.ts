@@ -83,15 +83,8 @@ beforeAll(
   300000,
 );
 
-test('Passes in the react-passing test project', async () => {
-  const { stdout, stderr } = await execaCommand(
-    `../../../../bin/preflight.js`,
-    {
-      cwd: `${fixturesTempDir}/react-passing`,
-    },
-  );
-
-  const stdoutSortedWithoutVersionNumber = stdout
+function sortStdoutAndStripVersionNumber(stdout: string) {
+  return stdout
     .replace(/(UpLeveled Preflight) v\d+\.\d+\.\d+(-\d+)?/, '$1')
     .split('\n')
     .sort((a: string, b: string) => {
@@ -100,8 +93,17 @@ test('Passes in the react-passing test project', async () => {
     })
     .join('\n')
     .trim();
+}
 
-  expect(stdoutSortedWithoutVersionNumber).toMatchSnapshot();
+test('Passes in the react-passing test project', async () => {
+  const { stdout, stderr } = await execaCommand(
+    `../../../../bin/preflight.js`,
+    {
+      cwd: `${fixturesTempDir}/react-passing`,
+    },
+  );
+
+  expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
 }, 30000);
 
@@ -113,16 +115,6 @@ test('Passes in the next-js-passing test project', async () => {
     },
   );
 
-  const stdoutSortedWithoutVersionNumber = stdout
-    .replace(/(UpLeveled Preflight) v\d+\.\d+\.\d+(-\d+)?/, '$1')
-    .split('\n')
-    .sort((a: string, b: string) => {
-      if (b.includes('UpLeveled Preflight')) return 1;
-      return a < b ? -1 : 1;
-    })
-    .join('\n')
-    .trim();
-
-  expect(stdoutSortedWithoutVersionNumber).toMatchSnapshot();
+  expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
 }, 45000);
