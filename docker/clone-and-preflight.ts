@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
-import { readFile } from 'node:fs/promises';
 import { execaCommand, Options } from 'execa';
-import YAML from 'yaml';
 
 const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
 
@@ -13,7 +11,7 @@ $ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-
   process.exit(1);
 }
 
-const repoPath = 'repo-to-check';
+const projectPath = 'project-to-check';
 
 async function executeCommand(command: string, options?: Pick<Options, 'cwd'>) {
   let all: string | undefined = '';
@@ -43,16 +41,16 @@ await executeCommand(
     !process.argv[3] ? '' : `--branch ${process.argv[3]}`
   } --single-branch ${
     process.argv[2]
-  } ${repoPath} --config core.autocrlf=input`,
+  } ${projectPath} --config core.autocrlf=input`,
 );
 
 console.log('Installing dependencies...');
-await executeCommand('pnpm install', { cwd: repoPath });
+await executeCommand('pnpm install', { cwd: projectPath });
 
 const projectUsesPostgresql =
   (
     await execaCommand('grep package.json -e \'"postgres":\'', {
-      cwd: repoPath,
+      cwd: projectPath,
       shell: true,
       reject: false,
     })
@@ -61,24 +59,17 @@ const projectUsesPostgresql =
 if (projectUsesPostgresql) {
   console.log('Setting up database...');
 
-  const databaseEnv = YAML.parse(
-    await readFile(
-      `${repoPath}/.github/workflows/test-playwright-and-deploy-to-fly-io.yml`,
-      'utf8',
-    ),
-  ).jobs['playwright-tests'].env;
-
   // Set database connection environment variables (inherited in
   // all future execaCommand / executeCommand calls)
-  process.env.PGHOST = databaseEnv.PGHOST;
-  process.env.PGDATABASE = databaseEnv.PGDATABASE;
-  process.env.PGUSERNAME = databaseEnv.PGUSERNAME;
-  process.env.PGPASSWORD = databaseEnv.PGPASSWORD;
+  process.env.PGHOST = 'localhost';
+  process.env.PGDATABASE = 'project_to_check';
+  process.env.PGUSERNAME = 'project_to_check';
+  process.env.PGPASSWORD = 'project_to_check';
 
   await executeCommand('mkdir /run/postgresql');
   await executeCommand('chown postgres:postgres /run/postgresql');
   await execaCommand('bash ./scripts/alpine-postgresql-setup-and-start.sh', {
-    cwd: repoPath,
+    cwd: projectPath,
     uid: 70, // postgres user, for initdb and pg_ctl
     // Show output to simplify debugging
     stdout: 'inherit',
@@ -86,7 +77,7 @@ if (projectUsesPostgresql) {
   });
 
   console.log('Running migrations...');
-  await executeCommand('pnpm migrate up', { cwd: repoPath });
+  await executeCommand('pnpm migrate up', { cwd: projectPath });
 
   if (
     // Exit code of grep will be non-zero if the
@@ -95,7 +86,7 @@ if (projectUsesPostgresql) {
     // installed
     (
       await execaCommand("grep package.json -e '@ts-safeql/eslint-plugin'", {
-        cwd: repoPath,
+        cwd: projectPath,
         shell: true,
         reject: false,
       })
@@ -105,13 +96,13 @@ if (projectUsesPostgresql) {
       'SafeQL ESLint plugin not yet installed (project created on Windows machine), installing...',
     );
     await executeCommand('pnpm add @ts-safeql/eslint-plugin libpg-query', {
-      cwd: repoPath,
+      cwd: projectPath,
     });
   }
 }
 
 console.log('Running Preflight...');
-const preflightOutput = await executeCommand('preflight', { cwd: repoPath });
+const preflightOutput = await executeCommand('preflight', { cwd: projectPath });
 
 if (preflightOutput) {
   console.log(
