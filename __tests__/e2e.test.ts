@@ -24,20 +24,19 @@ const testRepos: Repo[] = [
   {
     repoPath: 'upleveled/preflight-test-project-next-js-passing',
     dirName: 'next-js-passing',
-    installCommands: [
-      // Test if on Windows
-      ...(process.platform !== 'win32'
-        ? []
+    installCommands:
+      process.platform !== 'win32'
+        ? [
+            'pnpm install --frozen-lockfile',
+            // Run project database migrations
+            'pnpm migrate up',
+          ]
         : [
             'pnpm remove @ts-safeql/eslint-plugin libpg-query',
             'git config user.email github-actions[bot]@users.noreply.github.com',
             'git config user.name github-actions[bot]',
             'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
-          ]),
-      'pnpm install --frozen-lockfile',
-      // Run project database migrations
-      'pnpm migrate up',
-    ],
+          ],
   },
 ];
 
