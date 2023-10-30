@@ -1,4 +1,4 @@
-import { dirname, relative, sep } from 'node:path';
+import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execaCommand } from 'execa';
 import normalizeNewline from '../util/normalizeNewline';
@@ -8,7 +8,12 @@ export const title = 'Prettier';
 export default async function prettierCheck() {
   try {
     await execaCommand(
-      `../node_modules/.bin/prettier --list-different ${process.cwd()}/**/*.{js,jsx,ts,jsx} --ignore-path ${process.cwd()}/.eslintignore --config ${process.cwd()}/prettier.config.mjs --end-of-line auto`,
+      `${resolve(
+        dirname(fileURLToPath(import.meta.url)),
+        '..',
+        'node_modules',
+        '.bin',
+      )}/prettier --list-different **/*.{js,jsx,ts,jsx} --ignore-path .eslintignore --config prettier.config.mjs --end-of-line auto`,
       { cwd: dirname(fileURLToPath(import.meta.url)) },
     );
   } catch (error) {
