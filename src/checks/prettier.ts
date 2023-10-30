@@ -13,7 +13,7 @@ export default async function prettierCheck() {
         '..',
         'node_modules',
         '.bin',
-      )}/prettier --list-different **/*.{js,jsx,ts,jsx} --ignore-path .eslintignore --config prettier.config.mjs --end-of-line auto`,
+      )}/prettier --list-different **/*.{js,jsx,ts,jsx} --ignore-path .eslintignore --end-of-line auto`,
     );
   } catch (error) {
     const { stdout, stderr } = error as { stdout: string; stderr: string };
@@ -54,8 +54,6 @@ export default async function prettierCheck() {
           ${unformattedFiles.join('\n')}
 
           For each of the files above, open the file in your editor and save the file. This will format the file with Prettier, which will cause changes to appear in Git.
-
-          In some very uncommon cases (this probably doesn't apply to you), the mismatch may come from inconsistent end of line characters. Read more here: https://github.com/upleveled/answers/issues/31
         `,
       );
     }
