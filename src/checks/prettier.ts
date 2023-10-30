@@ -14,7 +14,6 @@ export default async function prettierCheck() {
         'node_modules',
         '.bin',
       )}/prettier --list-different **/*.{js,jsx,ts,jsx} --ignore-path .eslintignore --config prettier.config.mjs --end-of-line auto`,
-      { cwd: dirname(fileURLToPath(import.meta.url)) },
     );
   } catch (error) {
     const { stdout, stderr } = error as { stdout: string; stderr: string };
