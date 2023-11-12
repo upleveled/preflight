@@ -28,6 +28,8 @@ export default async function noUnusedAndMissingDependencies() {
     // ESLint configuration
     'babel-eslint',
     'eslint-config-next',
+    '@ts-safeql/eslint-plugin',
+    'libpg-query',
 
     // TODO: Remove this once depcheck issue is fixed:
     // PR: https://github.com/depcheck/depcheck/pull/790
