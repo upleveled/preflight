@@ -45,6 +45,7 @@ jobs:
 
       - run: pnpm install
       - run: pnpm install
+        if: runner.os != 'Windows'
         working-directory: docker
 
       - name: Lint
