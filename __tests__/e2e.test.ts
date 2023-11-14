@@ -37,12 +37,14 @@ const testRepos: Repo[] = [
             'git config user.email github-actions[bot]@users.noreply.github.com',
             'git config user.name github-actions[bot]',
             'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
+            'pnpm setup',
             'pnpm add --global ../../../preflight',
           ]
         : [
             'pnpm install --frozen-lockfile',
             // Run project database migrations
             'pnpm migrate up',
+            'pnpm setup',
             'pnpm add --global ../../../preflight',
           ],
   },
