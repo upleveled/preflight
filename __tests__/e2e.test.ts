@@ -78,6 +78,7 @@ beforeAll(
               cwd: `${fixturesTempDir}/${dirName}`,
               env: {
                 PNPM_HOME: '/usr/local/bin',
+                SHELL: 'bash',
               },
             }),
           { concurrency: 1 },
