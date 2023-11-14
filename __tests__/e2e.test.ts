@@ -106,7 +106,7 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 test('Passes in the react-passing test project', async () => {
   if (process.platform === 'win32') {
     const { stdout: stdout1 } = await execaCommand('dir', {
-      cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@t_ygntojkrkqu3wjzv73xoodfpfe\\node_modules\\`,
+      cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@ty_xvhbeu5qc6hlxssq5gmtnagbti\\node_modules\\`,
     });
     console.log(stdout1);
 
@@ -116,7 +116,7 @@ test('Passes in the react-passing test project', async () => {
     console.log(stdout2);
 
     const { stdout: stdout3 } = await execaCommand('type index.js', {
-      cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@t_ygntojkrkqu3wjzv73xoodfpfe\\node_modules\\eslint-config-upleveled\\`,
+      cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@ty_xvhbeu5qc6hlxssq5gmtnagbti\\node_modules\\eslint-config-upleveled\\`,
     });
     console.log(stdout3);
   }
