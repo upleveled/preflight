@@ -49,12 +49,17 @@ jobs:
         working-directory: docker
 
       - name: Lint
+        if: runner.os != 'Windows'
         run: pnpm lint
 
       - run: pnpm tsc
+        if: runner.os != 'Windows'
       - run: pnpm tsc --project bin/tsconfig.json
+        if: runner.os != 'Windows'
       - run: pnpm tsc --project docker/tsconfig.json
+        if: runner.os != 'Windows'
       - run: pnpm tsc --project tsconfig.nonsrc.json
+        if: runner.os != 'Windows'
 
       - name: Build
         run: pnpm build
