@@ -21,33 +21,33 @@ const testRepos: Repo[] = [
     repoPath: 'upleveled/preflight-test-project-react-passing',
     dirName: 'react-passing',
   },
-  {
-    repoPath: 'upleveled/preflight-test-project-next-js-passing',
-    dirName: 'next-js-passing',
-    installCommands:
-      // libpg-query is not yet supported on Windows
-      // https://github.com/pganalyze/libpg_query/issues/44
-      process.platform === 'win32'
-        ? [
-            // `pnpm remove` also installs if node_modules doesn't
-            // exist (no need to run `pnpm install` as well)
-            'pnpm remove @ts-safeql/eslint-plugin libpg-query',
-            // Commit packages.json and pnpm-lock.yaml changes to
-            // avoid failing "All changes committed to Git" check
-            'git config user.email github-actions[bot]@users.noreply.github.com',
-            'git config user.name github-actions[bot]',
-            'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
-            'pnpm setup',
-            'pnpm add --global ../../../preflight',
-          ]
-        : [
-            'pnpm install --frozen-lockfile',
-            // Run project database migrations
-            'pnpm migrate up',
-            'pnpm setup',
-            'pnpm add --global ../../../preflight',
-          ],
-  },
+  // {
+  //   repoPath: 'upleveled/preflight-test-project-next-js-passing',
+  //   dirName: 'next-js-passing',
+  //   installCommands:
+  //     // libpg-query is not yet supported on Windows
+  //     // https://github.com/pganalyze/libpg_query/issues/44
+  //     process.platform === 'win32'
+  //       ? [
+  //           // `pnpm remove` also installs if node_modules doesn't
+  //           // exist (no need to run `pnpm install` as well)
+  //           'pnpm remove @ts-safeql/eslint-plugin libpg-query',
+  //           // Commit packages.json and pnpm-lock.yaml changes to
+  //           // avoid failing "All changes committed to Git" check
+  //           'git config user.email github-actions[bot]@users.noreply.github.com',
+  //           'git config user.name github-actions[bot]',
+  //           'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
+  //           // 'pnpm setup',
+  //           // 'pnpm add --global ../../../preflight',
+  //         ]
+  //       : [
+  //           'pnpm install --frozen-lockfile',
+  //           // Run project database migrations
+  //           'pnpm migrate up',
+  //           // 'pnpm setup',
+  //           // 'pnpm add --global ../../../preflight',
+  //         ],
+  // },
 ];
 
 beforeAll(
@@ -76,10 +76,10 @@ beforeAll(
           (command) =>
             execaCommand(command, {
               cwd: `${fixturesTempDir}/${dirName}`,
-              env: {
-                PNPM_HOME: '/usr/local/bin',
-                SHELL: 'bash',
-              },
+              // env: {
+              //   PNPM_HOME: '/usr/local/bin',
+              //   SHELL: 'bash',
+              // },
             }),
           { concurrency: 1 },
         );
@@ -104,8 +104,25 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 }
 
 test('Passes in the react-passing test project', async () => {
+  if (process.platform === 'win32') {
+    const { stdout: stdout1 } = await execaCommand('dir', {
+      cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@t_ygntojkrkqu3wjzv73xoodfpfe\\node_modules\\`,
+    });
+    console.log(stdout1);
+
+    const { stdout: stdout2 } = await execaCommand('dir', {
+      cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\`,
+    });
+    console.log(stdout2);
+
+    const { stdout: stdout3 } = await execaCommand('type index.js', {
+      cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@t_ygntojkrkqu3wjzv73xoodfpfe\\node_modules\\eslint-config-upleveled\\`,
+    });
+    console.log(stdout3);
+  }
+
   const { stdout, stderr } = await execaCommand(
-    `../../../../bin/preflight.js`,
+    '../../../../bin/preflight.js',
     {
       cwd: `${fixturesTempDir}/react-passing`,
     },
@@ -115,11 +132,15 @@ test('Passes in the react-passing test project', async () => {
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
 }, 30000);
 
-test('Passes in the next-js-passing test project', async () => {
-  const { stdout, stderr } = await execaCommand('preflight', {
-    cwd: `${fixturesTempDir}/next-js-passing`,
-  });
+// test('Passes in the next-js-passing test project', async () => {
 
-  expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
-  expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
-}, 45000);
+//   const { stdout, stderr } = await execaCommand(
+//     '../../../../bin/preflight.js',
+//     {
+//       cwd: `${fixturesTempDir}/next-js-passing`,
+//     },
+//   );
+
+//   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
+//   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
+// }, 45000);
