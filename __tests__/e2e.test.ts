@@ -76,6 +76,9 @@ beforeAll(
           (command) =>
             execaCommand(command, {
               cwd: `${fixturesTempDir}/${dirName}`,
+              env: {
+                PNPM_HOME: '/usr/local/bin',
+              },
             }),
           { concurrency: 1 },
         );
