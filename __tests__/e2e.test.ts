@@ -119,6 +119,10 @@ test('Passes in the react-passing test project', async () => {
       cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@ty_xvhbeu5qc6hlxssq5gmtnagbti\\node_modules\\eslint-config-upleveled\\`,
     });
     console.log(stdout3);
+
+    await execaCommand('pnpm install --shamefully-hoist', {
+      cwd: `${fixturesTempDir}/react-passing`,
+    });
   }
 
   const { stdout, stderr } = await execaCommand(
