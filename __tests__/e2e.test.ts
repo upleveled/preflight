@@ -37,11 +37,13 @@ const testRepos: Repo[] = [
             'git config user.email github-actions[bot]@users.noreply.github.com',
             'git config user.name github-actions[bot]',
             'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
+            'pnpm add --global ../../../../',
           ]
         : [
             'pnpm install --frozen-lockfile',
             // Run project database migrations
             'pnpm migrate up',
+            'pnpm add --global ../../../../',
           ],
   },
 ];
@@ -108,12 +110,9 @@ test('Passes in the react-passing test project', async () => {
 }, 30000);
 
 test('Passes in the next-js-passing test project', async () => {
-  const { stdout, stderr } = await execaCommand(
-    `../../../../bin/preflight.js`,
-    {
-      cwd: `${fixturesTempDir}/next-js-passing`,
-    },
-  );
+  const { stdout, stderr } = await execaCommand('preflight', {
+    cwd: `${fixturesTempDir}/next-js-passing`,
+  });
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
