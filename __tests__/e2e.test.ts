@@ -117,7 +117,7 @@ test('Passes in the react-passing test project', async () => {
 
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execaCommand(
-    '../../../../bin/preflight.js',
+    `${process.cwd()}/bin/preflight.js`,
     {
       cwd: `${fixturesTempDir}/next-js-passing`,
     },
