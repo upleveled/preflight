@@ -3,7 +3,7 @@ import { beforeAll, expect, test } from '@jest/globals';
 import { execaCommand } from 'execa';
 import pMap from 'p-map';
 
-const tempDir = process.env.GITHUB_ACTIONS
+const fixturesTempDir = process.env.GITHUB_ACTIONS
   ? // Switch to `tmpdir()` on GitHub Actions to avoid
     // ESLint crashing with Windows paths over the 260
     // character MAX_PATH limit
@@ -14,7 +14,7 @@ const tempDir = process.env.GITHUB_ACTIONS
 
 function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
   return execaCommand(
-    `git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${tempDir}/${fixtureDirName} --config core.autocrlf=input`,
+    `git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${fixturesTempDir}/${fixtureDirName} --config core.autocrlf=input`,
   );
 }
 
@@ -70,7 +70,7 @@ beforeAll(
           // `return pMap()` below
           return [
             await execaCommand('pnpm install --frozen-lockfile', {
-              cwd: `${tempDir}/${dirName}`,
+              cwd: `${fixturesTempDir}/${dirName}`,
             }),
           ];
         }
@@ -79,7 +79,7 @@ beforeAll(
           installCommands,
           (command) =>
             execaCommand(command, {
-              cwd: `${tempDir}/${dirName}`,
+              cwd: `${fixturesTempDir}/${dirName}`,
             }),
           { concurrency: 1 },
         );
@@ -107,7 +107,7 @@ test('Passes in the react-passing test project', async () => {
   const { stdout, stderr } = await execaCommand(
     `${process.cwd()}/bin/preflight.js`,
     {
-      cwd: `${tempDir}/react-passing`,
+      cwd: `${fixturesTempDir}/react-passing`,
     },
   );
 
