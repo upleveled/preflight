@@ -3,7 +3,14 @@ import { beforeAll, expect, test } from '@jest/globals';
 import { execaCommand } from 'execa';
 import pMap from 'p-map';
 
-const tempDir = tmpdir();
+const tempDir = process.env.GITHUB_ACTIONS
+  ? // Switch to `tmpdir()` on GitHub Actions to avoid
+    // ESLint crashing with Windows paths over the 260
+    // character MAX_PATH limit
+    // https://github.com/upleveled/preflight/pull/469/#issuecomment-1812422819
+    // https://github.com/eslint/eslint/issues/17763
+    tmpdir()
+  : '__tests__/fixtures/__temp';
 
 function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
   return execaCommand(
@@ -21,42 +28,30 @@ const testRepos: Repo[] = [
   {
     repoPath: 'upleveled/preflight-test-project-react-passing',
     dirName: 'react-passing',
-    // installCommands:
-    //   process.platform === 'win32'
-    //     ? [
-    //         'pnpm config set node-linker hoisted --location project',
-    //         'pnpm install --frozen-lockfile',
-    //         'rm .npmrc',
-    //       ]
-    //     : ['pnpm install --frozen-lockfile'],
   },
-  // {
-  //   repoPath: 'upleveled/preflight-test-project-next-js-passing',
-  //   dirName: 'next-js-passing',
-  //   installCommands:
-  //     // libpg-query is not yet supported on Windows
-  //     // https://github.com/pganalyze/libpg_query/issues/44
-  //     process.platform === 'win32'
-  //       ? [
-  //           // `pnpm remove` also installs if node_modules doesn't
-  //           // exist (no need to run `pnpm install` as well)
-  //           'pnpm remove @ts-safeql/eslint-plugin libpg-query',
-  //           // Commit packages.json and pnpm-lock.yaml changes to
-  //           // avoid failing "All changes committed to Git" check
-  //           'git config user.email github-actions[bot]@users.noreply.github.com',
-  //           'git config user.name github-actions[bot]',
-  //           'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
-  //           // 'pnpm setup',
-  //           // 'pnpm add --global ../../../preflight',
-  //         ]
-  //       : [
-  //           'pnpm install --frozen-lockfile',
-  //           // Run project database migrations
-  //           'pnpm migrate up',
-  //           // 'pnpm setup',
-  //           // 'pnpm add --global ../../../preflight',
-  //         ],
-  // },
+  {
+    repoPath: 'upleveled/preflight-test-project-next-js-passing',
+    dirName: 'next-js-passing',
+    installCommands:
+      // libpg-query is not yet supported on Windows
+      // https://github.com/pganalyze/libpg_query/issues/44
+      process.platform === 'win32'
+        ? [
+            // `pnpm remove` also installs if node_modules doesn't
+            // exist (no need to run `pnpm install` as well)
+            'pnpm remove @ts-safeql/eslint-plugin libpg-query',
+            // Commit packages.json and pnpm-lock.yaml changes to
+            // avoid failing "All changes committed to Git" check
+            'git config user.email github-actions[bot]@users.noreply.github.com',
+            'git config user.name github-actions[bot]',
+            'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
+          ]
+        : [
+            'pnpm install --frozen-lockfile',
+            // Run project database migrations
+            'pnpm migrate up',
+          ],
+  },
 ];
 
 beforeAll(
@@ -85,10 +80,6 @@ beforeAll(
           (command) =>
             execaCommand(command, {
               cwd: `${tempDir}/${dirName}`,
-              // env: {
-              //   PNPM_HOME: '/usr/local/bin',
-              //   SHELL: 'bash',
-              // },
             }),
           { concurrency: 1 },
         );
@@ -113,24 +104,6 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 }
 
 test('Passes in the react-passing test project', async () => {
-  if (process.platform === 'win32') {
-    // const { stdout: stdout1 } = await execaCommand('dir', {
-    //   cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@ty_xvhbeu5qc6hlxssq5gmtnagbti\\node_modules\\eslint-plugin-jsx-expressions\\`,
-    // });
-    // console.log(stdout1);
-    // const { stdout: stdout2 } = await execaCommand('dir', {
-    //   cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\`,
-    // });
-    // console.log(stdout2);
-    // const { stdout: stdout3 } = await execaCommand('type index.js', {
-    //   cwd: `D:\\a\\preflight\\preflight\\__tests__\\fixtures\\__temp\\react-passing\\node_modules\\.pnpm\\eslint-config-upleveled@7.0.0_@babel+eslint-parser@7.23.3_@next+eslint-plugin-next@14.0.2_@ty_xvhbeu5qc6hlxssq5gmtnagbti\\node_modules\\eslint-config-upleveled\\`,
-    // });
-    // console.log(stdout3);
-    // await execaCommand('pnpm install --shamefully-hoist', {
-    //   cwd: `${fixturesTempDir}/react-passing`,
-    // });
-  }
-
   const { stdout, stderr } = await execaCommand(
     `${process.cwd()}/bin/preflight.js`,
     {
@@ -142,15 +115,14 @@ test('Passes in the react-passing test project', async () => {
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
 }, 30000);
 
-// test('Passes in the next-js-passing test project', async () => {
+test('Passes in the next-js-passing test project', async () => {
+  const { stdout, stderr } = await execaCommand(
+    '../../../../bin/preflight.js',
+    {
+      cwd: `${fixturesTempDir}/next-js-passing`,
+    },
+  );
 
-//   const { stdout, stderr } = await execaCommand(
-//     '../../../../bin/preflight.js',
-//     {
-//       cwd: `${fixturesTempDir}/next-js-passing`,
-//     },
-//   );
-
-//   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
-//   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
-// }, 45000);
+  expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
+  expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
+}, 45000);
