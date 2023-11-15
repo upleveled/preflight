@@ -1,12 +1,13 @@
+import { tmpdir } from 'node:os';
 import { beforeAll, expect, test } from '@jest/globals';
 import { execaCommand } from 'execa';
 import pMap from 'p-map';
 
-const fixturesTempDir = '__tests__/fixtures/__temp';
+const tempDir = tmpdir();
 
 function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
   return execaCommand(
-    `git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${fixturesTempDir}/${fixtureDirName} --config core.autocrlf=input`,
+    `git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${tempDir}/${fixtureDirName} --config core.autocrlf=input`,
   );
 }
 
@@ -20,14 +21,14 @@ const testRepos: Repo[] = [
   {
     repoPath: 'upleveled/preflight-test-project-react-passing',
     dirName: 'react-passing',
-    installCommands:
-      process.platform === 'win32'
-        ? [
-            'pnpm config set node-linker hoisted --location project',
-            'pnpm install --frozen-lockfile',
-            'rm .npmrc',
-          ]
-        : ['pnpm install --frozen-lockfile'],
+    // installCommands:
+    //   process.platform === 'win32'
+    //     ? [
+    //         'pnpm config set node-linker hoisted --location project',
+    //         'pnpm install --frozen-lockfile',
+    //         'rm .npmrc',
+    //       ]
+    //     : ['pnpm install --frozen-lockfile'],
   },
   // {
   //   repoPath: 'upleveled/preflight-test-project-next-js-passing',
@@ -74,7 +75,7 @@ beforeAll(
           // `return pMap()` below
           return [
             await execaCommand('pnpm install --frozen-lockfile', {
-              cwd: `${fixturesTempDir}/${dirName}`,
+              cwd: `${tempDir}/${dirName}`,
             }),
           ];
         }
@@ -83,7 +84,7 @@ beforeAll(
           installCommands,
           (command) =>
             execaCommand(command, {
-              cwd: `${fixturesTempDir}/${dirName}`,
+              cwd: `${tempDir}/${dirName}`,
               // env: {
               //   PNPM_HOME: '/usr/local/bin',
               //   SHELL: 'bash',
@@ -131,15 +132,15 @@ test('Passes in the react-passing test project', async () => {
   }
 
   const { stdout, stderr } = await execaCommand(
-    '../../../../bin/preflight.js',
+    `${process.cwd()}/bin/preflight.js`,
     {
-      cwd: `${fixturesTempDir}/react-passing`,
+      cwd: `${tempDir}/react-passing`,
     },
   );
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
-}, 70000);
+}, 30000);
 
 // test('Passes in the next-js-passing test project', async () => {
 
