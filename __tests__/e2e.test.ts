@@ -65,12 +65,9 @@ beforeAll(
           // Return array to keep return type uniform with
           // `return pMap()` below
           return [
-            await execaCommand(
-              'pnpm install --frozen-lockfile --shamefully-hoist',
-              {
-                cwd: `${fixturesTempDir}/${dirName}`,
-              },
-            ),
+            await execaCommand('npm install', {
+              cwd: `${fixturesTempDir}/${dirName}`,
+            }),
           ];
         }
 
