@@ -20,6 +20,14 @@ const testRepos: Repo[] = [
   {
     repoPath: 'upleveled/preflight-test-project-react-passing',
     dirName: 'react-passing',
+    installCommands:
+      process.platform === 'win32'
+        ? [
+            'pnpm config set node-linker hoisted --location project',
+            'pnpm install --frozen-lockfile',
+            'rm .npmrc',
+          ]
+        : ['pnpm install --frozen-lockfile'],
   },
   // {
   //   repoPath: 'upleveled/preflight-test-project-next-js-passing',
@@ -65,14 +73,9 @@ beforeAll(
           // Return array to keep return type uniform with
           // `return pMap()` below
           return [
-            await execaCommand(
-              process.platform === 'win32'
-                ? 'npm install'
-                : 'pnpm install --frozen-lockfile --shamefully-hoist',
-              {
-                cwd: `${fixturesTempDir}/${dirName}`,
-              },
-            ),
+            await execaCommand('pnpm install --frozen-lockfile', {
+              cwd: `${fixturesTempDir}/${dirName}`,
+            }),
           ];
         }
 
