@@ -29,7 +29,7 @@
     "docker-run": "docker run preflight",
     "postinstall": "patch-package",
     "lint": "eslint . --max-warnings 0",
-    "prepare": "pnpm build",
+    "preparezzzzzzzzzzzzzzzzzz": "pnpm build",
     "size": "size-limit",
     "start": "tsdx watch --format esm --target node",
     "test": "tsdx test",
