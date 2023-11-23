@@ -107,6 +107,8 @@ const tasks = new Listr(listrTasks, {
   concurrent: 5,
 });
 
+const a = 1;
+
 await tasks.run();
 
 if (tasks.errors.length > 0) {
