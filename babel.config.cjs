@@ -5,4 +5,7 @@ module.exports = {
     },
   },
 };
+
+/** @type {string} */
 const a = 1;
+console.log(a);

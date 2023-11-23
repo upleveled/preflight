@@ -136,7 +136,8 @@ if (projectUsesPostgresql) {
     );
   }
 }
-const a = 1;
+const a: string = 1;
+console.log(a);
 
 console.log('Running Preflight...');
 
