@@ -8,6 +8,7 @@ jobs:
     name: '${{ matrix.os }}: Build, lint, test'
 
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
@@ -38,22 +39,22 @@ jobs:
           version: 'latest'
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
 
       - run: pnpm install
       - run: pnpm install
+        if: runner.os != 'Windows'
         working-directory: docker
 
       - name: Lint
+        if: runner.os != 'Windows'
         run: pnpm lint
 
-      - run: pnpm tsc
-      - run: pnpm tsc --project bin/tsconfig.json
-      - run: pnpm tsc --project docker/tsconfig.json
-      - run: pnpm tsc --project tsconfig.nonsrc.json
+      - run: pnpm tsc --build
+        if: runner.os != 'Windows'
 
       - name: Build
         run: pnpm build

@@ -13,6 +13,7 @@ jobs:
     if: ${{ github.event.ref_type == 'tag' || github.event.inputs.dispatchConfirmation == 'Workflow dispatch confirmed' }}
     name: Build and push Docker image
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: read
       packages: write
@@ -25,14 +26,14 @@ jobs:
           version: 'latest'
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 'lts/*'
           cache: 'pnpm'
 
       - run: pnpm install
 
-      - name: Compile TypeScript and build Docker images
+      - name: Compile TypeScript
         run: pnpm docker-build-ts
 
       # Publish to container registry
