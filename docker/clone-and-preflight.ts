@@ -71,7 +71,7 @@ if (projectUsesPostgresql) {
   process.env.PGPASSWORD = 'project_to_check';
 
   // Create directory for PostgreSQL socket
-  await executeCommand('mkdir /postgres-volume/run/postgresql');
+  await executeCommand('mkdir -p /postgres-volume/run/postgresql');
   await executeCommand('chown postgres:postgres /postgres-volume/run/postgresql');
 
   // Run script as postgres user to:
