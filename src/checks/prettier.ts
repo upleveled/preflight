@@ -5,7 +5,9 @@ export const title = 'Prettier';
 
 export default async function prettierCheck() {
   try {
-    await execaCommand('pnpm prettier . --list-different --end-of-line auto');
+    await execaCommand(
+      'pnpm prettier "**/*.{js,jsx,ts,tsx,css,scss,sql}" --list-different --end-of-line auto',
+    );
   } catch (error) {
     const { stdout, stderr } = error as { stdout: string; stderr: string };
 
