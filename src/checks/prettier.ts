@@ -11,12 +11,7 @@ export default async function prettierCheck() {
   } catch (error) {
     const { stdout, stderr } = error as { stdout: string; stderr: string };
 
-    const stderrWithoutPackageJsonWarning = stderr.replace(
-      /warning [/.\\]*package\.json: No license field[\r\n]*/g,
-      '',
-    );
-
-    if (!stdout || stderrWithoutPackageJsonWarning) {
+    if (!stdout || stderr) {
       throw error;
     }
 
