@@ -73,7 +73,7 @@ if (projectUsesPostgresql) {
   // Create directory for PostgreSQL socket
   await executeCommand('mkdir -p /postgres-volume/run/postgresql/data');
   await executeCommand(
-    'chown postgres:postgres /postgres-volume/run/postgresql/data',
+    'chown -R postgres:postgres /postgres-volume/run/postgresql',
   );
 
   // Run script as postgres user to:
