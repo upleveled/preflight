@@ -13,7 +13,7 @@ export default async function eslintConfigIsValid() {
     'npm show eslint-config-upleveled version',
   );
 
-  let localVersion;
+  let localVersion: string | undefined;
 
   try {
     const eslintConfigPackageJsonPath = require.resolve(
