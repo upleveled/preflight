@@ -14,7 +14,7 @@ export default async function stylelintConfigIsValid() {
     'npm show stylelint-config-upleveled version',
   );
 
-  let localVersion;
+  let localVersion: string | undefined;
 
   try {
     const stylelintConfigPackageJsonPath = require.resolve(
