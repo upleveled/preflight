@@ -45,6 +45,11 @@ export default async function noUnusedAndMissingDependencies() {
     // TODO: Remove when we switch from Jest to Vitest
     'expect',
 
+    // 'ts-node' required for Jest configuration in Typescript
+    // https://github.com/jestjs/jest/issues/11989
+    // TODO: Remove when usage of tsm is allowed
+    'ts-node',
+
     // TypeScript
     'typescript',
     '@types/*',
