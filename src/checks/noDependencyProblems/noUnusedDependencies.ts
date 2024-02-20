@@ -46,8 +46,9 @@ export default async function noUnusedAndMissingDependencies() {
     'expect',
 
     // 'ts-node' required for Jest configuration in Typescript
-    // https://github.com/jestjs/jest/issues/11989
+    // https://jestjs.io/docs/29.6/configuration#:~:text=To%20read%20TypeScript%20configuration%20files%20Jest%20requires%20ts%2Dnode.%20Make%20sure%20it%20is%20installed%20in%20your%20project
     // TODO: Remove when usage of tsm is allowed
+    // https://github.com/jestjs/jest/issues/11989
     'ts-node',
 
     // TypeScript
