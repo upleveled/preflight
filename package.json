@@ -54,15 +54,15 @@
     "patch-package": "8.0.0",
     "readdirp": "3.6.0",
     "semver": "7.6.0",
-    "top-user-agents": "2.1.13"
+    "top-user-agents": "2.1.15"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "7.23.3",
     "@jest/globals": "29.7.0",
-    "@size-limit/file": "11.0.2",
+    "@size-limit/file": "11.1.0",
     "@types/babel__core": "7.20.5",
     "@types/jest": "29.5.12",
-    "@types/node": "20.11.25",
+    "@types/node": "20.11.27",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
     "babel-jest": "29.7.0",
@@ -71,7 +71,7 @@
     "p-map": "7.0.1",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.2.5",
-    "size-limit": "11.0.2",
+    "size-limit": "11.1.0",
     "stylelint": "16.2.1",
     "tsdx": "0.14.1",
     "tslib": "2.6.2",
