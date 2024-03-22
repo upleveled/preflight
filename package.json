@@ -41,7 +41,7 @@
     ]
   },
   "dependencies": {
-    "@types/eslint": "8.56.5",
+    "@types/eslint": "8.56.6",
     "algoliasearch": "4.22.1",
     "chalk": "5.3.0",
     "cheerio": "1.0.0-rc.12",
@@ -54,28 +54,28 @@
     "patch-package": "8.0.0",
     "readdirp": "3.6.0",
     "semver": "7.6.0",
-    "top-user-agents": "2.1.15"
+    "top-user-agents": "2.1.16"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "7.23.3",
+    "@babel/plugin-transform-modules-commonjs": "7.24.1",
     "@jest/globals": "29.7.0",
-    "@size-limit/file": "11.1.0",
+    "@size-limit/file": "11.1.2",
     "@types/babel__core": "7.20.5",
     "@types/jest": "29.5.12",
-    "@types/node": "20.11.27",
+    "@types/node": "20.11.30",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
     "babel-jest": "29.7.0",
     "eslint": "8.57.0",
-    "eslint-config-upleveled": "7.8.1",
+    "eslint-config-upleveled": "7.8.2",
     "p-map": "7.0.1",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.2.5",
-    "size-limit": "11.1.0",
+    "size-limit": "11.1.2",
     "stylelint": "16.2.1",
     "tsdx": "0.14.1",
     "tslib": "2.6.2",
-    "typescript": "5.4.2"
+    "typescript": "5.4.3"
   },
   "engines": {
     "node": ">=18"
