@@ -37,14 +37,15 @@ const testRepos: Repo[] = [
       // https://github.com/pganalyze/libpg_query/issues/44
       process.platform === 'win32'
         ? [
-            // `pnpm remove` also installs if node_modules doesn't
-            // exist (no need to run `pnpm install` as well)
-            'pnpm remove @ts-safeql/eslint-plugin libpg-query',
-            // Commit packages.json and pnpm-lock.yaml changes to
-            // avoid failing "All changes committed to Git" check
-            'git config user.email github-actions[bot]@users.noreply.github.com',
-            'git config user.name github-actions[bot]',
-            'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
+            // // `pnpm remove` also installs if node_modules doesn't
+            // // exist (no need to run `pnpm install` as well)
+            // 'pnpm remove @ts-safeql/eslint-plugin libpg-query',
+            // // Commit packages.json and pnpm-lock.yaml changes to
+            // // avoid failing "All changes committed to Git" check
+            // 'git config user.email github-actions[bot]@users.noreply.github.com',
+            // 'git config user.name github-actions[bot]',
+            // 'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
+            'pnpm install --frozen-lockfile',
           ]
         : [
             'pnpm install --frozen-lockfile',
