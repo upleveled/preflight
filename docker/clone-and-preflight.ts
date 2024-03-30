@@ -99,44 +99,6 @@ if (projectUsesPostgresql) {
 
   console.log('Running migrations...');
   await executeCommand('pnpm migrate up', { cwd: projectPath });
-
-  if (
-    // Exit code of grep will be non-zero if the
-    // `"@ts-safeql/eslint-plugin":` string is not found in
-    // package.json, indicating that SafeQL has not been
-    // installed
-    (
-      await execaCommand(
-        'grep package.json -e \'"@ts-safeql/eslint-plugin":\'',
-        {
-          cwd: projectPath,
-          shell: true,
-          reject: false,
-        },
-      )
-    ).exitCode !== 0
-  ) {
-    console.log(
-      'SafeQL ESLint plugin not yet installed (project created on Windows machine), installing...',
-    );
-    await executeCommand('pnpm add @ts-safeql/eslint-plugin libpg-query', {
-      cwd: projectPath,
-    });
-
-    // Commit packages.json and pnpm-lock.yaml changes to
-    // avoid failing "All changes committed to Git" check
-    await executeCommand(
-      'git config user.email github-actions[bot]@users.noreply.github.com',
-      { cwd: projectPath },
-    );
-    await executeCommand('git config user.name github-actions[bot]', {
-      cwd: projectPath,
-    });
-    await executeCommand(
-      'git commit --all --message Add\\ SafeSQL\\ for\\ Windows',
-      { cwd: projectPath },
-    );
-  }
 }
 
 console.log('Running Preflight...');
