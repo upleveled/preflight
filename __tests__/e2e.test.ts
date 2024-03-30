@@ -9,6 +9,7 @@ const fixturesTempDir = process.env.GITHUB_ACTIONS
     // character MAX_PATH limit
     // https://github.com/upleveled/preflight/pull/469/#issuecomment-1812422819
     // https://github.com/eslint/eslint/issues/17763
+    // https://github.com/nodejs/node/issues/50753
     tmpdir()
   : '__tests__/fixtures/__temp';
 
@@ -32,25 +33,11 @@ const testRepos: Repo[] = [
   {
     repoPath: 'upleveled/preflight-test-project-next-js-passing',
     dirName: 'next-js-passing',
-    installCommands:
-      // libpg-query is not yet supported on Windows
-      // https://github.com/pganalyze/libpg_query/issues/44
-      process.platform === 'win32'
-        ? [
-            // `pnpm remove` also installs if node_modules doesn't
-            // exist (no need to run `pnpm install` as well)
-            'pnpm remove @ts-safeql/eslint-plugin libpg-query',
-            // Commit packages.json and pnpm-lock.yaml changes to
-            // avoid failing "All changes committed to Git" check
-            'git config user.email github-actions[bot]@users.noreply.github.com',
-            'git config user.name github-actions[bot]',
-            'git commit --all --message Remove\\ SafeSQL\\ for\\ Windows',
-          ]
-        : [
-            'pnpm install --frozen-lockfile',
-            // Run project database migrations
-            'pnpm migrate up',
-          ],
+    installCommands: [
+      'pnpm install --frozen-lockfile',
+      // Run project database migrations
+      'pnpm migrate up',
+    ],
   },
 ];
 
