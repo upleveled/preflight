@@ -66,7 +66,12 @@ jobs:
 
       - uses: pnpm/action-setup@v3
         with:
-          version: 'latest'
+          # Use pnpm v9 beta for Python 3.12 problem with node-gyp
+          # https://github.com/pnpm/pnpm/issues/2135#issuecomment-2028118254
+          #
+          # TODO: Switch back to 'latest' once pnpm v9 released:
+          # version: 'latest'
+          version: '9.0.0-beta.2'
 
       - name: Use Node.js
         uses: actions/setup-node@v4
