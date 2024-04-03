@@ -23,7 +23,7 @@ jobs:
           username: ${{ env.PGUSERNAME }}
           password: ${{ env.PGPASSWORD }}
           database: ${{ env.PGDATABASE }}
-      # To avoid CRLF in Windows tests, which cause problems with Prettier:
+      # Avoid CRLF in Windows tests, which cause problems with Prettier:
       # https://github.com/upleveled/preflight/runs/1824397400
       #
       # Suggested here: https://github.com/actions/checkout/issues/250#issuecomment-635267458
