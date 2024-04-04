@@ -1,4 +1,4 @@
-import { Listr } from 'listr2';
+import { Listr, ListrTask } from 'listr2';
 import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit.js';
 import * as eslint from './checks/eslint.js';
 import * as eslintConfigIsValid from './checks/eslintConfigIsValid.js';
@@ -26,7 +26,7 @@ const projectDependencies = projectPackageJson.dependencies || {};
 
 console.log(`🚀 UpLeveled Preflight v${preflightPackageJson.version}`);
 
-const listrTasks = [
+const listrTasks: ListrTask[] = [
   // ======= Sync Tasks =======
   // Git
   allChangesCommittedToGit,
