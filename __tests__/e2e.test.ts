@@ -74,8 +74,8 @@ beforeAll(
       { concurrency: 1 },
     );
   },
-  // 7.5 minute timeout for pnpm installation inside test repos
-  450000,
+  // 10 minute timeout for pnpm installation inside test repos
+  600000,
 );
 
 function sortStdoutAndStripVersionNumber(stdout: string) {
