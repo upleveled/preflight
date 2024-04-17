@@ -11,7 +11,7 @@ COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
 RUN apk update
 RUN apk add --no-cache git postgresql python3 py3-pip build-base bash
 
-RUN corepack enable && corepack prepare pnpm@9.0.0-beta.2 --activate
+RUN corepack enable && corepack prepare pnpm@9.0.1 --activate
 RUN pnpm install --frozen-lockfile
 
 # Enable `pnpm add --global` on Alpine Linux by setting
