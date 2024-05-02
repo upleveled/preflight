@@ -10,7 +10,7 @@ overrides:
   '@typescript-eslint/scope-manager': 7.7.1
   '@typescript-eslint/utils': 7.7.1
   eslint: 8.57.0
-  eslint-plugin-jest: 27.6.0
+  eslint-plugin-jest: 28.3.0
   eslint-plugin-react-hooks: 4.6.1
   node-notifier: 10.0.1
   normalize-package-data@2.5.0>semver: 5.7.2
