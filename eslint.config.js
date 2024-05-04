@@ -7,7 +7,6 @@ const config = [
     languageOptions: {
       parserOptions: {
         EXPERIMENTAL_useProjectService: true,
-        project: './tsconfig.json',
       },
     },
   },
