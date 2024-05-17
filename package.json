@@ -82,10 +82,10 @@
   },
   "pnpm": {
     "overrides": {
-      "@typescript-eslint/eslint-plugin": "7.9.0",
-      "@typescript-eslint/parser": "7.9.0",
-      "@typescript-eslint/scope-manager": "7.9.0",
-      "@typescript-eslint/utils": "7.9.0",
+      "@typescript-eslint/eslint-plugin": "7.9.1-alpha.6",
+      "@typescript-eslint/parser": "7.9.1-alpha.6",
+      "@typescript-eslint/scope-manager": "7.9.1-alpha.6",
+      "@typescript-eslint/utils": "7.9.1-alpha.6",
       "eslint": "8.57.0",
       "eslint-plugin-jest": "28.5.0",
       "eslint-plugin-react-hooks": "4.6.2",
