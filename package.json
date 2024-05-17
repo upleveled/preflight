@@ -67,7 +67,7 @@
     "@types/semver": "7.5.8",
     "babel-jest": "29.7.0",
     "eslint": "9.0.0",
-    "eslint-config-upleveled": "8.1.0",
+    "eslint-config-upleveled": "8.1.1",
     "p-map": "7.0.2",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.2.5",
@@ -77,6 +77,7 @@
     "tslib": "2.6.2",
     "typescript": "5.4.5"
   },
+  "packageManager": "pnpm@9.1.1+sha256.9551e803dcb7a1839fdf5416153a844060c7bce013218ce823410532504ac10b",
   "engines": {
     "node": ">=18"
   },
@@ -96,6 +97,5 @@
       "ts-jest": "29.1.2",
       "typescript": "5.4.5"
     }
-  },
-  "packageManager": "pnpm@9.1.1+sha256.9551e803dcb7a1839fdf5416153a844060c7bce013218ce823410532504ac10b"
+  }
 }
