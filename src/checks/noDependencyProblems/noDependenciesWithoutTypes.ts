@@ -44,13 +44,17 @@ export default async function noDependenciesWithoutTypes() {
         if ('types' in modulePackageJson || 'typings' in modulePackageJson) {
           return filteredDependencies;
         }
-      } catch (error) {}
+      } catch {
+        // Swallow error
+      }
 
       let indexDTsPath;
 
       try {
         indexDTsPath = require.resolve(`${dependency}/index.d.ts`);
-      } catch (error) {}
+      } catch {
+        // Swallow error
+      }
 
       // If the index.d.ts file exists inside the module's directory, bail out
       if (indexDTsPath && existsSync(indexDTsPath)) {

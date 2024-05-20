@@ -19,7 +19,7 @@ export default async function eslintCheck() {
         .filter((eslintResult) => {
           return eslintResult.errorCount > 0 || eslintResult.warningCount > 0;
         });
-    } catch (parseError) {
+    } catch {
       throw error;
     }
 

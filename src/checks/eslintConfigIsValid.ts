@@ -23,7 +23,9 @@ export default async function eslintConfigIsValid() {
     localVersion = JSON.parse(
       await fs.readFile(eslintConfigPackageJsonPath, 'utf-8'),
     ).version;
-  } catch (error) {}
+  } catch {
+    // Swallow error
+  }
 
   if (typeof localVersion === 'undefined') {
     throw new Error(
@@ -45,7 +47,7 @@ export default async function eslintConfigIsValid() {
     eslintConfigMatches =
       (await fs.readFile('./eslint.config.js', 'utf-8')).trim() ===
       "export { default } from 'eslint-config-upleveled';";
-  } catch (error) {
+  } catch {
     throw new Error(
       `Error reading your eslint.config.js file - please delete the file if it exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
