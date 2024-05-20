@@ -30,7 +30,7 @@ export default async function stylelintCheck() {
       stylelintResults = (JSON.parse(stdout) as LintResult[]).filter(
         (stylelintResult) => stylelintResult.errored === true,
       );
-    } catch (parseError) {
+    } catch {
       throw error;
     }
 

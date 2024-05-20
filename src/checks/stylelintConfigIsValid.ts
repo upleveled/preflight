@@ -24,7 +24,9 @@ export default async function stylelintConfigIsValid() {
     localVersion = JSON.parse(
       await fs.readFile(stylelintConfigPackageJsonPath, 'utf-8'),
     ).version;
-  } catch (error) {}
+  } catch {
+    // Swallow error
+  }
 
   if (typeof localVersion === 'undefined') {
     throw new Error(
@@ -52,7 +54,7 @@ const config = {
 };
 
 export default config;`;
-  } catch (error) {
+  } catch {
     throw new Error(
       `Error reading your stylelint.config.js file - please delete the file if it exists and reinstall the config using the instructions on https://www.npmjs.com/package/eslint-config-upleveled
       `,
