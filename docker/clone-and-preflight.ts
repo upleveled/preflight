@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
+import { argv, exit } from 'node:process';
 import { execaCommand, Options } from 'execa';
 
 const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
 
-if (!process.argv[2] || !process.argv[2].match(regex)) {
+if (!argv[2] || !argv[2].match(regex)) {
   console.error(`Argument doesn't match GitHub URL format. Example:
 
 $ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-test-project-react-passing`);
-  process.exit(1);
+  exit(1);
 }
 
 const projectPath = 'project-to-check';
@@ -24,24 +25,22 @@ async function executeCommand(command: string, options?: Pick<Options, 'cwd'>) {
     }));
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    exit(1);
   }
 
   if (exitCode !== 0) {
     console.error(all);
-    process.exit(1);
+    exit(1);
   } else {
     return all;
   }
 }
 
-console.log(`Cloning ${process.argv[2]}...`);
+console.log(`Cloning ${argv[2]}...`);
 await executeCommand(
   `git clone --depth 1 ${
-    !process.argv[3] ? '' : `--branch ${process.argv[3]}`
-  } --single-branch ${
-    process.argv[2]
-  } ${projectPath} --config core.autocrlf=input`,
+    !argv[3] ? '' : `--branch ${argv[3]}`
+  } --single-branch ${argv[2]} ${projectPath} --config core.autocrlf=input`,
 );
 
 console.log('Installing dependencies...');
@@ -110,4 +109,4 @@ const { exitCode } = await execaCommand('preflight', {
   stderr: 'inherit',
 });
 
-process.exit(exitCode);
+exit(exitCode);
