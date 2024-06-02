@@ -1,6 +1,6 @@
 import { tmpdir } from 'node:os';
 import { beforeAll, expect, test } from '@jest/globals';
-import { execa } from 'execa';
+import { execa, execaCommand } from 'execa';
 import pMap from 'p-map';
 
 const fixturesTempDir = process.env.GITHUB_ACTIONS
@@ -37,9 +37,11 @@ beforeAll(
         return pMap(
           installCommands,
           (command) =>
-            execa({
+            // TODO: Switch to parseCommandString when PR 1054 is published
+            // https://github.com/sindresorhus/execa/pull/1054#issuecomment-2143922502
+            execaCommand(command, {
               cwd: `${fixturesTempDir}/${dirName}`,
-            })`${command}`,
+            }),
           { concurrency: 1 },
         );
       },
