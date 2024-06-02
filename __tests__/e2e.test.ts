@@ -13,53 +13,27 @@ const fixturesTempDir = process.env.GITHUB_ACTIONS
     tmpdir()
   : '__tests__/fixtures/__temp';
 
-function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
-  return execa`git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${fixturesTempDir}/${fixtureDirName} --config core.autocrlf=input`;
-}
-
-type Repo = {
-  repoPath: string;
-  dirName: string;
-  installCommands?: string[];
-};
-
-const testRepos: Repo[] = [
-  {
-    repoPath: 'upleveled/preflight-test-project-react-passing',
-    dirName: 'react-passing',
-  },
-  {
-    repoPath: 'upleveled/preflight-test-project-next-js-passing',
-    dirName: 'next-js-passing',
-    installCommands: [
-      'pnpm install --frozen-lockfile',
-      // Run project database migrations
-      'pnpm migrate up',
-    ],
-  },
-];
-
 beforeAll(
   async () => {
     await pMap(
-      testRepos,
-      ({ repoPath, dirName }) => cloneRepoToFixtures(repoPath, dirName),
-      { concurrency: 4 },
-    );
-
-    await pMap(
-      testRepos,
-      async ({ dirName, installCommands }) => {
-        if (!installCommands || installCommands.length < 1) {
-          // Return array to keep return type uniform with
-          // `return pMap()` below
-          return [
-            await execa({
-              cwd: `${fixturesTempDir}/${dirName}`,
-            })`pnpm install --frozen-lockfile`,
-          ];
-        }
-
+      [
+        {
+          repoPath: 'upleveled/preflight-test-project-react-passing',
+          dirName: 'react-passing',
+          installCommands: ['pnpm install --frozen-lockfile'],
+        },
+        {
+          repoPath: 'upleveled/preflight-test-project-next-js-passing',
+          dirName: 'next-js-passing',
+          installCommands: [
+            'pnpm install --frozen-lockfile',
+            // Run project database migrations
+            'pnpm migrate up',
+          ],
+        },
+      ],
+      async ({ repoPath, dirName, installCommands }) => {
+        await execa`git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${fixturesTempDir}/${dirName} --config core.autocrlf=input`;
         return pMap(
           installCommands,
           (command) =>
@@ -69,7 +43,10 @@ beforeAll(
           { concurrency: 1 },
         );
       },
-      { concurrency: 1 },
+      {
+        // Run up to 4 concurrent test repo setups at a time
+        concurrency: 4,
+      },
     );
   },
   // 10 minute timeout for pnpm installation inside test repos
