@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import { argv, exit } from 'node:process';
-import { execaCommand, Options } from 'execa';
+import { argv, cwd, exit } from 'node:process';
+import { execa as bindExeca } from 'execa';
 
-const regex = /^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/;
-
-if (!argv[2] || !argv[2].match(regex)) {
+if (
+  !argv[2] ||
+  !argv[2].match(/^https:\/\/github\.com\/[a-zA-Z0-9\-.]+\/[a-zA-Z0-9\-.]+$/)
+) {
   console.error(`Argument doesn't match GitHub URL format. Example:
 
 $ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-test-project-react-passing`);
@@ -13,38 +14,18 @@ $ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-
 }
 
 const projectPath = 'project-to-check';
-
-async function executeCommand(command: string, options?: Pick<Options, 'cwd'>) {
-  let all: string | undefined = '';
-  let exitCode: number | undefined = 0;
-
-  try {
-    ({ all, exitCode } = await execaCommand(command, {
-      cwd: options?.cwd,
-      all: true,
-    }));
-  } catch (error) {
-    console.error(error);
-    exit(1);
-  }
-
-  if (exitCode !== 0) {
-    console.error(all);
-    exit(1);
-  } else {
-    return all;
-  }
-}
+const execa = bindExeca({ cwd: projectPath });
 
 console.log(`Cloning ${argv[2]}...`);
-await executeCommand(
-  `git clone --depth 1 ${
-    !argv[3] ? '' : `--branch ${argv[3]}`
-  } --single-branch ${argv[2]} ${projectPath} --config core.autocrlf=input`,
-);
+await execa({
+  // Reset default for the `git clone` command before projectPath exists
+  cwd: cwd(),
+})`git clone --depth 1 ${
+  !argv[3] ? '' : `--branch ${argv[3]}`
+} --single-branch ${argv[2]} ${projectPath} --config core.autocrlf=input`;
 
 console.log('Installing dependencies...');
-await executeCommand('pnpm install', { cwd: projectPath });
+await execa`pnpm install`;
 
 // Exit code of grep will be 0 if the `"postgres":`
 // string is found in package.json, indicating that
@@ -52,28 +33,25 @@ await executeCommand('pnpm install', { cwd: projectPath });
 // a PostgreSQL database
 const projectUsesPostgresql =
   (
-    await execaCommand('grep package.json -e \'"postgres":\'', {
-      cwd: projectPath,
-      shell: true,
+    await execa({
+      // Avoid crashing when `grep` doesn't find the string
       reject: false,
-    })
+    })`grep package.json -e "postgres":`
   ).exitCode === 0;
 
 if (projectUsesPostgresql) {
   console.log('Setting up PostgreSQL database...');
 
-  // Set database connection environment variables (inherited in
-  // all future execaCommand / executeCommand calls)
+  // Create directory for PostgreSQL socket
+  await execa`mkdir -p /postgres-volume/run/postgresql/data`;
+  await execa`chown -R postgres:postgres /postgres-volume/run/postgresql`;
+
+  // Set database connection environment variables, inherited in
+  // all future execa calls
   process.env.PGHOST = 'localhost';
   process.env.PGDATABASE = 'project_to_check';
   process.env.PGUSERNAME = 'project_to_check';
   process.env.PGPASSWORD = 'project_to_check';
-
-  // Create directory for PostgreSQL socket
-  await executeCommand('mkdir -p /postgres-volume/run/postgresql/data');
-  await executeCommand(
-    'chown -R postgres:postgres /postgres-volume/run/postgresql',
-  );
 
   // Run script as postgres user to:
   // - Create data directory
@@ -86,27 +64,25 @@ if (projectUsesPostgresql) {
   //
   // Example script:
   // https://github.com/upleveled/preflight-test-project-next-js-passing/blob/e65717f6951b5336bb0bd83c15bbc99caa67ebe9/scripts/alpine-postgresql-setup-and-start.sh
-  const postgresUid = Number(await executeCommand('id -u postgres'));
-  await execaCommand('bash ./scripts/alpine-postgresql-setup-and-start.sh', {
-    cwd: projectPath,
+  const postgresUid = Number(await execa`id -u postgres`);
+  await execa({
     // postgres user, for initdb and pg_ctl
     uid: postgresUid,
     // Show output to simplify debugging
     stdout: 'inherit',
     stderr: 'inherit',
-  });
+  })`bash ./scripts/alpine-postgresql-setup-and-start.sh`;
 
   console.log('Running migrations...');
-  await executeCommand('pnpm migrate up', { cwd: projectPath });
+  await execa`pnpm migrate up`;
 }
 
 console.log('Running Preflight...');
 
-const { exitCode } = await execaCommand('preflight', {
-  cwd: projectPath,
+const { exitCode } = await execa({
   reject: false,
   stdout: 'inherit',
   stderr: 'inherit',
-});
+})`preflight`;
 
 exit(exitCode);

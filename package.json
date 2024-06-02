@@ -69,6 +69,7 @@
     "eslint": "9.3.0",
     "eslint-config-upleveled": "8.1.9",
     "p-map": "7.0.2",
+    "postgres": "",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.2.5",
     "size-limit": "11.1.4",

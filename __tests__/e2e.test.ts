@@ -1,6 +1,6 @@
 import { tmpdir } from 'node:os';
 import { beforeAll, expect, test } from '@jest/globals';
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import pMap from 'p-map';
 
 const fixturesTempDir = process.env.GITHUB_ACTIONS
@@ -14,9 +14,7 @@ const fixturesTempDir = process.env.GITHUB_ACTIONS
   : '__tests__/fixtures/__temp';
 
 function cloneRepoToFixtures(repoPath: string, fixtureDirName: string) {
-  return execaCommand(
-    `git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${fixturesTempDir}/${fixtureDirName} --config core.autocrlf=input`,
-  );
+  return execa`git clone --depth 1 --single-branch --branch=main https://github.com/${repoPath}.git ${fixturesTempDir}/${fixtureDirName} --config core.autocrlf=input`;
 }
 
 type Repo = {
@@ -56,16 +54,16 @@ beforeAll(
           // Return array to keep return type uniform with
           // `return pMap()` below
           return [
-            await execaCommand('pnpm install --frozen-lockfile', {
+            await execa({
               cwd: `${fixturesTempDir}/${dirName}`,
-            }),
+            })`pnpm install --frozen-lockfile`,
           ];
         }
 
         return pMap(
           installCommands,
           (command) =>
-            execaCommand(command, {
+            execa(command, {
               cwd: `${fixturesTempDir}/${dirName}`,
             }),
           { concurrency: 1 },
@@ -91,24 +89,18 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 }
 
 test('Passes in the react-passing test project', async () => {
-  const { stdout, stderr } = await execaCommand(
-    `${process.cwd()}/bin/preflight.js`,
-    {
-      cwd: `${fixturesTempDir}/react-passing`,
-    },
-  );
+  const { stdout, stderr } = await execa({
+    cwd: `${fixturesTempDir}/react-passing`,
+  })`${process.cwd()}/bin/preflight.js`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
 }, 30000);
 
 test('Passes in the next-js-passing test project', async () => {
-  const { stdout, stderr } = await execaCommand(
-    `${process.cwd()}/bin/preflight.js`,
-    {
-      cwd: `${fixturesTempDir}/next-js-passing`,
-    },
-  );
+  const { stdout, stderr } = await execa({
+    cwd: `${fixturesTempDir}/next-js-passing`,
+  })`${process.cwd()}/bin/preflight.js`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
