@@ -86,7 +86,7 @@ if (projectUsesPostgresql) {
   //
   // Example script:
   // https://github.com/upleveled/preflight-test-project-next-js-passing/blob/e65717f6951b5336bb0bd83c15bbc99caa67ebe9/scripts/alpine-postgresql-setup-and-start.sh
-  const postgresUid = Number((await executeCommand('id -u postgres'))!);
+  const postgresUid = Number(await executeCommand('id -u postgres'));
   await execaCommand('bash ./scripts/alpine-postgresql-setup-and-start.sh', {
     cwd: projectPath,
     // postgres user, for initdb and pg_ctl
