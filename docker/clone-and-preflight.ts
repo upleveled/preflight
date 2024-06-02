@@ -16,7 +16,7 @@ const projectPath = 'project-to-check';
 
 async function executeCommand(command: string, options?: Pick<Options, 'cwd'>) {
   let all: string | undefined = '';
-  let exitCode = 0;
+  let exitCode: number | undefined = 0;
 
   try {
     ({ all, exitCode } = await execaCommand(command, {
