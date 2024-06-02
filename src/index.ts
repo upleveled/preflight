@@ -4,7 +4,6 @@ import * as eslint from './checks/eslint.js';
 import * as eslintConfigIsValid from './checks/eslintConfigIsValid.js';
 import * as linkOnGithubAbout from './checks/linkOnGithubAbout.js';
 import * as nodeModulesIgnoredFromGit from './checks/nodeModulesIgnoredFromGit.js';
-import * as nextJsProjectHasSharpInstalled from './checks/noDependencyProblems/nextJsProjectHasSharpInstalled.js';
 import * as noDependenciesWithoutTypes from './checks/noDependencyProblems/noDependenciesWithoutTypes.js';
 import * as noUnusedAndMissingDependencies from './checks/noDependencyProblems/noUnusedDependencies.js';
 import * as noExtraneousFilesCommittedToGit from './checks/noExtraneousFilesCommittedToGit.js';
@@ -46,14 +45,6 @@ const listrTasks: ListrTask[] = [
     title: 'No dependency problems',
     task: (ctx: CtxParam, task: TaskParam): Listr =>
       task.newListr([
-        ...(!Object.keys(projectDependencies).includes('next')
-          ? []
-          : [
-              {
-                title: nextJsProjectHasSharpInstalled.title,
-                task: nextJsProjectHasSharpInstalled.default,
-              },
-            ]),
         {
           title: noUnusedAndMissingDependencies.title,
           task: noUnusedAndMissingDependencies.default,
