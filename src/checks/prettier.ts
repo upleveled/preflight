@@ -1,13 +1,13 @@
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import { normalizeNewlines } from '../util/crossPlatform';
 
 export const title = 'Prettier';
 
 export default async function prettierCheck() {
   try {
-    await execaCommand(
-      'pnpm prettier "**/*.{js,jsx,ts,tsx,css,scss,sql}" --list-different --end-of-line auto',
-    );
+    await execa({
+      preferLocal: true,
+    })`prettier "**/*.{js,jsx,ts,tsx,css,scss,sql}" --list-different --end-of-line auto`;
   } catch (error) {
     const { stdout, stderr } = error as { stdout: string; stderr: string };
 

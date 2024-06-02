@@ -1,7 +1,7 @@
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 
-export const { stdout: preflightBinPath } = await execaCommand(`pnpm bin`, {
+export const { stdout: preflightBinPath } = await execa({
   cwd: dirname(fileURLToPath(import.meta.url)),
-});
+})`pnpm bin`;

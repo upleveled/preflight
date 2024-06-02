@@ -1,12 +1,14 @@
 import { sep } from 'node:path';
 import { ESLint } from 'eslint';
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 
 export const title = 'ESLint';
 
 export default async function eslintCheck() {
   try {
-    await execaCommand('pnpm eslint . --max-warnings 0  --format json');
+    await execa({
+      preferLocal: true,
+    })`eslint . --max-warnings 0  --format json`;
   } catch (error) {
     const { stdout } = error as { stdout: string };
 
