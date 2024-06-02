@@ -6,7 +6,6 @@ exports[`Passes in the next-js-passing test project 1`] = `
 [32m[COMPLETED][39m ESLint
 [32m[COMPLETED][39m ESLint config is latest version
 [32m[COMPLETED][39m GitHub repo has deployed project link under About
-[32m[COMPLETED][39m Next.js project has sharp installed
 [32m[COMPLETED][39m No dependencies without types
 [32m[COMPLETED][39m No dependency problems
 [32m[COMPLETED][39m No extraneous files committed to Git
@@ -23,7 +22,6 @@ exports[`Passes in the next-js-passing test project 1`] = `
 [33m[STARTED][39m ESLint
 [33m[STARTED][39m ESLint config is latest version
 [33m[STARTED][39m GitHub repo has deployed project link under About
-[33m[STARTED][39m Next.js project has sharp installed
 [33m[STARTED][39m No dependencies without types
 [33m[STARTED][39m No dependency problems
 [33m[STARTED][39m No extraneous files committed to Git
