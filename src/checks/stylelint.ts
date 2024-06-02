@@ -17,6 +17,8 @@ export const title = 'Stylelint';
 export default async function stylelintCheck() {
   try {
     await execa({
+      // Execute binaries in ./node_modules/.bin to avoid pnpm overhead
+      // https://github.com/sindresorhus/execa/blob/main/docs/environment.md#local-binaries
       preferLocal: true,
     })`stylelint **/*.{${supportedStylelintFileExtensions.join(
       ',',

@@ -6,6 +6,8 @@ export const title = 'Prettier';
 export default async function prettierCheck() {
   try {
     await execa({
+      // Execute binaries in ./node_modules/.bin to avoid pnpm overhead
+      // https://github.com/sindresorhus/execa/blob/main/docs/environment.md#local-binaries
       preferLocal: true,
     })`prettier "**/*.{js,jsx,ts,tsx,css,scss,sql}" --list-different --end-of-line auto`;
   } catch (error) {

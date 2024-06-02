@@ -7,6 +7,8 @@ export const title = 'ESLint';
 export default async function eslintCheck() {
   try {
     await execa({
+      // Execute binaries in ./node_modules/.bin to avoid pnpm overhead
+      // https://github.com/sindresorhus/execa/blob/main/docs/environment.md#local-binaries
       preferLocal: true,
     })`eslint . --max-warnings 0  --format json`;
   } catch (error) {
