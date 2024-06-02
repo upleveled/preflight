@@ -37,9 +37,9 @@ beforeAll(
         return pMap(
           installCommands,
           (command) =>
-            execa(command, {
+            execa({
               cwd: `${fixturesTempDir}/${dirName}`,
-            }),
+            })`${command}`,
           { concurrency: 1 },
         );
       },
