@@ -1,12 +1,11 @@
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import { commandExample } from '../util/commandExample';
 
 export const title = 'No extraneous files committed to Git';
 
 export default async function noExtraneousFilesCommittedToGit() {
-  const { stdout } = await execaCommand(
-    'git ls-files .DS_Store yarn-error.log npm-debug.log',
-  );
+  const { stdout } =
+    await execa`git ls-files .DS_Store yarn-error.log npm-debug.log`;
 
   if (stdout !== '') {
     throw new Error(

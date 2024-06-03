@@ -1,5 +1,5 @@
 import os from 'node:os';
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import semver from 'semver';
 import { commandExample } from '../util/commandExample';
 import { preflightPackageJson } from '../util/packageJson';
@@ -7,9 +7,8 @@ import { preflightPackageJson } from '../util/packageJson';
 export const title = 'Preflight is latest version';
 
 export default async function preflightIsLatestVersion() {
-  const { stdout: remoteVersion } = await execaCommand(
-    'npm show @upleveled/preflight version',
-  );
+  const { stdout: remoteVersion } =
+    await execa`npm show @upleveled/preflight version`;
 
   if (semver.gt(remoteVersion, preflightPackageJson.version)) {
     throw new Error(

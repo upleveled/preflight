@@ -1,12 +1,12 @@
 import { promises as fs } from 'node:fs';
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import { commandExample } from '../util/commandExample';
 import { isDrone } from '../util/drone';
 
 export const title = 'All changes committed to Git';
 
 export default async function allChangesCommittedToGit() {
-  const { stdout: replSlug } = await execaCommand('echo $REPL_SLUG');
+  const { stdout: replSlug } = await execa`echo $REPL_SLUG`;
 
   const isRunningInReplIt = replSlug !== '';
 
@@ -14,7 +14,7 @@ export default async function allChangesCommittedToGit() {
     await fs.writeFile('.git/info/exclude', '.replit\n');
   }
 
-  const { stdout } = await execaCommand('git status --porcelain');
+  const { stdout } = await execa`git status --porcelain`;
 
   if (stdout !== '') {
     const onlyPnpmLockModifiedOnDrone =

@@ -1,13 +1,15 @@
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import { normalizeNewlines } from '../util/crossPlatform';
 
 export const title = 'Prettier';
 
 export default async function prettierCheck() {
   try {
-    await execaCommand(
-      'pnpm prettier "**/*.{js,jsx,ts,tsx,css,scss,sql}" --list-different --end-of-line auto',
-    );
+    await execa({
+      // Execute binaries in ./node_modules/.bin to avoid pnpm overhead
+      // https://github.com/sindresorhus/execa/blob/main/docs/environment.md#local-binaries
+      preferLocal: true,
+    })`prettier "**/*.{js,jsx,ts,tsx,css,scss,sql}" --list-different --end-of-line auto`;
   } catch (error) {
     const { stdout, stderr } = error as { stdout: string; stderr: string };
 

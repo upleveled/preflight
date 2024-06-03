@@ -1,6 +1,6 @@
 import { promises as fs } from 'node:fs';
 import { createRequire } from 'node:module';
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import readdirp from 'readdirp';
 import semver from 'semver';
 import { supportedStylelintFileExtensions } from './stylelint';
@@ -10,9 +10,8 @@ const require = createRequire(`${process.cwd()}/`);
 export const title = 'Stylelint config is latest version';
 
 export default async function stylelintConfigIsValid() {
-  const { stdout: remoteVersion } = await execaCommand(
-    'npm show stylelint-config-upleveled version',
-  );
+  const { stdout: remoteVersion } =
+    await execa`npm show stylelint-config-upleveled version`;
 
   let localVersion: string | undefined;
 

@@ -1,4 +1,4 @@
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import { commandExample } from '../../util/commandExample';
 import { preflightBinPath } from '../../util/preflightBinPath';
 
@@ -61,9 +61,7 @@ export default async function noUnusedAndMissingDependencies() {
   ].join(',');
 
   try {
-    await execaCommand(
-      `${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}"`,
-    );
+    await execa`${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}"`;
   } catch (error) {
     const { stdout } = error as { stdout: string };
     if (

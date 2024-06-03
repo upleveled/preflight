@@ -1,5 +1,5 @@
 import { sep } from 'node:path';
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 import { LintResult } from 'stylelint';
 
 export const supportedStylelintFileExtensions = [
@@ -16,11 +16,13 @@ export const title = 'Stylelint';
 
 export default async function stylelintCheck() {
   try {
-    await execaCommand(
-      `pnpm stylelint **/*.{${supportedStylelintFileExtensions.join(
-        ',',
-      )}} --max-warnings 0 --formatter json`,
-    );
+    await execa({
+      // Execute binaries in ./node_modules/.bin to avoid pnpm overhead
+      // https://github.com/sindresorhus/execa/blob/main/docs/environment.md#local-binaries
+      preferLocal: true,
+    })`stylelint **/*.{${supportedStylelintFileExtensions.join(
+      ',',
+    )}} --max-warnings 0 --formatter json`;
   } catch (error) {
     const { stdout } = error as { stdout: string };
 

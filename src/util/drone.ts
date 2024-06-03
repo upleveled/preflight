@@ -1,8 +1,8 @@
-import { execaCommand } from 'execa';
+import { execa } from 'execa';
 
 export async function isDrone() {
-  const { stdout } = await execaCommand('cat /etc/os-release', {
+  const { stdout } = await execa({
     reject: false,
-  });
+  })`cat /etc/os-release`;
   return /Alpine Linux/.test(stdout);
 }
