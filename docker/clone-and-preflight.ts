@@ -21,7 +21,7 @@ await execa({
   // Reset default for the `git clone` command before projectPath exists
   cwd: cwd(),
 })`git clone --depth 1 ${
-  !argv[3] ? [] : `--branch ${argv[3]}`
+  !argv[3] ? [] : ['--branch', argv[3]]
 } --single-branch ${argv[2]} ${projectPath} --config core.autocrlf=input`;
 
 console.log('Installing dependencies...');
