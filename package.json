@@ -70,23 +70,23 @@
     "eslint-config-upleveled": "8.2.1",
     "p-map": "7.0.2",
     "postinstall-postinstall": "2.1.0",
-    "prettier": "3.3.1",
+    "prettier": "3.3.2",
     "size-limit": "11.1.4",
     "stylelint": "16.6.1",
     "tsdx": "0.14.1",
     "tslib": "2.6.3",
     "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@9.2.0",
+  "packageManager": "pnpm@9.3.0",
   "engines": {
     "node": ">=18"
   },
   "pnpm": {
     "overrides": {
-      "@typescript-eslint/eslint-plugin": "8.0.0-alpha.28",
-      "@typescript-eslint/parser": "8.0.0-alpha.28",
-      "@typescript-eslint/scope-manager": "8.0.0-alpha.28",
-      "@typescript-eslint/utils": "8.0.0-alpha.28",
+      "@typescript-eslint/eslint-plugin": "8.0.0-alpha.30",
+      "@typescript-eslint/parser": "8.0.0-alpha.30",
+      "@typescript-eslint/scope-manager": "8.0.0-alpha.30",
+      "@typescript-eslint/utils": "8.0.0-alpha.30",
       "eslint": "9.4.0",
       "eslint-plugin-jest": "28.6.0",
       "eslint-plugin-react-hooks": "4.6.2",
