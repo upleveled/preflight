@@ -27,7 +27,6 @@
     "docker-build-run": "pnpm docker-build-ts && pnpm docker-build && pnpm docker-run",
     "docker-build-ts": "tsc --project docker/tsconfig.build.json",
     "docker-run": "docker run preflight",
-    "postinstall": "patch-package",
     "lint": "eslint . --max-warnings 0",
     "prepare": "pnpm build",
     "size": "size-limit",
@@ -51,7 +50,6 @@
     "listr2": "8.2.3",
     "node-fetch": "3.3.2",
     "p-reduce": "3.0.0",
-    "patch-package": "8.0.0",
     "readdirp": "3.6.0",
     "semver": "7.6.3",
     "top-user-agents": "2.1.22"
