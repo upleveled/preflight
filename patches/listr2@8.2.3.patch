@@ -1,17 +1,18 @@
 diff --git a/dist/index.d.ts b/dist/index.d.ts
-index af27624713e0005090de0202e7da2d8d08124ef8..5a3f80fa33dd66a354c497ff46d4bc8b9848f15e 100644
+index af27624713e0005090de0202e7da2d8d08124ef8..cc23c0ef846bb03a712477f96e793f58477cfcc5 100644
 --- a/dist/index.d.ts
 +++ b/dist/index.d.ts
-@@ -492,7 +492,7 @@ declare class TaskWrapper<Ctx, Renderer extends ListrRendererFactory, FallbackRe
+@@ -492,7 +492,8 @@ declare class TaskWrapper<Ctx, Renderer extends ListrRendererFactory, FallbackRe
       *
       * @see {@link https://listr2.kilic.dev/task/subtasks.html}
       */
 -    newListr<NewCtx = Ctx>(task: ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[] | ((parent: Omit<this, 'skip' | 'enabled'>) => ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[]), options?: ListrSubClassOptions<NewCtx, Renderer, FallbackRenderer>): Listr<NewCtx, any, any>;
 +    newListr<NewCtx = Ctx>(task: ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[] | ((parent: Omit<this, 'skip' | 'enabled'>) => ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[]), options?: ListrSubClassOptions<NewCtx, Renderer, FallbackRenderer>): Listr<NewCtx>;
++    // https://github.com/listr2/listr2/pull/722
      /**
       * Report an error that has to be collected and handled.
       *
-@@ -573,7 +573,7 @@ declare class Task<Ctx, Renderer extends ListrRendererFactory = ListrRendererFac
+@@ -573,7 +574,7 @@ declare class Task<Ctx, Renderer extends ListrRendererFactory = ListrRendererFac
      private taskFn;
      /** Marks the task as closed. This is different from finalized since this is not really related to task itself. */
      private closed;
