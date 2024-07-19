@@ -1,0 +1,14 @@
+diff --git a/node_modules/listr2/dist/index.d.ts b/node_modules/listr2/dist/index.d.ts
+index af27624..cc23c0e 100644
+--- a/node_modules/listr2/dist/index.d.ts
++++ b/node_modules/listr2/dist/index.d.ts
+@@ -492,7 +492,8 @@ declare class TaskWrapper<Ctx, Renderer extends ListrRendererFactory, FallbackRe
+      *
+      * @see {@link https://listr2.kilic.dev/task/subtasks.html}
+      */
+-    newListr<NewCtx = Ctx>(task: ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[] | ((parent: Omit<this, 'skip' | 'enabled'>) => ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[]), options?: ListrSubClassOptions<NewCtx, Renderer, FallbackRenderer>): Listr<NewCtx, any, any>;
++    newListr<NewCtx = Ctx>(task: ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[] | ((parent: Omit<this, 'skip' | 'enabled'>) => ListrTask<NewCtx, Renderer, FallbackRenderer> | ListrTask<NewCtx, Renderer, FallbackRenderer>[]), options?: ListrSubClassOptions<NewCtx, Renderer, FallbackRenderer>): Listr<NewCtx>;
++    // https://github.com/listr2/listr2/pull/722
+     /**
+      * Report an error that has to be collected and handled.
+      *
