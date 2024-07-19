@@ -23,6 +23,9 @@ patchedDependencies:
   listr2@8.2.3:
     hash: pvptfs7fm3kunijbmvfgt424ta
     path: patches/listr2@8.2.3.patch
+  tsdx@0.14.1:
+    hash: dsfwm4apkeam3sjd6j6wh5g2nq
+    path: patches/tsdx@0.14.1.patch
 
 importers:
 
@@ -118,7 +121,7 @@ importers:
         version: 16.7.0(typescript@5.5.3)
       tsdx:
         specifier: 0.14.1
-        version: 0.14.1(@jest/transform@29.7.0)(@jest/types@29.6.3)(@types/babel__core@7.20.5)(@types/node@20.14.11)(babel-jest@29.7.0(@babel/core@7.24.4))
+        version: 0.14.1(patch_hash=dsfwm4apkeam3sjd6j6wh5g2nq)(@jest/transform@29.7.0)(@jest/types@29.6.3)(@types/babel__core@7.20.5)(@types/node@20.14.11)(babel-jest@29.7.0(@babel/core@7.24.4))
       tslib:
         specifier: 2.6.3
         version: 2.6.3
@@ -9178,7 +9181,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdx@0.14.1(@jest/transform@29.7.0)(@jest/types@29.6.3)(@types/babel__core@7.20.5)(@types/node@20.14.11)(babel-jest@29.7.0(@babel/core@7.24.4)):
+  tsdx@0.14.1(patch_hash=dsfwm4apkeam3sjd6j6wh5g2nq)(@jest/transform@29.7.0)(@jest/types@29.6.3)(@types/babel__core@7.20.5)(@types/node@20.14.11)(babel-jest@29.7.0(@babel/core@7.24.4)):
     dependencies:
       '@babel/core': 7.24.4
       '@babel/helper-module-imports': 7.24.7
