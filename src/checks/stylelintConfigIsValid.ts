@@ -20,9 +20,16 @@ export default async function stylelintConfigIsValid() {
       'stylelint-config-upleveled/package.json',
     );
 
-    localVersion = JSON.parse(
-      await fs.readFile(stylelintConfigPackageJsonPath, 'utf-8'),
-    ).version;
+    localVersion =
+      // Type assertion because we swallow the error anyway if
+      // the .version property doesn't exist
+      (
+        JSON.parse(
+          await fs.readFile(stylelintConfigPackageJsonPath, 'utf-8'),
+        ) as {
+          version: string;
+        }
+      ).version;
   } catch {
     // Swallow error
   }

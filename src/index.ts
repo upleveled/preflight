@@ -1,4 +1,10 @@
-import { Listr, ListrTask } from 'listr2';
+import {
+  Listr,
+  ListrContext,
+  ListrDefaultRenderer,
+  ListrTask,
+  ListrTaskWrapper,
+} from 'listr2';
 import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit.js';
 import * as eslint from './checks/eslint.js';
 import * as eslintConfigIsValid from './checks/eslintConfigIsValid.js';
@@ -14,8 +20,6 @@ import * as projectFolderNameMatchesCorrectFormat from './checks/projectFolderNa
 import * as stylelint from './checks/stylelint.js';
 import * as stylelintConfigIsValid from './checks/stylelintConfigIsValid.js';
 import * as useSinglePackageManager from './checks/useSinglePackageManager.js';
-import { CtxParam } from './types/CtxParam.js';
-import { TaskParam } from './types/TaskParam.js';
 import {
   preflightPackageJson,
   projectPackageJson,
@@ -43,7 +47,10 @@ const listrTasks: ListrTask[] = [
   // Dependencies
   {
     title: 'No dependency problems',
-    task: (ctx: CtxParam, task: TaskParam): Listr =>
+    task: (
+      ctx: ListrContext,
+      task: ListrTaskWrapper<any, ListrDefaultRenderer, ListrDefaultRenderer>,
+    ): Listr =>
       task.newListr([
         {
           title: noUnusedAndMissingDependencies.title,
