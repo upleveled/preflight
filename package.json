@@ -94,6 +94,9 @@
       "rollup-plugin-typescript2": "^0.36.0",
       "ts-jest": "29.2.3",
       "typescript": "5.5.3"
+    },
+    "patchedDependencies": {
+      "listr2@8.2.3": "patches/listr2@8.2.3.patch"
     }
   }
 }
