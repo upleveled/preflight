@@ -20,9 +20,6 @@ overrides:
   typescript: 5.5.3
 
 patchedDependencies:
-  listr2@8.2.3:
-    hash: pvptfs7fm3kunijbmvfgt424ta
-    path: patches/listr2@8.2.3.patch
   tsdx@0.14.1:
     hash: dsfwm4apkeam3sjd6j6wh5g2nq
     path: patches/tsdx@0.14.1.patch
@@ -54,7 +51,7 @@ importers:
         version: 9.3.0
       listr2:
         specifier: 8.2.3
-        version: 8.2.3(patch_hash=pvptfs7fm3kunijbmvfgt424ta)
+        version: 8.2.3
       node-fetch:
         specifier: 3.3.2
         version: 3.3.2
@@ -8154,7 +8151,7 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  listr2@8.2.3(patch_hash=pvptfs7fm3kunijbmvfgt424ta):
+  listr2@8.2.3:
     dependencies:
       cli-truncate: 4.0.0
       colorette: 2.0.20

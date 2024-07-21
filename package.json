@@ -96,7 +96,6 @@
       "typescript": "5.5.3"
     },
     "patchedDependencies": {
-      "listr2@8.2.3": "patches/listr2@8.2.3.patch",
       "tsdx@0.14.1": "patches/tsdx@0.14.1.patch"
     }
   }

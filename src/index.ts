@@ -50,7 +50,7 @@ const listrTasks: ListrTask[] = [
     task: (
       ctx: ListrContext,
       task: ListrTaskWrapper<any, ListrDefaultRenderer, ListrDefaultRenderer>,
-    ): Listr =>
+    ): Listr<any, any, any> =>
       task.newListr([
         {
           title: noUnusedAndMissingDependencies.title,
