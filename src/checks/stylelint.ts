@@ -24,16 +24,21 @@ export default async function stylelintCheck() {
       ',',
     )}} --max-warnings 0 --formatter json`;
   } catch (error) {
-    const { stdout } = error as { stdout: string };
+    const { stderr } = error as { stderr: string };
 
     let stylelintResults;
 
     try {
-      stylelintResults = (JSON.parse(stdout) as LintResult[]).filter(
+      stylelintResults = (JSON.parse(stderr) as LintResult[]).filter(
         (stylelintResult) => stylelintResult.errored === true,
       );
     } catch {
-      throw error;
+      throw new Error(
+        `Failed to parse Stylelint JSON output - please report this to the UpLeveled engineering team, including the following output:
+
+          ${stderr}
+        `,
+      );
     }
 
     if (
@@ -42,7 +47,7 @@ export default async function stylelintCheck() {
     ) {
       throw new Error(
         `Unexpected shape of Stylelint JSON related to .errored properties - please report this to the UpLeveled engineering team, including the following output:
-          ${stdout}
+          ${stderr}
         `,
       );
     }
