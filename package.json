@@ -60,12 +60,12 @@
     "@size-limit/file": "11.1.4",
     "@types/babel__core": "7.20.5",
     "@types/jest": "29.5.12",
-    "@types/node": "20.14.11",
+    "@types/node": "20.14.12",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
     "babel-jest": "29.7.0",
     "eslint": "9.7.0",
-    "eslint-config-upleveled": "8.6.9",
+    "eslint-config-upleveled": "8.6.13",
     "p-map": "7.0.2",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.3.3",
@@ -73,18 +73,18 @@
     "stylelint": "16.7.0",
     "tsdx": "0.14.1",
     "tslib": "2.6.3",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   },
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.6.0",
   "engines": {
     "node": ">=18"
   },
   "pnpm": {
     "overrides": {
-      "@typescript-eslint/eslint-plugin": "8.0.0-alpha.45",
-      "@typescript-eslint/parser": "8.0.0-alpha.45",
-      "@typescript-eslint/scope-manager": "8.0.0-alpha.45",
-      "@typescript-eslint/utils": "8.0.0-alpha.45",
+      "@typescript-eslint/eslint-plugin": "8.0.0-alpha.54",
+      "@typescript-eslint/parser": "8.0.0-alpha.54",
+      "@typescript-eslint/scope-manager": "8.0.0-alpha.54",
+      "@typescript-eslint/utils": "8.0.0-alpha.54",
       "eslint": "9.7.0",
       "eslint-plugin-jest": "28.6.0",
       "eslint-plugin-react-hooks": "4.6.2",
@@ -93,7 +93,7 @@
       "jest": "30.0.0-alpha.5",
       "rollup-plugin-typescript2": "^0.36.0",
       "ts-jest": "29.2.3",
-      "typescript": "5.5.3"
+      "typescript": "5.5.4"
     },
     "patchedDependencies": {
       "tsdx@0.14.1": "patches/tsdx@0.14.1.patch"
