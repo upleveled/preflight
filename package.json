@@ -60,7 +60,7 @@
     "@size-limit/file": "11.1.4",
     "@types/babel__core": "7.20.5",
     "@types/jest": "29.5.12",
-    "@types/node": "22.0.2",
+    "@types/node": "22.1.0",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
     "babel-jest": "29.7.0",
@@ -75,22 +75,22 @@
     "tslib": "2.6.3",
     "typescript": "5.5.4"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.7.0",
   "engines": {
     "node": ">=18"
   },
   "pnpm": {
     "overrides": {
-      "@typescript-eslint/eslint-plugin": "8.0.0",
-      "@typescript-eslint/parser": "8.0.0",
-      "@typescript-eslint/scope-manager": "8.0.0",
-      "@typescript-eslint/utils": "8.0.0",
+      "@typescript-eslint/eslint-plugin": "8.0.1",
+      "@typescript-eslint/parser": "8.0.1",
+      "@typescript-eslint/scope-manager": "8.0.1",
+      "@typescript-eslint/utils": "8.0.1",
       "eslint": "9.8.0",
-      "eslint-plugin-jest": "28.6.0",
+      "eslint-plugin-jest": "28.8.0",
       "eslint-plugin-react-hooks": "4.6.2",
       "node-notifier": "10.0.1",
       "normalize-package-data@2.5.0>semver": "5.7.2",
-      "jest": "30.0.0-alpha.5",
+      "jest": "30.0.0-alpha.6",
       "rollup-plugin-typescript2": "^0.36.0",
       "ts-jest": "29.2.4",
       "typescript": "5.5.4"
