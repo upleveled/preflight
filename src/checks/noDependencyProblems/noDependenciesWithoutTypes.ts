@@ -66,7 +66,7 @@ export default async function noDependenciesWithoutTypes() {
         results = (await client.getObject({
           indexName: 'npm-search',
           objectID: dependency,
-          { attributesToRetrieve: ['types'] },
+          attributesToRetrieve: ['types'],
         )) as AlgoliaObj;
       } catch (error) {
         // Show dependency name if Algolia's `client.getObject()` throws with an
