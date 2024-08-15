@@ -1,5 +1,5 @@
 import { existsSync, promises as fs } from 'node:fs';
-import { liteClient as algoliasearch } from 'algoliasearch/lite';
+import { algoliasearch } from 'algoliasearch';
 import pReduce from 'p-reduce';
 import { commandExample } from '../../util/commandExample';
 import { projectPackageJson } from '../../util/packageJson';
