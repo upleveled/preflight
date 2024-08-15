@@ -1,5 +1,5 @@
 import { existsSync, promises as fs } from 'node:fs';
-import algoliasearch from 'algoliasearch';
+import { algoliasearch } from 'algoliasearch';
 import pReduce from 'p-reduce';
 import { commandExample } from '../../util/commandExample';
 import { projectPackageJson } from '../../util/packageJson';
@@ -11,7 +11,6 @@ const client = algoliasearch(
   'OFCNCOG2CU', // Application ID
   'ec73550aa8b2936dab436d4e02144784', // API Key
 );
-const index = client.initIndex('npm-search');
 
 interface AlgoliaObj {
   types?: {
@@ -64,11 +63,13 @@ export default async function noDependenciesWithoutTypes() {
       let results: AlgoliaObj;
 
       try {
-        results = await index.getObject<AlgoliaObj>(dependency, {
+        results = (await client.getObject({
+          indexName: 'npm-search',
+          objectID: dependency,
           attributesToRetrieve: ['types'],
-        });
+        })) as AlgoliaObj;
       } catch (error) {
-        // Show dependency name if Algolia's `index.getObject()` throws with an
+        // Show dependency name if Algolia's `client.getObject()` throws with an
         // error message (such as the error message "ObjectID does not exist"
         // when a package cannot be found in the index)
         throw new Error(
