@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import type { Element } from 'domhandler';
 import { execa } from 'execa';
 import fetch from 'node-fetch';
@@ -15,7 +15,7 @@ export default async function linkOnGithubAbout() {
 
   const html = await (await fetch(repoUrl)).text();
 
-  const $ = cheerio.load(html);
+  const $ = load(html);
 
   const urlInAboutSection = $('h2')
     .filter(function (this: Element) {
