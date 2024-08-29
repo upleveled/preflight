@@ -77,10 +77,12 @@ export default config;`;
   const stylelintDisableOccurrences = [];
 
   for await (const { path } of readdirp('.', {
-    directoryFilter: ['!.git', '!.next', '!node_modules'],
-    fileFilter: supportedStylelintFileExtensions.map(
-      (fileExtension) => `*.${fileExtension}`,
-    ),
+    directoryFilter: (dir) =>
+      !['.git', '.next', 'node_modules'].includes(dir.basename),
+    fileFilter: (file) =>
+      new RegExp(`\\.(?:${supportedStylelintFileExtensions.join('|')})$`).test(
+        file.basename,
+      ),
   })) {
     const fileContents = await fs.readFile(path, 'utf-8');
     if (fileContents.includes('stylelint-disable')) {
