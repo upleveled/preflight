@@ -40,8 +40,8 @@
     ]
   },
   "dependencies": {
-    "@types/eslint": "9.6.0",
-    "algoliasearch": "5.1.1",
+    "@types/eslint": "9.6.1",
+    "algoliasearch": "5.2.3",
     "chalk": "5.3.0",
     "cheerio": "1.0.0",
     "depcheck": "1.4.7",
@@ -52,7 +52,7 @@
     "p-reduce": "3.0.0",
     "readdirp": "4.0.1",
     "semver": "7.6.3",
-    "top-user-agents": "2.1.22"
+    "top-user-agents": "2.1.23"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "7.24.8",
@@ -60,39 +60,39 @@
     "@size-limit/file": "11.1.4",
     "@types/babel__core": "7.20.5",
     "@types/jest": "29.5.12",
-    "@types/node": "22.5.0",
+    "@types/node": "22.5.1",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
     "babel-jest": "29.7.0",
-    "eslint": "9.9.0",
-    "eslint-config-upleveled": "8.6.14",
+    "eslint": "9.9.1",
+    "eslint-config-upleveled": "8.6.15",
     "p-map": "7.0.2",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.3.3",
     "size-limit": "11.1.4",
-    "stylelint": "16.8.2",
+    "stylelint": "16.9.0",
     "tsdx": "0.14.1",
-    "tslib": "2.6.3",
+    "tslib": "2.7.0",
     "typescript": "5.5.4"
   },
-  "packageManager": "pnpm@9.8.0",
+  "packageManager": "pnpm@9.9.0",
   "engines": {
     "node": ">=18"
   },
   "pnpm": {
     "overrides": {
-      "@typescript-eslint/eslint-plugin": "8.2.0",
-      "@typescript-eslint/parser": "8.2.0",
-      "@typescript-eslint/scope-manager": "8.2.0",
-      "@typescript-eslint/utils": "8.2.0",
-      "eslint": "9.9.0",
-      "eslint-plugin-jest": "28.8.0",
+      "@typescript-eslint/eslint-plugin": "8.3.0",
+      "@typescript-eslint/parser": "8.3.0",
+      "@typescript-eslint/scope-manager": "8.3.0",
+      "@typescript-eslint/utils": "8.3.0",
+      "eslint": "9.9.1",
+      "eslint-plugin-jest": "28.8.1",
       "eslint-plugin-react-hooks": "4.6.2",
       "node-notifier": "10.0.1",
       "normalize-package-data@2.5.0>semver": "5.7.2",
       "jest": "30.0.0-alpha.6",
       "rollup-plugin-typescript2": "^0.36.0",
-      "ts-jest": "29.2.4",
+      "ts-jest": "29.2.5",
       "typescript": "5.5.4"
     },
     "patchedDependencies": {
