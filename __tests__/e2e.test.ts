@@ -1,4 +1,3 @@
-import { tmpdir } from 'node:os';
 import { beforeAll, expect, test } from '@jest/globals';
 import { execa } from 'execa';
 import pMap from 'p-map';
