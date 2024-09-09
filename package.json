@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@types/eslint": "9.6.1",
-    "algoliasearch": "5.3.1",
+    "algoliasearch": "5.3.2",
     "chalk": "5.3.0",
     "cheerio": "1.0.0",
     "depcheck": "1.4.7",
@@ -65,7 +65,7 @@
     "@types/semver": "7.5.8",
     "babel-jest": "29.7.0",
     "eslint": "9.10.0",
-    "eslint-config-upleveled": "8.6.20",
+    "eslint-config-upleveled": "8.6.21",
     "p-map": "7.0.2",
     "postinstall-postinstall": "2.1.0",
     "prettier": "3.3.3",
@@ -73,7 +73,7 @@
     "stylelint": "16.9.0",
     "tsdx": "0.14.1",
     "tslib": "2.7.0",
-    "typescript": "5.5.4"
+    "typescript": "5.6.2"
   },
   "packageManager": "pnpm@9.10.0",
   "engines": {
@@ -81,10 +81,10 @@
   },
   "pnpm": {
     "overrides": {
-      "@typescript-eslint/eslint-plugin": "8.4.0",
-      "@typescript-eslint/parser": "8.4.0",
-      "@typescript-eslint/scope-manager": "8.4.0",
-      "@typescript-eslint/utils": "8.4.0",
+      "@typescript-eslint/eslint-plugin": "8.5.0",
+      "@typescript-eslint/parser": "8.5.0",
+      "@typescript-eslint/scope-manager": "8.5.0",
+      "@typescript-eslint/utils": "8.5.0",
       "eslint": "9.10.0",
       "eslint-plugin-jest": "28.8.3",
       "eslint-plugin-react-hooks": "4.6.2",
@@ -93,7 +93,7 @@
       "jest": "30.0.0-alpha.6",
       "rollup-plugin-typescript2": "^0.36.0",
       "ts-jest": "29.2.5",
-      "typescript": "5.5.4"
+      "typescript": "5.6.2"
     },
     "patchedDependencies": {
       "tsdx@0.14.1": "patches/tsdx@0.14.1.patch"
