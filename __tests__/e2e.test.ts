@@ -1,17 +1,8 @@
-import { tmpdir } from 'node:os';
 import { beforeAll, expect, test } from '@jest/globals';
 import { execa } from 'execa';
 import pMap from 'p-map';
 
-const fixturesTempDir = process.env.GITHUB_ACTIONS
-  ? // Switch to `tmpdir()` on GitHub Actions to avoid
-    // ESLint crashing with Windows paths over the 260 character
-    // MAX_PATH limit
-    // https://github.com/upleveled/preflight/pull/469/#issuecomment-1812422819
-    // https://github.com/eslint/eslint/issues/17763
-    // https://github.com/nodejs/node/issues/50753
-    tmpdir()
-  : '__tests__/fixtures/__temp';
+const fixturesTempDir = '__tests__/fixtures/__temp';
 
 beforeAll(
   async () => {
