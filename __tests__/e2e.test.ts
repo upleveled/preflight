@@ -1,6 +1,6 @@
-import { beforeAll, expect, test } from '@jest/globals';
 import { execa } from 'execa';
 import pMap from 'p-map';
+import { beforeAll, expect, test } from 'vitest';
 
 const fixturesTempDir = '__tests__/fixtures/__temp';
 

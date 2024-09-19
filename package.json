@@ -31,13 +31,8 @@
     "prepare": "pnpm build",
     "size": "size-limit",
     "start": "tsdx watch --format esm --target node",
-    "test": "tsdx test",
+    "test": "vitest run",
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/(?!execa)/"
-    ]
   },
   "dependencies": {
     "@types/eslint": "9.6.1",
@@ -55,15 +50,10 @@
     "top-user-agents": "2.1.23"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "7.24.8",
-    "@jest/globals": "29.7.0",
     "@size-limit/file": "11.1.5",
-    "@types/babel__core": "7.20.5",
-    "@types/jest": "29.5.13",
     "@types/node": "22.5.5",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
-    "babel-jest": "29.7.0",
     "eslint": "9.10.0",
     "eslint-config-upleveled": "8.7.0",
     "p-map": "7.0.2",
@@ -73,7 +63,8 @@
     "stylelint": "16.9.0",
     "tsdx": "0.14.1",
     "tslib": "2.7.0",
-    "typescript": "5.6.2"
+    "typescript": "5.6.2",
+    "vitest": "2.1.1"
   },
   "packageManager": "pnpm@9.10.0",
   "engines": {
