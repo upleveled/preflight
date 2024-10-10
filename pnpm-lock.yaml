@@ -13,7 +13,7 @@ overrides:
   eslint-plugin-jest: 28.8.3
   eslint-plugin-react-hooks: 4.6.2
   node-notifier: 10.0.1
-  normalize-package-data@2.5.0>semver: 5.7.2
+  normalize-package-data@2.5.0>semver: 7.6.3
   jest: 30.0.0-alpha.6
   rollup-plugin-typescript2: ^0.36.0
   ts-jest: 29.2.5
@@ -4220,10 +4220,6 @@ packages:
 
   semver-compare@1.0.0:
     resolution: {integrity: sha512-YM3/ITh2MJ5MtzaM429anh+x2jiLVjqILF4m4oyQB18W7Ggea7BfqdH/wGMK7dDiMghv/6WG7znWMwUDzJiXow==}
-
-  semver@5.7.2:
-    resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
-    hasBin: true
 
   semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
@@ -9405,7 +9401,7 @@ snapshots:
     dependencies:
       hosted-git-info: 2.8.9
       resolve: 1.22.8
-      semver: 5.7.2
+      semver: 7.6.3
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
@@ -9971,8 +9967,6 @@ snapshots:
     optional: true
 
   semver-compare@1.0.0: {}
-
-  semver@5.7.2: {}
 
   semver@6.3.1: {}
 
