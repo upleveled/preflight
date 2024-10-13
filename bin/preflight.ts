@@ -1,3 +1,3 @@
-#!/usr/bin/env -S pnpx --quiet tsx
+#!/usr/bin/env -S pnpm exec tsx
 
 import '../src/index.ts';
