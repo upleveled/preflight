@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import { execa } from 'execa';
 import readdirp from 'readdirp';
 import semver from 'semver';
-import { supportedStylelintFileExtensions } from './stylelint';
+import { supportedStylelintFileExtensions } from './stylelint.ts';
 
 const require = createRequire(`${process.cwd()}/`);
 

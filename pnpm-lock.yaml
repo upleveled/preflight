@@ -82,8 +82,8 @@ importers:
         specifier: 9.12.0
         version: 9.12.0(jiti@2.1.2)
       eslint-config-upleveled:
-        specifier: 8.7.3
-        version: 8.7.3(@babel/core@7.24.4)(@types/eslint@9.6.1)(@types/node@22.7.5)(@types/react-dom@18.2.25)(@types/react@18.2.79)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.8.1(eslint@9.12.0(jiti@2.1.2))(typescript@5.6.3))(eslint@9.12.0(jiti@2.1.2)))(eslint@9.12.0(jiti@2.1.2))(globals@15.9.0)(typescript@5.6.3)
+        specifier: 8.8.0
+        version: 8.8.0(@babel/core@7.24.4)(@types/eslint@9.6.1)(@types/node@22.7.5)(@types/react-dom@18.2.25)(@types/react@18.2.79)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.8.1(eslint@9.12.0(jiti@2.1.2))(typescript@5.6.3))(eslint@9.12.0(jiti@2.1.2)))(eslint@9.12.0(jiti@2.1.2))(globals@15.9.0)(typescript@5.6.3)
       p-map:
         specifier: 7.0.2
         version: 7.0.2
@@ -1502,15 +1502,15 @@ packages:
     peerDependencies:
       eslint: 9.12.0
 
-  eslint-config-upleveled@8.7.3:
-    resolution: {integrity: sha512-JnOFPjRTQiW/JW/QZZ7yxfUcT2R8zW+UOTVml3+5cEtnwFv4LUUeaOGquE90L4zOx+59+1vL37rt0VdZetmZBQ==}
+  eslint-config-upleveled@8.8.0:
+    resolution: {integrity: sha512-B5JWKaigin2yIrxKHXT6Rhl3bxWyI6d1tKku3yRSgwtUqPxfsnqDv/FyT5Nc+TbUu2kKFxQkbfv8+ISiwQsfXw==}
     engines: {node: '>=20.9.0'}
     hasBin: true
     peerDependencies:
       '@types/eslint': ^9.6.1
       '@types/node': '>=22.7.5'
       '@types/react': ^18.3.11
-      '@types/react-dom': ^18.3.0
+      '@types/react-dom': ^18.3.1
       eslint: 9.12.0
       globals: ^15.11.0
       typescript: 5.6.3
@@ -4926,7 +4926,7 @@ snapshots:
       eslint: 9.12.0(jiti@2.1.2)
       find-up-simple: 1.0.0
 
-  eslint-config-upleveled@8.7.3(@babel/core@7.24.4)(@types/eslint@9.6.1)(@types/node@22.7.5)(@types/react-dom@18.2.25)(@types/react@18.2.79)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.8.1(eslint@9.12.0(jiti@2.1.2))(typescript@5.6.3))(eslint@9.12.0(jiti@2.1.2)))(eslint@9.12.0(jiti@2.1.2))(globals@15.9.0)(typescript@5.6.3):
+  eslint-config-upleveled@8.8.0(@babel/core@7.24.4)(@types/eslint@9.6.1)(@types/node@22.7.5)(@types/react-dom@18.2.25)(@types/react@18.2.79)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.8.1(eslint@9.12.0(jiti@2.1.2))(typescript@5.6.3))(eslint@9.12.0(jiti@2.1.2)))(eslint@9.12.0(jiti@2.1.2))(globals@15.9.0)(typescript@5.6.3):
     dependencies:
       '@babel/eslint-parser': 7.25.8(@babel/core@7.24.4)(eslint@9.12.0(jiti@2.1.2))
       '@eslint/compat': 1.2.0(eslint@9.12.0(jiti@2.1.2))

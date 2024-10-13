@@ -1,5 +1,5 @@
 import { execa } from 'execa';
-import { normalizeNewlines } from '../util/crossPlatform';
+import { normalizeNewlines } from '../util/crossPlatform.ts';
 
 export const title = 'Prettier';
 

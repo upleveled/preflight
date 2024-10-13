@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 import { execa } from 'execa';
-import { commandExample } from '../util/commandExample';
-import { isDrone } from '../util/drone';
+import { commandExample } from '../util/commandExample.ts';
+import { isDrone } from '../util/drone.ts';
 
 export const title = 'All changes committed to Git';
 

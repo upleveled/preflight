@@ -1,5 +1,5 @@
 import { execa } from 'execa';
-import { commandExample } from '../util/commandExample';
+import { commandExample } from '../util/commandExample.ts';
 
 export const title = 'Use single package manager';
 

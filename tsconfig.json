@@ -3,7 +3,6 @@
   "files": [],
   "references": [
     { "path": "./docker/tsconfig.json" },
-    { "path": "./tsconfig.nonsrc.json" },
-    { "path": "./tsconfig.src.json" }
+    { "path": "./tsconfig.root.json" }
   ]
 }
