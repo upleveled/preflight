@@ -61,5 +61,5 @@ export const projectPackageJson = JSON.parse(
 ) as PackageJson;
 
 export const preflightPackageJson = JSON.parse(
-  await fs.readFile(new URL('../package.json', import.meta.url), 'utf-8'),
+  await fs.readFile(new URL('../../package.json', import.meta.url), 'utf-8'),
 ) as PackageJson;
