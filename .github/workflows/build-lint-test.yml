@@ -84,8 +84,5 @@ jobs:
       - run: pnpm tsc --build
         if: runner.os != 'Windows'
 
-      - name: Build
-        run: pnpm build
-
       - name: Test
         run: pnpm test

@@ -16,3 +16,4 @@ jobs:
           COREPACK_ENABLE_STRICT: 0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: build
