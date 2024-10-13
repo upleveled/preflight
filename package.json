@@ -19,15 +19,13 @@
     "src"
   ],
   "scripts": {
-    "analyze": "size-limit --why",
-    "build": "tsdx build --format esm --target node --tsconfig tsconfig.src.json",
     "docker-build": "docker build --tag preflight .",
     "docker-build-run": "pnpm docker-build-ts && pnpm docker-build && pnpm docker-run",
     "docker-build-ts": "tsc --project docker/tsconfig.build.json",
     "docker-run": "docker run preflight",
     "lint": "eslint . --max-warnings 0",
     "size": "size-limit",
-    "start": "tsdx watch --format esm --target node",
+    "start": "tsx watch ./src/index.ts",
     "test": "vitest run",
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
   },
@@ -55,11 +53,9 @@
     "eslint": "9.12.0",
     "eslint-config-upleveled": "8.7.3",
     "p-map": "7.0.2",
-    "postinstall-postinstall": "2.1.0",
     "prettier": "3.3.3",
     "size-limit": "11.1.6",
     "stylelint": "16.9.0",
-    "tsdx": "0.14.1",
     "tslib": "2.7.0",
     "typescript": "5.6.3",
     "vitest": "2.1.2"
