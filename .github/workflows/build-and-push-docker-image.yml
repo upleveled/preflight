@@ -31,9 +31,6 @@ jobs:
 
       - run: pnpm install
 
-      - name: Compile TypeScript
-        run: pnpm docker-build-ts
-
       # Publish to container registry
       - name: Log in to the Container registry
         uses: docker/login-action@v3

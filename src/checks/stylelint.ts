@@ -1,6 +1,6 @@
 import { sep } from 'node:path';
 import { execa } from 'execa';
-import { LintResult } from 'stylelint';
+import type { LintResult } from 'stylelint';
 
 export const supportedStylelintFileExtensions = [
   'css',

@@ -1,6 +1,6 @@
 {
   "name": "@upleveled/preflight",
-  "version": "7.0.9",
+  "version": "8.0.0-0",
   "repository": "upleveled/preflight",
   "license": "MIT",
   "author": "UpLeveled (https://github.com/upleveled)",
@@ -9,28 +9,21 @@
     "Karl Horky <karl.horky@gmail.com>"
   ],
   "type": "module",
-  "main": "dist/preflight.esm.js",
-  "module": "dist/preflight.esm.js",
-  "typings": "dist/index.d.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
   "bin": {
-    "preflight": "bin/preflight.js"
+    "preflight": "./bin/preflight.ts"
   },
   "files": [
-    "bin/preflight.js",
-    "dist",
+    "./bin/preflight.js",
     "src"
   ],
   "scripts": {
-    "analyze": "size-limit --why",
-    "build": "tsdx build --format esm --target node --tsconfig tsconfig.src.json",
     "docker-build": "docker build --tag preflight .",
-    "docker-build-run": "pnpm docker-build-ts && pnpm docker-build && pnpm docker-run",
-    "docker-build-ts": "tsc --project docker/tsconfig.build.json",
+    "docker-build-run": "pnpm docker-build && pnpm docker-run",
     "docker-run": "docker run preflight",
     "lint": "eslint . --max-warnings 0",
-    "prepare": "pnpm build",
-    "size": "size-limit",
-    "start": "tsdx watch --format esm --target node",
+    "start": "tsx watch ./src/index.ts",
     "test": "vitest run",
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
   },
@@ -47,44 +40,23 @@
     "p-reduce": "3.0.0",
     "readdirp": "4.0.2",
     "semver": "7.6.3",
-    "top-user-agents": "2.1.24"
+    "top-user-agents": "2.1.24",
+    "tsx": "4.19.1"
   },
   "devDependencies": {
-    "@size-limit/file": "11.1.6",
     "@types/node": "22.7.5",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
     "eslint": "9.12.0",
-    "eslint-config-upleveled": "8.7.3",
+    "eslint-config-upleveled": "8.8.0",
     "p-map": "7.0.2",
-    "postinstall-postinstall": "2.1.0",
     "prettier": "3.3.3",
-    "size-limit": "11.1.6",
     "stylelint": "16.9.0",
-    "tsdx": "0.14.1",
-    "tslib": "2.7.0",
     "typescript": "5.6.3",
     "vitest": "2.1.2"
   },
   "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4",
   "engines": {
     "node": ">=18"
-  },
-  "pnpm": {
-    "overrides": {
-      "@typescript-eslint/eslint-plugin": "8.8.1",
-      "@typescript-eslint/parser": "8.8.1",
-      "@typescript-eslint/scope-manager": "8.8.1",
-      "@typescript-eslint/utils": "8.8.1",
-      "eslint": "9.12.0",
-      "eslint-plugin-jest": "28.8.3",
-      "eslint-plugin-react-hooks": "4.6.2",
-      "node-notifier": "10.0.1",
-      "normalize-package-data@2.5.0>semver": "5.7.2",
-      "jest": "30.0.0-alpha.6",
-      "rollup-plugin-typescript2": "^0.36.0",
-      "ts-jest": "29.2.5",
-      "typescript": "5.6.3"
-    }
   }
 }

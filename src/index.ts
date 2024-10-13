@@ -1,29 +1,29 @@
 import {
   Listr,
-  ListrContext,
-  ListrDefaultRenderer,
-  ListrTask,
+  type ListrContext,
+  type ListrDefaultRenderer,
+  type ListrTask,
   ListrTaskWrapper,
 } from 'listr2';
-import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit.js';
-import * as eslint from './checks/eslint.js';
-import * as eslintConfigIsValid from './checks/eslintConfigIsValid.js';
-import * as linkOnGithubAbout from './checks/linkOnGithubAbout.js';
-import * as nodeModulesIgnoredFromGit from './checks/nodeModulesIgnoredFromGit.js';
-import * as noDependenciesWithoutTypes from './checks/noDependencyProblems/noDependenciesWithoutTypes.js';
-import * as noUnusedAndMissingDependencies from './checks/noDependencyProblems/noUnusedDependencies.js';
-import * as noExtraneousFilesCommittedToGit from './checks/noExtraneousFilesCommittedToGit.js';
-import * as noSecretsCommittedToGit from './checks/noSecretsCommittedToGit.js';
-import * as preflightIsLatestVersion from './checks/preflightIsLatestVersion.js';
-import * as prettier from './checks/prettier.js';
-import * as projectFolderNameMatchesCorrectFormat from './checks/projectFolderNameMatchesCorrectFormat.js';
-import * as stylelint from './checks/stylelint.js';
-import * as stylelintConfigIsValid from './checks/stylelintConfigIsValid.js';
-import * as useSinglePackageManager from './checks/useSinglePackageManager.js';
+import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit.ts';
+import * as eslint from './checks/eslint.ts';
+import * as eslintConfigIsValid from './checks/eslintConfigIsValid.ts';
+import * as linkOnGithubAbout from './checks/linkOnGithubAbout.ts';
+import * as nodeModulesIgnoredFromGit from './checks/nodeModulesIgnoredFromGit.ts';
+import * as noDependenciesWithoutTypes from './checks/noDependencyProblems/noDependenciesWithoutTypes.ts';
+import * as noUnusedAndMissingDependencies from './checks/noDependencyProblems/noUnusedDependencies.ts';
+import * as noExtraneousFilesCommittedToGit from './checks/noExtraneousFilesCommittedToGit.ts';
+import * as noSecretsCommittedToGit from './checks/noSecretsCommittedToGit.ts';
+import * as preflightIsLatestVersion from './checks/preflightIsLatestVersion.ts';
+import * as prettier from './checks/prettier.ts';
+import * as projectFolderNameMatchesCorrectFormat from './checks/projectFolderNameMatchesCorrectFormat.ts';
+import * as stylelint from './checks/stylelint.ts';
+import * as stylelintConfigIsValid from './checks/stylelintConfigIsValid.ts';
+import * as useSinglePackageManager from './checks/useSinglePackageManager.ts';
 import {
   preflightPackageJson,
   projectPackageJson,
-} from './util/packageJson.js';
+} from './util/packageJson.ts';
 
 const projectDependencies = projectPackageJson.dependencies || {};
 

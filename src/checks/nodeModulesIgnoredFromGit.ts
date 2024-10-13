@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 import { execa } from 'execa';
-import { commandExample } from '../util/commandExample';
-import { normalizeNewlines } from '../util/crossPlatform';
+import { commandExample } from '../util/commandExample.ts';
+import { normalizeNewlines } from '../util/crossPlatform.ts';
 
 export const title = 'node_modules/ folder ignored in Git';
 

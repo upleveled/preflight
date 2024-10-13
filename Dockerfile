@@ -1,4 +1,6 @@
-FROM node:lts-alpine
+# TODO: Switch back to lts-alpine once v22 becomes LTS
+# FROM node:lts-alpine
+FROM node:22-alpine
 
 WORKDIR /preflight
 
@@ -21,6 +23,6 @@ ENV PNPM_HOME=/usr/local/bin
 
 RUN pnpm add --global @upleveled/preflight@latest
 
-COPY ./docker/clone-and-preflight.js ./
-RUN chmod +x ./clone-and-preflight.js
-ENTRYPOINT ["./clone-and-preflight.js"]
+COPY ./docker/clone-and-preflight.ts ./
+RUN chmod +x ./clone-and-preflight.ts
+ENTRYPOINT ["./clone-and-preflight.ts"]

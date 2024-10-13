@@ -1,5 +1,5 @@
 import { sep } from 'node:path';
-import { ESLint } from 'eslint';
+import type { ESLint } from 'eslint';
 import { execa } from 'execa';
 
 export const title = 'ESLint';
