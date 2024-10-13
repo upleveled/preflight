@@ -20,8 +20,7 @@
   ],
   "scripts": {
     "docker-build": "docker build --tag preflight .",
-    "docker-build-run": "pnpm docker-build-ts && pnpm docker-build && pnpm docker-run",
-    "docker-build-ts": "tsc --project docker/tsconfig.build.json",
+    "docker-build-run": "pnpm docker-build && pnpm docker-run",
     "docker-run": "docker run preflight",
     "lint": "eslint . --max-warnings 0",
     "start": "tsx watch ./src/index.ts",

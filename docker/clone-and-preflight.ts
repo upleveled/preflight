@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S node --experimental-strip-types
 
 import { argv, cwd, exit } from 'node:process';
 import { execa as bindExeca } from 'execa';
