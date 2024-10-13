@@ -7,7 +7,7 @@ const fixturesTempDir = '__tests__/fixtures/__temp';
 beforeAll(
   async () => {
     const { stdout: pnpmPackTarballPath } = await execa`pnpm pack`;
-    await execa`pnpm add --global $(pwd)/${pnpmPackTarballPath}`;
+    await execa`pnpm add --global ${process.cwd()}/${pnpmPackTarballPath}`;
     await pMap(
       [
         {
