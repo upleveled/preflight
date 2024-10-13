@@ -60,22 +60,5 @@
   "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4",
   "engines": {
     "node": ">=18"
-  },
-  "pnpm": {
-    "overrides": {
-      "@typescript-eslint/eslint-plugin": "8.8.1",
-      "@typescript-eslint/parser": "8.8.1",
-      "@typescript-eslint/scope-manager": "8.8.1",
-      "@typescript-eslint/utils": "8.8.1",
-      "eslint": "9.12.0",
-      "eslint-plugin-jest": "28.8.3",
-      "eslint-plugin-react-hooks": "4.6.2",
-      "node-notifier": "10.0.1",
-      "normalize-package-data@2.5.0>semver": "5.7.2",
-      "jest": "30.0.0-alpha.6",
-      "rollup-plugin-typescript2": "^0.36.0",
-      "ts-jest": "29.2.5",
-      "typescript": "5.6.3"
-    }
   }
 }
