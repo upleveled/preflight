@@ -6,6 +6,7 @@ const fixturesTempDir = '__tests__/fixtures/__temp';
 
 beforeAll(
   async () => {
+    await execa`pnpm add --global .`;
     await pMap(
       [
         {
@@ -60,7 +61,7 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 test('Passes in the react-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
-  })`${process.cwd()}/bin/preflight.ts`;
+  })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
@@ -69,7 +70,7 @@ test('Passes in the react-passing test project', async () => {
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/next-js-passing`,
-  })`${process.cwd()}/bin/preflight.ts`;
+  })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
