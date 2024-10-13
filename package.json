@@ -24,7 +24,6 @@
     "docker-build-ts": "tsc --project docker/tsconfig.build.json",
     "docker-run": "docker run preflight",
     "lint": "eslint . --max-warnings 0",
-    "size": "size-limit",
     "start": "tsx watch ./src/index.ts",
     "test": "vitest run",
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
@@ -46,7 +45,6 @@
     "tsx": "4.19.1"
   },
   "devDependencies": {
-    "@size-limit/file": "11.1.6",
     "@types/node": "22.7.5",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
@@ -54,7 +52,6 @@
     "eslint-config-upleveled": "8.8.0",
     "p-map": "7.0.2",
     "prettier": "3.3.3",
-    "size-limit": "11.1.6",
     "stylelint": "16.9.0",
     "tslib": "2.7.0",
     "typescript": "5.6.3",
