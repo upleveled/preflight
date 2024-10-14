@@ -7,11 +7,12 @@ WORKDIR /preflight
 COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
 
 # Install dependencies:
+# - env to enable -S flag for custom shebang (coreutils) https://forum.gitlab.com/t/error-usr-bin-env-unrecognized-option-s-with-alpine-linux-image-causes-ci-script-to-fail/64063
 # - Git to allow `git clone` in the clone-and-preflight script (git)
 # - PostgreSQL for project databases
 # - Python and build tools for building libpg-query with node-gyp (python3, py3-pip, build-base, bash)
 RUN apk update
-RUN apk add --no-cache git postgresql python3 py3-pip build-base bash
+RUN apk add --no-cache coreutils git postgresql python3 py3-pip build-base bash
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm install --frozen-lockfile
