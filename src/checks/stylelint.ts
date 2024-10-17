@@ -22,7 +22,7 @@ export default async function stylelintCheck() {
       preferLocal: true,
     })`stylelint **/*.{${supportedStylelintFileExtensions.join(
       ',',
-    )}} --max-warnings 0 --formatter json`;
+    )}} --ignore-path .gitignore --max-warnings 0 --formatter json`;
   } catch (error) {
     const { stderr } = error as { stderr: string };
 
