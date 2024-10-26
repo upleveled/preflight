@@ -12,9 +12,5 @@ tsx_shim="$script_dir/../node_modules/.bin/tsx"
 exec_command=$(awk '/^else$/{flag=1;next}/^fi$/{flag=0}flag' "$tsx_shim" | grep 'exec node')
 cli_path=$(echo "$exec_command" | sed -E 's/^[[:space:]]*exec node[[:space:]]+"[^"]+(node_modules\/tsx\/[^"]+)".*/\1/')
 cli_path="$(pnpm bin --global)/global/5/.pnpm/$cli_path"
-# # pnpm_bin_global="$(pnpm bin --global)/global/5/.pnpm/$cli_path"
-# # echo "pnpm_bin_global: $pnpm_bin_global"
-# cli_path="${cli_path/$pnpm_bin_global\//$pnpm_bin_global\/global\/5\/.pnpm\/}"
-# echo "cli_path: $cli_path"
 
 node "$cli_path" "$script_dir/../src/index.ts"
