@@ -14,18 +14,4 @@ cli_path="${cli_path/\$basedir/$script_dir}"
 pnpm_bin_global="$(pnpm bin --global)"
 cli_path="${cli_path/$pnpm_bin_global\//$pnpm_bin_global\/global\/5\/.pnpm\/}"
 
-# if [[ ! -x "$cli_path" ]]; then
-#   echo "Error: tsx executable not found or is not executable at $cli_path" >&2
-#   # pnpm bin --global
-#   echo "pnpm bin --global: $(pnpm bin --global)"
-#   echo "script_dir: $script_dir"
-#   cd "$script_dir/.." || exit 1
-#   echo "$script_dir/node_modules/.bin files:"
-#   ls -la node_modules/.bin
-#   echo "tsx shim contents:"
-#   cat "$tsx_shim"
-#   echo "exec_command: $exec_command"
-#   exit 1
-# fi
-
 node "$cli_path" "$script_dir/../src/index.ts"
