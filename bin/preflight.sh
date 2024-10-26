@@ -13,5 +13,16 @@ cli_path=$(echo "$exec_command" | sed -E 's/^[[:space:]]*exec node[[:space:]]+"(
 cli_path="${cli_path/\$basedir/$script_dir}"
 cli_path="${cli_path/\/pnpm\//\/pnpm\/global\/5\/.pnpm\/}"
 
-# node "$cli_path" "$script_dir/../src/index.ts"
-node "$script_dir/../node_modules/.bin/tsx" "$script_dir/../src/index.ts"
+if [[ ! -x "$cli_path" ]]; then
+  echo "Error: tsx executable not found or is not executable at $cli_path" >&2
+  echo "script_dir: $script_dir"
+  cd "$script_dir/.." || exit 1
+  echo "$script_dir/node_modules/.bin files:"
+  ls -la node_modules/.bin
+  echo "tsx shim contents:"
+  cat "$tsx_shim"
+  echo "exec_command: $exec_command"
+  exit 1
+fi
+
+node "$cli_path" "$script_dir/../src/index.ts"
