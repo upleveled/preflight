@@ -12,7 +12,7 @@
   "module": "./src/index.ts",
   "types": "./src/index.ts",
   "bin": {
-    "preflight": "./bin/preflight.ts"
+    "preflight": "./bin/preflight.sh"
   },
   "files": [
     "./bin/preflight.js",
