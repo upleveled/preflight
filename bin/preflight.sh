@@ -11,7 +11,8 @@ tsx_shim="$script_dir/../node_modules/.bin/tsx"
 exec_command=$(awk '/^else$/{flag=1;next}/^fi$/{flag=0}flag' "$tsx_shim" | grep 'exec node')
 cli_path=$(echo "$exec_command" | sed -E 's/^[[:space:]]*exec node[[:space:]]+"([^"]+)".*/\1/')
 cli_path="${cli_path/\$basedir/$script_dir}"
-cli_path="${cli_path/\/pnpm\//\/pnpm\/global\/5\/.pnpm\/}"
+pnpm_bin_global="$(pnpm bin --global)"
+cli_path="${cli_path/\/$pnpm_bin_global\//\/$pnpm_bin_global\/global\/5\/.pnpm\/}"
 
 if [[ ! -x "$cli_path" ]]; then
   echo "Error: tsx executable not found or is not executable at $cli_path" >&2
