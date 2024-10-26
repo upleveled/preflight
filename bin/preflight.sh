@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"
-echo "script_dir: $script_dir"
 
 # Workaround for incorrect path in pnpm shim
 # https://github.com/pnpm/pnpm/issues/8704#issuecomment-2439618363
