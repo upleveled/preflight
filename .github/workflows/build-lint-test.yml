@@ -69,7 +69,9 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          # TODO: Switch back to lts/* when v22 becomes LTS
+          # node-version: 'lts/*'
+          node-version: '22'
           cache: 'pnpm'
 
       - run: pnpm install
