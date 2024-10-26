@@ -15,6 +15,8 @@ cli_path="${cli_path/\/pnpm\//\/pnpm\/global\/5\/.pnpm\/}"
 
 if [[ ! -x "$cli_path" ]]; then
   echo "Error: tsx executable not found or is not executable at $cli_path" >&2
+  # pnpm bin --global
+  echo "pnpm bin --global: $(pnpm bin --global)"
   echo "script_dir: $script_dir"
   cd "$script_dir/.." || exit 1
   echo "$script_dir/node_modules/.bin files:"
