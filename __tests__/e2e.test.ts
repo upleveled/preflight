@@ -7,10 +7,9 @@ const fixturesTempDir = '__tests__/fixtures/__temp';
 beforeAll(
   async () => {
     // Pack and install Preflight globally
-    console.log((await execa`pnpm pack`).stdout);
     const pnpmPackTarballPath = (await execa`pnpm pack`).stdout
       .split('\n')
-      .find((line) => line.match(/^preflight-.*\.tgz$/));
+      .find((line) => line.match(/^upleveled-preflight-.*\.tgz$/));
 
     if (!pnpmPackTarballPath) {
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
