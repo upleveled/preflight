@@ -43,18 +43,18 @@
     "tsx": "4.19.2"
   },
   "devDependencies": {
-    "@types/node": "22.9.1",
+    "@types/node": "22.10.1",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.5.8",
     "eslint": "9.15.0",
-    "eslint-config-upleveled": "8.11.4",
+    "eslint-config-upleveled": "8.12.0",
     "p-map": "7.0.2",
-    "prettier": "3.3.3",
-    "stylelint": "16.10.0",
-    "typescript": "5.6.3",
-    "vitest": "2.1.5"
+    "prettier": "3.4.1",
+    "stylelint": "16.11.0",
+    "typescript": "5.7.2",
+    "vitest": "2.1.6"
   },
-  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387",
+  "packageManager": "pnpm@9.14.3+sha512.c0f53ee99477ed969b82b289ad011a5d16bf1623c957e7f29eabe8d0c00b574c29b8c7f54f6c67ee710c73f285c8154d07ce44b46fe2c0eeb476a90441bac371",
   "engines": {
     "node": ">=18"
   }

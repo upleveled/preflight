@@ -44,7 +44,7 @@ beforeAll(
       ],
       async (testRepo) => {
         await execa`git clone --depth 1 --single-branch --branch=main https://github.com/${testRepo.repoPath}.git ${fixturesTempDir}/${testRepo.dirName} --config core.autocrlf=input`;
-        return testRepo.setup();
+        return await testRepo.setup();
       },
       {
         // Run up to 4 concurrent test repo setups at a time
