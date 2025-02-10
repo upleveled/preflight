@@ -1,8 +1,8 @@
 import upleveled from 'eslint-config-upleveled';
+import tseslint from 'typescript-eslint';
 
-/** @type {import('@typescript-eslint/utils/ts-eslint').FlatConfig.ConfigArray} */
-const config = [
-  ...upleveled,
+export default tseslint.config(
+  upleveled,
   {
     languageOptions: {
       parserOptions: {
@@ -11,6 +11,4 @@ const config = [
       },
     },
   },
-];
-
-export default config;
+);
