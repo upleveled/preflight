@@ -69,12 +69,16 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          # TODO: Switch back to lts/* when v22 becomes LTS
-          # node-version: 'lts/*'
-          node-version: '22'
+          node-version: 'lts/*'
           cache: 'pnpm'
 
-      - run: pnpm install
+      - name: Install dependencies
+        # Fail on pnpm v10 ignored build scripts
+        #
+        # TODO: Switch to future `pnpm install` option to fail on pnpm v10 ignored build scripts, if accepted:
+        # - https://github.com/pnpm/pnpm/issues/9032#issuecomment-2647428724
+        # run: pnpm install --<flag here>
+        run: pnpm install | { has_ignored_build_scripts=false; while IFS= read -r line; do echo "$line"; [[ "$line" == *"Ignored build scripts:"* ]] && has_ignored_build_scripts=true; done; [[ "$has_ignored_build_scripts" = false ]]; }
       - run: pnpm install
         if: runner.os != 'Windows'
         working-directory: docker
