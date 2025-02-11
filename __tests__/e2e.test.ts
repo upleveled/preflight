@@ -20,9 +20,19 @@ beforeAll(
     // - https://github.com/pnpm/pnpm/issues/8891#issuecomment-2651840685
     const globalPnpmRoot = (await execa`pnpm root --global`).stdout;
     const globalPnpmPackageJsonPath = `${globalPnpmRoot.replace(/\/node_modules$/, '')}/package.json`;
-    const globalPnpmPackageJson = JSON.parse(
-      await readFile(globalPnpmPackageJsonPath, 'utf8'),
-    ) as { pnpm?: { onlyBuiltDependencies?: string[] } };
+
+    let globalPnpmPackageJson: {
+      pnpm?: { onlyBuiltDependencies?: string[] };
+    } = {};
+
+    try {
+      globalPnpmPackageJson = JSON.parse(
+        await readFile(globalPnpmPackageJsonPath, 'utf8'),
+      );
+    } catch {
+      // Swallow error if package.json doesn't exist
+    }
+
     if (
       !globalPnpmPackageJson.pnpm?.onlyBuiltDependencies ||
       !globalPnpmPackageJson.pnpm.onlyBuiltDependencies.includes('esbuild')
