@@ -1,5 +1,4 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { sep } from 'node:path';
 import { execa } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
@@ -20,7 +19,7 @@ beforeAll(
     // Workaround to globally set `pnpm.onlyBuiltDependencies` for `esbuild`
     // - https://github.com/pnpm/pnpm/issues/8891#issuecomment-2651840685
     const globalPnpmRoot = (await execa`pnpm root --global`).stdout.replace(
-      new RegExp(`${sep}node_modules$`),
+      /[/\\]node_modules$/,
       '',
     );
     await mkdir(globalPnpmRoot, { recursive: true });
