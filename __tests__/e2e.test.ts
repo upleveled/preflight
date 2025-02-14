@@ -1,4 +1,3 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { execa } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
@@ -16,45 +15,7 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    // Workaround to globally set `pnpm.onlyBuiltDependencies` for `esbuild`
-    // - https://github.com/pnpm/pnpm/issues/8891#issuecomment-2651840685
-    const globalPnpmRoot = (await execa`pnpm root --global`).stdout.replace(
-      /[/\\]node_modules$/,
-      '',
-    );
-    await mkdir(globalPnpmRoot, { recursive: true });
-    const globalPnpmPackageJsonPath = `${globalPnpmRoot}/package.json`;
-
-    let globalPnpmPackageJson: {
-      pnpm?: { onlyBuiltDependencies?: string[] };
-    } = {};
-
-    try {
-      globalPnpmPackageJson = JSON.parse(
-        await readFile(globalPnpmPackageJsonPath, 'utf8'),
-      );
-    } catch {
-      // Swallow error if package.json doesn't exist
-    }
-
-    if (
-      !globalPnpmPackageJson.pnpm?.onlyBuiltDependencies ||
-      !globalPnpmPackageJson.pnpm.onlyBuiltDependencies.includes('esbuild')
-    ) {
-      console.log(
-        `Updating pnpm global package.json at ${globalPnpmPackageJsonPath} to add 'esbuild' to pnpm.onlyBuiltDependencies...`,
-      );
-      globalPnpmPackageJson.pnpm = globalPnpmPackageJson.pnpm || {};
-      globalPnpmPackageJson.pnpm.onlyBuiltDependencies =
-        globalPnpmPackageJson.pnpm.onlyBuiltDependencies || [];
-      globalPnpmPackageJson.pnpm.onlyBuiltDependencies.push('esbuild');
-      await writeFile(
-        globalPnpmPackageJsonPath,
-        JSON.stringify(globalPnpmPackageJson, null, 2) + '\n',
-      );
-    }
-
-    await execa`pnpm add --global ${process.cwd()}/${pnpmPackTarballPath}`;
+    await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
 
     await pMap(
       [
