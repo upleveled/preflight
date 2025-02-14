@@ -74,6 +74,11 @@ test('Passes in the react-passing test project', async () => {
     cwd: `${fixturesTempDir}/react-passing`,
     stdout: 'inherit',
     stderr: 'inherit',
+  })`pnpm eslint . --max-warnings 0`;
+  await execa({
+    cwd: `${fixturesTempDir}/react-passing`,
+    stdout: 'inherit',
+    stderr: 'inherit',
   })`preflight`;
 
   // expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
@@ -82,6 +87,11 @@ test('Passes in the react-passing test project', async () => {
 
 test('Passes in the next-js-passing test project', async () => {
   // const { stdout, stderr } =
+  await execa({
+    cwd: `${fixturesTempDir}/react-passing`,
+    stdout: 'inherit',
+    stderr: 'inherit',
+  })`pnpm eslint . --max-warnings 0`;
   await execa({
     cwd: `${fixturesTempDir}/next-js-passing`,
     stdout: 'inherit',
