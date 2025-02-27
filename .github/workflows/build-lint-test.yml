@@ -106,4 +106,3 @@ jobs:
 
       - name: Test
         run: pnpm test
-        if: runner.os == 'Windows'
