@@ -25,8 +25,8 @@ beforeAll(
         cwd: process.cwd(),
       })`pnpm add --global --allow-build=esbuild /d/a/preflight/preflight/${pnpmPackTarballPath}`,
     );
-    console.log((await execa`preflight --version`).stdout);
     console.log((await execa({ shell: 'bash' })`preflight --version`).stdout);
+    console.log((await execa`preflight --version`).stdout);
     // console.log(
     //   (await execa`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm`)
     //     .stdout,
