@@ -15,6 +15,8 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
+    console.log(await execa({ shell: true })`echo $PATH`);
+    console.log(await execa({ shell: 'bash' })`echo $PATH`);
     await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
 
     await pMap(
@@ -69,8 +71,6 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 }
 
 test('Passes in the react-passing test project', async () => {
-  console.log(await execa({ shell: true })`echo $PATH`);
-  console.log(await execa({ shell: 'bash' })`echo $PATH`);
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
     shell: 'bash',
