@@ -64,13 +64,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - run: corepack enable
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
-
-      - run: corepack enable
 
       - name: Install dependencies
         run: pnpm install
