@@ -1,10 +1,6 @@
-import { execa as execaBind } from 'execa';
+import { execa } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
-
-const execa = execaBind({
-  shell: 'bash',
-});
 
 const fixturesTempDir = '__tests__/fixtures/__temp';
 
