@@ -72,9 +72,15 @@ jobs:
       - run: npm install --global --force corepack@>=0.31.0
 
       - run: corepack enable
+
       - run: |
-          echo "PNPM_HOME=/home/runner/.local/share/pnpm" >> $GITHUB_ENV
+          echo "PNPM_HOME=/home/runner/.local/share/pnpm" >> "$GITHUB_ENV"
           echo "$PNPM_HOME" >> "$GITHUB_PATH"
+        if: runner.os != 'Windows'
+      - run: |
+          echo "PNPM_HOME=/home/runner/.local/share/pnpm" >> "$GITHUB_ENV"
+          echo "$PNPM_HOME" >> "$GITHUB_PATH"
+        if: runner.os == 'Windows'
         shell: bash
 
       - name: Use Node.js
