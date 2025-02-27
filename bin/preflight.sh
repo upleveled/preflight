@@ -13,7 +13,7 @@ cli_path=$(echo "$exec_command" | sed -E 's/^[[:space:]]*exec node[[:space:]]+"[
 cli_path="$(pnpm bin --global)/global/5/.pnpm/$cli_path"
 
 ls /home/runner/.local/share/pnpm/global
-ls \\c\\Program Files\\Git\\home\\runner\\.local\\share\\pnpm\\global
+ls \\c\\Program\ Files\\Git\\home\\runner\\.local\\share\\pnpm\\global
 ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global
 ls "$(pnpm bin --global)"
 ls "$(pnpm bin --global)/global"
