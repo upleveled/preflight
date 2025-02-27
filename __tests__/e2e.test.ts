@@ -15,9 +15,7 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    console.log(
-      await execa({ shell: 'bash', env: { SHELL: 'bash' } })`pnpm setup`,
-    );
+    console.log(await execa({ env: { SHELL: 'bash' } })`pnpm setup`);
     console.log(await execa({ shell: true })`echo $PATH`);
     console.log(await execa({ shell: 'bash' })`echo $PATH`);
     await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
