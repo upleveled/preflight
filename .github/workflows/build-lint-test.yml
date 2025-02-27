@@ -76,13 +76,13 @@ jobs:
       - run: corepack enable
 
       - run: |
-          echo "PNPM_HOME=/home/runner/.local/share/pnpm" >> "$GITHUB_ENV"
-          echo "/home/runner/.local/share/pnpm" >> "$GITHUB_PATH"
-        if: runner.os != 'Windows'
-      - run: |
-          echo "PNPM_HOME=/home/runner/.local/share/pnpm" >> "$GITHUB_ENV"
-          echo "/home/runner/.local/share/pnpm" >> "$GITHUB_PATH"
-        if: runner.os == 'Windows'
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            PNPM_HOME=/c/Program\ Files/Git/home/runner/.local/share/pnpm
+          else
+            PNPM_HOME=/home/runner/.local/share/pnpm
+          fi
+          echo "PNPM_HOME=$PNPM_HOME" >> "$GITHUB_ENV"
+          echo "$PNPM_HOME" >> "$GITHUB_PATH"
         shell: bash
       - run: echo $PNPM_HOME
       - run: echo $PATH
