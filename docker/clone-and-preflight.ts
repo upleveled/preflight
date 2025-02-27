@@ -64,7 +64,7 @@ if (projectUsesPostgresql) {
   //
   // Example script:
   // https://github.com/upleveled/preflight-test-project-next-js-passing/blob/e65717f6951b5336bb0bd83c15bbc99caa67ebe9/scripts/alpine-postgresql-setup-and-start.sh
-  const postgresUid = Number(await execa`id -u postgres`);
+  const postgresUid = Number((await execa`id -u postgres`).stdout);
   await execa({
     // postgres user, for initdb and pg_ctl
     uid: postgresUid,
