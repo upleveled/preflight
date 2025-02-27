@@ -1,7 +1,10 @@
-import { readdir } from 'node:fs/promises';
-import { execa } from 'execa';
+import { execa as execaBind } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
+
+const execa = execaBind({
+  shell: 'bash',
+});
 
 const fixturesTempDir = '__tests__/fixtures/__temp';
 
@@ -16,27 +19,7 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    console.log(
-      await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`,
-    );
-    // list out tree of C:\Program Files\Git\home\runner\.local\share\pnpm
-    async function logTree(dir: string, depth = 0) {
-      const folders = await readdir(dir, { withFileTypes: true });
-      return await Promise.all(
-        folders.map(async (folder) => {
-          console.log(`${' '.repeat(depth * 2)}- ${folder.name}`);
-          if (folder.isDirectory()) {
-            await logTree(`${dir}/${folder.name}`, depth + 1);
-          }
-        }),
-      );
-    }
-    // Error: Cannot find module 'C:\Program Files\Git\home\runner\.local\share\pnpm\global\5\.pnpm\node_modules\tsx\dist\cli.mjs'\r
-    await logTree(
-      '/c/Program Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm/node_modules/tsx',
-    );
-
-    console.log(await execa`preflight`);
+    await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
 
     await pMap(
       [
