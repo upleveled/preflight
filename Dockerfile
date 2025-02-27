@@ -20,7 +20,7 @@ RUN pnpm install --frozen-lockfile
 # https://github.com/pnpm/pnpm/issues/784#issuecomment-1518582235
 ENV PNPM_HOME=/usr/local/bin
 
-RUN pnpm add --global @upleveled/preflight@latest
+RUN pnpm add --global --allow-build=esbuild @upleveled/preflight@latest
 
 COPY ./docker/clone-and-preflight.ts ./
 RUN chmod +x ./clone-and-preflight.ts
