@@ -7,7 +7,9 @@ const fixturesTempDir = '__tests__/fixtures/__temp';
 beforeAll(
   async () => {
     // Pack and install Preflight globally
-    const pnpmPackTarballPath = (await execa`pnpm pack`).stdout
+    const pnpmPackTarballPath = (
+      await execa({ shell: 'bash' })`pnpm pack`
+    ).stdout
       .split('\n')
       .find((line) => line.match(/^upleveled-preflight-.*\.tgz$/));
 
