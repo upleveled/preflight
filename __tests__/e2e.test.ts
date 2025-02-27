@@ -30,35 +30,35 @@ beforeAll(
       (
         await execa({
           shell: 'bash',
-        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm`
+        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm"`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global`
+        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global"`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5`
+        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5"`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm`
+        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm"`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm/node_modules`
+        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm/node_modules"`
       ).stdout,
     );
     console.log((await execa`preflight --version`).stdout);
