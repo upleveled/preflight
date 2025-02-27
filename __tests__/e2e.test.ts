@@ -31,7 +31,9 @@ beforeAll(
         }),
       );
     }
-    await logTree('/home/runner/.local/share/pnpm');
+    await logTree(
+      '/c/Program Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm',
+    );
 
     console.log(await execa`preflight`);
 
