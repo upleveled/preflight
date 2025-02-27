@@ -20,45 +20,45 @@ beforeAll(
     console.log(
       await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`,
     );
-    console.log(
-      (await execa`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm`)
-        .stdout,
-    );
+    // console.log(
+    //   (await execa`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm`)
+    //     .stdout,
+    // );
     // logging for
     // Error: Cannot find module 'C:\Program Files\Git\home\runner\.local\share\pnpm\global\5\.pnpm\node_modules\tsx\dist\cli.mjs'\r
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm"`
+        })`ls /home/runner/.local/share/pnpm`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global"`
+        })`ls /home/runner/.local/share/pnpm/global`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5"`
+        })`ls /home/runner/.local/share/pnpm/global/5`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm"`
+        })`ls /home/runner/.local/share/pnpm/global/5/.pnpm`
       ).stdout,
     );
     console.log(
       (
         await execa({
           shell: 'bash',
-        })`ls "/c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm/node_modules"`
+        })`ls /home/runner/.local/share/pnpm/global/5/.pnpm/node_modules`
       ).stdout,
     );
     console.log((await execa`preflight --version`).stdout);
