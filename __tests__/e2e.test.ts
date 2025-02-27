@@ -28,27 +28,37 @@ beforeAll(
     // Error: Cannot find module 'C:\Program Files\Git\home\runner\.local\share\pnpm\global\5\.pnpm\node_modules\tsx\dist\cli.mjs'\r
     console.log(
       (
-        await execa`ls C:\\Program\ Files\\Git\\home\\runner\\.local\\share\\pnpm`
+        await execa({
+          shell: 'bash',
+        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm`
       ).stdout,
     );
     console.log(
       (
-        await execa`ls C:\\Program\ Files\\Git\\home\\runner\\.local\\share\\pnpm\\global`
+        await execa({
+          shell: 'bash',
+        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global`
       ).stdout,
     );
     console.log(
       (
-        await execa`ls C:\\Program\ Files\\Git\\home\\runner\\.local\\share\\pnpm\\global\\5`
+        await execa({
+          shell: 'bash',
+        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5`
       ).stdout,
     );
     console.log(
       (
-        await execa`ls C:\\Program\ Files\\Git\\home\\runner\\.local\\share\\pnpm\\global\\5\\.pnpm`
+        await execa({
+          shell: 'bash',
+        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm`
       ).stdout,
     );
     console.log(
       (
-        await execa`ls C:\\Program\ Files\\Git\\home\\runner\\.local\\share\\pnpm\\global\\5\\.pnpm\\node_modules`
+        await execa({
+          shell: 'bash',
+        })`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm/node_modules`
       ).stdout,
     );
     console.log((await execa`preflight --version`).stdout);
