@@ -20,7 +20,6 @@ beforeAll(
     console.log(
       await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`,
     );
-    console.log((await execa`preflight --version`).stdout);
     console.log(
       (await execa`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm`)
         .stdout,
