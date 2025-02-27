@@ -24,8 +24,8 @@ beforeAll(
       const folders = await readdir(dir, { withFileTypes: true });
       return await Promise.all(
         folders.map(async (folder) => {
+          console.log(`${' '.repeat(depth * 2)}- ${folder.name}`);
           if (folder.isDirectory()) {
-            console.log(`${' '.repeat(depth * 2)}- ${folder.name}`);
             await logTree(`${dir}/${folder.name}`, depth + 1);
           }
         }),
