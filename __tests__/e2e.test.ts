@@ -3,6 +3,7 @@ import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
 
 const execa = execaBind({
+  // Use Bash also on Windows, to avoid path issues
   shell: 'bash',
 });
 
@@ -19,7 +20,7 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
+    await execa`pnpm add --global --allow-build=esbuild $(pwd)/${pnpmPackTarballPath}`;
 
     await pMap(
       [
