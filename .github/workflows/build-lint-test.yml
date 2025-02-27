@@ -75,10 +75,20 @@ jobs:
 
       - run: corepack enable
 
-      - run: |
+      # Set up PNPM_HOME directory to avoid errors such
+      # as `ERR_PNPM_NO_GLOBAL_BIN_DIR`:
+      #
+      # ```
+      #  ERR_PNPM_NO_GLOBAL_BIN_DIR  Unable to find the global bin directory
+      # Run "pnpm setup" to create it automatically, or set the global-bin-dir setting, or the PNPM_HOME env variable. The global bin directory should be in the PATH.
+      # ```
+      #
+      # - https://github.com/pnpm/pnpm/issues/9191#issuecomment-2687756396
+      - name: Set up pnpm global bin directory for `pnpm add --global`
+        run: |
           if [ "$RUNNER_OS" == "Windows" ]; then
             PNPM_HOME=/c/Program\ Files/Git/home/runner/.local/share/pnpm
-          else
+          elif [ "$RUNNER_OS" == "Linux" ]; then
             PNPM_HOME=/home/runner/.local/share/pnpm
           fi
           echo "PNPM_HOME=$PNPM_HOME" >> "$GITHUB_ENV"
