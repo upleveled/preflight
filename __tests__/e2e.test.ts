@@ -17,7 +17,9 @@ beforeAll(
 
     console.log(await execa({ shell: true })`echo $PATH`);
     console.log(await execa({ shell: 'bash' })`echo $PATH`);
-    await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
+    console.log(
+      await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`,
+    );
 
     await pMap(
       [
@@ -73,7 +75,6 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 test('Passes in the react-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
-    shell: 'bash',
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
@@ -83,7 +84,6 @@ test('Passes in the react-passing test project', async () => {
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/next-js-passing`,
-    shell: 'bash',
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
