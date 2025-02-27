@@ -72,6 +72,8 @@ jobs:
       - run: npm install -g corepack@>=0.31.0
 
       - run: corepack enable
+      - run: echo 'PNPM_HOME="/home/runner/.local/share/pnpm"' >> $GITHUB_ENV
+      - run: echo "$PNPM_HOME" >> $GITHUB_PATH
 
       - name: Use Node.js
         uses: actions/setup-node@v4
