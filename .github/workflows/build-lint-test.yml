@@ -68,6 +68,8 @@ jobs:
       # `Cannot find matching keyid` error
       # https://github.com/karlhorky/upleveled.io/pull/850#issuecomment-2646349719
       #
+      # Uses `--force` to overwrite Yarn v1 binary
+      #
       # TODO: Remove when GitHub Actions runners have corepack@>=0.31.0
       - run: npm install --global --force corepack@>=0.31.0
 
