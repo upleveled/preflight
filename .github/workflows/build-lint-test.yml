@@ -69,7 +69,7 @@ jobs:
       # https://github.com/karlhorky/upleveled.io/pull/850#issuecomment-2646349719
       #
       # TODO: Remove when GitHub Actions runners have corepack@>=0.31.0
-      - run: npm install -g corepack@>=0.31.0
+      - run: npm install --global --force corepack@>=0.31.0
 
       - run: corepack enable
       - run: echo 'PNPM_HOME="/home/runner/.local/share/pnpm"' >> $GITHUB_ENV
