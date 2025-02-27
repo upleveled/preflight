@@ -26,12 +26,12 @@ beforeAll(
         folders.map(async (folder) => {
           if (folder.isDirectory()) {
             console.log(`${' '.repeat(depth * 2)}- ${folder.name}`);
-            await logTree(`${dir}\\${folder.name}`, depth + 1);
+            await logTree(`${dir}/${folder.name}`, depth + 1);
           }
         }),
       );
     }
-    await logTree('C:\\Program Files\\Git\\home\\runner\\.local\\share\\pnpm');
+    await logTree('/c/Program Files/Git/home/runner/.local/share/pnpm');
 
     console.log(await execa`preflight`);
 
