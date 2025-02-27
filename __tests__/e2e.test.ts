@@ -69,6 +69,8 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 }
 
 test('Passes in the react-passing test project', async () => {
+  console.log(await execa({ shell: true })`echo $PATH`);
+  console.log(await execa({ shell: 'bash' })`echo $PATH`);
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
     shell: 'bash',
