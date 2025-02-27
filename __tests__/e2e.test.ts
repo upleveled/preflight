@@ -15,7 +15,6 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    await execa({ env: { SHELL: 'bash' } })`pnpm setup`;
     await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
 
     await pMap(
