@@ -1,15 +1,17 @@
-import { execa } from 'execa';
+import { execa as execaBind } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
+
+const execa = execaBind({
+  shell: 'bash',
+});
 
 const fixturesTempDir = '__tests__/fixtures/__temp';
 
 beforeAll(
   async () => {
     // Pack and install Preflight globally
-    const pnpmPackTarballPath = (
-      await execa({ shell: 'bash' })`pnpm pack`
-    ).stdout
+    const pnpmPackTarballPath = (await execa`pnpm pack`).stdout
       .split('\n')
       .find((line) => line.match(/^upleveled-preflight-.*\.tgz$/));
 
@@ -17,58 +19,9 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    console.log(await execa({ shell: true })`echo $PATH`);
-    console.log(await execa({ shell: 'bash' })`echo $PATH`);
-    console.log(
-      await execa({
-        shell: 'bash',
-        cwd: process.cwd(),
-      })`pnpm add --global --allow-build=esbuild /d/a/preflight/preflight/${pnpmPackTarballPath}`,
-    );
-    console.log((await execa({ shell: 'bash' })`preflight --version`).stdout);
-    console.log((await execa`preflight --version`).stdout);
-    // console.log(
-    //   (await execa`ls /c/Program\ Files/Git/home/runner/.local/share/pnpm`)
-    //     .stdout,
-    // );
-    // logging for
-    // Error: Cannot find module 'C:\Program Files\Git\home\runner\.local\share\pnpm\global\5\.pnpm\node_modules\tsx\dist\cli.mjs'\r
-    // console.log(
-    //   (
-    //     await execa({
-    //       shell: 'bash',
-    //     })`ls /home/runner/.local/share/pnpm`
-    //   ).stdout,
-    // );
-    // console.log(
-    //   (
-    //     await execa({
-    //       shell: 'bash',
-    //     })`ls /home/runner/.local/share/pnpm/global`
-    //   ).stdout,
-    // );
-    // console.log(
-    //   (
-    //     await execa({
-    //       shell: 'bash',
-    //     })`ls /home/runner/.local/share/pnpm/global/5`
-    //   ).stdout,
-    // );
-    // console.log(
-    //   (
-    //     await execa({
-    //       shell: 'bash',
-    //     })`ls /home/runner/.local/share/pnpm/global/5/.pnpm`
-    //   ).stdout,
-    // );
-    // console.log(
-    //   (
-    //     await execa({
-    //       shell: 'bash',
-    //     })`ls /home/runner/.local/share/pnpm/global/5/.pnpm/node_modules`
-    //   ).stdout,
-    // );
-    // console.log((await execa`preflight --version`).stdout);
+    await execa({
+      cwd: process.cwd(),
+    })`pnpm add --global --allow-build=esbuild $(pwd)/${pnpmPackTarballPath}`;
 
     await pMap(
       [
