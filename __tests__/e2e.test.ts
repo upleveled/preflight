@@ -1,6 +1,11 @@
-import { execa } from 'execa';
+import { execa as execaBind } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
+
+const execa = execaBind({
+  // Use Bash also on Windows, to avoid path issues
+  shell: 'bash',
+});
 
 const fixturesTempDir = '__tests__/fixtures/__temp';
 
@@ -15,7 +20,7 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
+    await execa`pnpm add --global --allow-build=esbuild $(pwd)/${pnpmPackTarballPath}`;
 
     await pMap(
       [
@@ -71,7 +76,6 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 test('Passes in the react-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
-    shell: 'bash',
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
@@ -81,7 +85,6 @@ test('Passes in the react-passing test project', async () => {
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/next-js-passing`,
-    shell: 'bash',
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
