@@ -75,11 +75,11 @@ jobs:
 
       - run: |
           echo "PNPM_HOME=/home/runner/.local/share/pnpm" >> "$GITHUB_ENV"
-          echo "$PNPM_HOME" >> "$GITHUB_PATH"
+          echo "/home/runner/.local/share/pnpm" >> "$GITHUB_PATH"
         if: runner.os != 'Windows'
       - run: |
           echo "PNPM_HOME=/home/runner/.local/share/pnpm" >> "$GITHUB_ENV"
-          echo "$PNPM_HOME" >> "$GITHUB_PATH"
+          echo "/home/runner/.local/share/pnpm" >> "$GITHUB_PATH"
         if: runner.os == 'Windows'
         shell: bash
       - run: echo $PNPM_HOME
