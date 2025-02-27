@@ -31,8 +31,9 @@ beforeAll(
         }),
       );
     }
+    // Error: Cannot find module 'C:\Program Files\Git\home\runner\.local\share\pnpm\global\5\.pnpm\node_modules\tsx\dist\cli.mjs'\r
     await logTree(
-      '/c/Program Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm',
+      '/c/Program Files/Git/home/runner/.local/share/pnpm/global/5/.pnpm/node_modules/tsx',
     );
 
     console.log(await execa`preflight`);
