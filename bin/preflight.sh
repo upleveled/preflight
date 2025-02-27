@@ -12,6 +12,8 @@ exec_command=$(awk '/^else$/{flag=1;next}/^fi$/{flag=0}flag' "$tsx_shim" | grep 
 cli_path=$(echo "$exec_command" | sed -E 's/^[[:space:]]*exec node[[:space:]]+"[^"]+(node_modules\/tsx\/[^"]+)".*/\1/')
 cli_path="$(pnpm bin --global)/global/5/.pnpm/$cli_path"
 
+ls /home/runner/.local/share
+ls /home/runner/.local/share/pnpm
 ls /home/runner/.local/share/pnpm/global
 ls \\c\\Program\ Files\\Git\\home\\runner\\.local\\share\\pnpm\\global
 ls /c/Program\ Files/Git/home/runner/.local/share/pnpm/global
