@@ -1,6 +1,4 @@
-# TODO: Switch back to lts-alpine once v22 becomes LTS
-# FROM node:lts-alpine
-FROM node:22-alpine
+FROM node:lts-alpine
 
 WORKDIR /preflight
 
