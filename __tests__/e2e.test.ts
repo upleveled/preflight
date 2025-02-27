@@ -22,7 +22,8 @@ beforeAll(
     console.log(
       await execa({
         shell: 'bash',
-      })`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath.replace('\\', '\\\\')}`,
+        cwd: process.cwd(),
+      })`pnpm add --global --allow-build=esbuild ${pnpmPackTarballPath}`,
     );
     console.log((await execa`preflight --version`).stdout);
     console.log((await execa({ shell: 'bash' })`preflight --version`).stdout);
