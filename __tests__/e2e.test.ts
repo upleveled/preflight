@@ -1,3 +1,4 @@
+import { readdir } from 'node:fs/promises';
 import { execa } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
@@ -15,7 +16,24 @@ beforeAll(
       throw new Error('Failed to find the tarball path in `pnpm pack` output');
     }
 
-    await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`;
+    console.log(
+      await execa`pnpm add --global --allow-build=esbuild ${process.cwd()}/${pnpmPackTarballPath}`,
+    );
+    // list out tree of C:\Program Files\Git\home\runner\.local\share\pnpm
+    async function logTree(dir: string, depth = 0) {
+      const folders = await readdir(dir, { withFileTypes: true });
+      return await Promise.all(
+        folders.map(async (folder) => {
+          if (folder.isDirectory()) {
+            console.log(`${' '.repeat(depth * 2)}- ${folder.name}`);
+            await logTree(`${dir}\\${folder.name}`, depth + 1);
+          }
+        }),
+      );
+    }
+    await logTree('C:\\Program Files\\Git\\home\\runner\\.local\\share\\pnpm');
+
+    console.log(await execa`preflight`);
 
     await pMap(
       [
