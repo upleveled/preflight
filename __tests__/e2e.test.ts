@@ -71,6 +71,7 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 test('Passes in the react-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
+    shell: true,
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
@@ -80,6 +81,7 @@ test('Passes in the react-passing test project', async () => {
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/next-js-passing`,
+    shell: true,
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
