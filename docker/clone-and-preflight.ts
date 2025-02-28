@@ -50,19 +50,26 @@ if (projectUsesPostgresql) {
 
   // Set database connection environment variables from .env.example,
   // inherited in all future execa calls
-  readFileSync(join(projectPath, '.env.example'), 'utf-8')
-    .split('\n')
-    .forEach((line) => {
-      const match = line.match(/^([A-Z0-9_]+)=/);
-      if (match) {
-        const key = match[1];
-        if (key) {
-          process.env[key] =
-            key === 'PGHOST' ? 'localhost' : 'project_to_check';
-        }
-      }
-    });
+  const envLines = readFileSync(
+    join(projectPath, '.env.example'),
+    'utf-8',
+  ).split('\n');
 
+  for (const line of envLines) {
+    // Skip comments and empty lines
+    if (!line || line.startsWith('#') || !line.includes('=')) continue;
+
+    // Split after the first '=' character
+    const [key] = line.split('=', 2);
+    if (!key) continue;
+
+    process.env[key] =
+      key === 'PGHOST'
+        ? 'localhost'
+        : key.startsWith('PG')
+          ? 'project_to_check'
+          : 'example_value';
+  }
   // Run script as postgres user to:
   // - Create data directory
   // - Init database
