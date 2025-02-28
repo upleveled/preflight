@@ -56,7 +56,10 @@ if (projectUsesPostgresql) {
       const match = line.match(/^([A-Z0-9_]+)=/);
       if (match) {
         const key = match[1];
-        process.env[key] = key === 'PGHOST' ? 'localhost' : 'project_to_check';
+        if (key) {
+          process.env[key] =
+            key === 'PGHOST' ? 'localhost' : 'project_to_check';
+        }
       }
     });
 
