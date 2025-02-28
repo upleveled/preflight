@@ -55,20 +55,13 @@ if (projectUsesPostgresql) {
   process.env.PGUSERNAME = 'project_to_check';
   process.env.PGPASSWORD = 'project_to_check';
 
-  const envLines = readFileSync(
-    join(projectPath, '.env.example'),
-    'utf-8',
-  ).split('\n');
+  const envLines = readFileSync(join(projectPath, '.env.example'), 'utf-8')
+    .split('\n')
+    .filter((line) => line && line.includes('='));
 
   for (const line of envLines) {
-    if (!line || line.startsWith('#') || !line.includes('=')) continue;
-
     const [key] = line.split('=', 2);
-    if (!key) continue;
-
-    if (key in process.env) {
-      continue;
-    }
+    if (!key || key in process.env) continue;
 
     process.env[key] = 'example_value';
   }
