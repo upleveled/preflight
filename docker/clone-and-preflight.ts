@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { argv, cwd, exit } from 'node:process';
 import { execa as bindExeca } from 'execa';
@@ -50,25 +50,27 @@ if (projectUsesPostgresql) {
 
   // Set database connection environment variables from .env.example,
   // inherited in all future execa calls
+  process.env.PGHOST = 'localhost';
+  process.env.PGDATABASE = 'project_to_check';
+  process.env.PGUSERNAME = 'project_to_check';
+  process.env.PGPASSWORD = 'project_to_check';
+
   const envLines = readFileSync(
     join(projectPath, '.env.example'),
     'utf-8',
   ).split('\n');
 
   for (const line of envLines) {
-    // Skip comments and empty lines
     if (!line || line.startsWith('#') || !line.includes('=')) continue;
 
-    // Split after the first '=' character
     const [key] = line.split('=', 2);
     if (!key) continue;
 
-    process.env[key] =
-      key === 'PGHOST'
-        ? 'localhost'
-        : key.startsWith('PG')
-          ? 'project_to_check'
-          : 'example_value';
+    if (key in process.env) {
+      continue;
+    }
+
+    process.env[key] = 'example_value';
   }
   // Run script as postgres user to:
   // - Create data directory
