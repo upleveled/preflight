@@ -46,8 +46,8 @@ if (projectUsesPostgresql) {
   await execa`mkdir -p /postgres-volume/run/postgresql/data`;
   await execa`chown -R postgres:postgres /postgres-volume/run/postgresql`;
 
-  // Set database connection environment variables from .env.example,
-  // inherited in all future execa calls
+  // Set database connection environment variables, inherited in
+  // all future execa calls
   process.env.PGHOST = 'localhost';
   process.env.PGDATABASE = 'project_to_check';
   process.env.PGUSERNAME = 'project_to_check';
