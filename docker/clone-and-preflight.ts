@@ -74,8 +74,8 @@ if (projectUsesPostgresql) {
   })`bash ./scripts/alpine-postgresql-setup-and-start.sh`;
 
   const output = postgresProcess.stdout;
-  const startMarker = '### START_ENV ###';
-  const endMarker = '### END_ENV ###';
+  const startMarker = 'ENVIRONMENT VARIABLES START';
+  const endMarker = 'ENVIRONMENT VARIABLES END';
 
   const startIndex = output.indexOf(startMarker);
   const endIndex = output.indexOf(endMarker);
