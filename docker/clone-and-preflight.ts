@@ -55,16 +55,6 @@ if (projectUsesPostgresql) {
   process.env.PGUSERNAME = 'project_to_check';
   process.env.PGPASSWORD = 'project_to_check';
 
-  const envLines = readFileSync(join(projectPath, '.env.example'), 'utf-8')
-    .split('\n')
-    .filter((line) => line && line.includes('='));
-
-  for (const line of envLines) {
-    const [key] = line.split('=', 2);
-    if (!key || key in process.env) continue;
-
-    process.env[key] = 'example_value';
-  }
   // Run script as postgres user to:
   // - Create data directory
   // - Init database
@@ -77,13 +67,32 @@ if (projectUsesPostgresql) {
   // Example script:
   // https://github.com/upleveled/preflight-test-project-next-js-passing/blob/e65717f6951b5336bb0bd83c15bbc99caa67ebe9/scripts/alpine-postgresql-setup-and-start.sh
   const postgresUid = Number((await execa`id -u postgres`).stdout);
-  await execa({
+  const postgresProcess = await execa({
     // postgres user, for initdb and pg_ctl
     uid: postgresUid,
     // Show output to simplify debugging
-    stdout: 'inherit',
+    stdout: 'pipe',
     stderr: 'inherit',
   })`bash ./scripts/alpine-postgresql-setup-and-start.sh`;
+
+  const output = postgresProcess.stdout;
+  const startMarker = '### START_ENV ###';
+  const endMarker = '### END_ENV ###';
+
+  const startIndex = output.indexOf(startMarker);
+  const endIndex = output.indexOf(endMarker);
+
+  const envLines = output
+    .slice(startIndex + startMarker.length, endIndex)
+    .trim()
+    .split('\n');
+
+  for (const line of envLines) {
+    const [key, value] = line.split('=');
+    if (key && value) {
+      process.env[key.trim()] = value.trim();
+    }
+  }
 
   console.log('Running migrations...');
   await execa`pnpm migrate up`;
