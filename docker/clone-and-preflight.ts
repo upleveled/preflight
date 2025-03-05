@@ -1,7 +1,5 @@
 #!/usr/bin/env -S node --experimental-strip-types
 
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { argv, cwd, exit } from 'node:process';
 import { execa as bindExeca } from 'execa';
 
