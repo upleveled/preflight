@@ -74,7 +74,7 @@ if (projectUsesPostgresql) {
   })`bash ./scripts/alpine-postgresql-setup-and-start.sh`;
 
   const preflightEnvironmentVariables = postgresProcess.stdout.match(
-    /PREFLIGHT_ENVIRONMENT_VARIABLES:\n(\[.*?\])/,
+    /PREFLIGHT_ENVIRONMENT_VARIABLES:\n(\[[^\]]+\])/,
   )?.[1];
 
   if (preflightEnvironmentVariables) {
