@@ -69,11 +69,9 @@ if (projectUsesPostgresql) {
     // postgres user, for initdb and pg_ctl
     uid: postgresUid,
     // Show output to simplify debugging
-    stdout: 'pipe',
-    stderr: 'inherit',
+    stdout: ['inherit', 'pipe'],
+    stderr: ['inherit', 'pipe'],
   })`bash ./scripts/alpine-postgresql-setup-and-start.sh`;
-
-  console.log(postgresProcess.stdout);
 
   const preflightEnvironmentVariables = postgresProcess.stdout.match(
     /PREFLIGHT_ENVIRONMENT_VARIABLES:\n(\[[^\]]+\])/,
