@@ -73,17 +73,15 @@ if (projectUsesPostgresql) {
     stderr: 'inherit',
   })`bash ./scripts/alpine-postgresql-setup-and-start.sh`;
 
+  console.log(postgresProcess.stdout);
+
   const preflightEnvironmentVariables = postgresProcess.stdout.match(
     /PREFLIGHT_ENVIRONMENT_VARIABLES:\n(\[[^\]]+\])/,
   )?.[1];
 
   if (preflightEnvironmentVariables) {
-    const environmentVariablesKeys: string[] = JSON.parse(
-      preflightEnvironmentVariables,
-    );
-
-    for (const key of environmentVariablesKeys) {
-      process.env[key] = `fake_${key.toLowerCase()}`;
+    for (const key of JSON.parse(preflightEnvironmentVariables) as string[]) {
+      process.env[key] = `MISSING_ENV_${key}`;
     }
   }
 
