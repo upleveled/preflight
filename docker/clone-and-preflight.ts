@@ -79,7 +79,7 @@ if (projectUsesPostgresql) {
 
   if (preflightEnvironmentVariables) {
     for (const key of JSON.parse(preflightEnvironmentVariables) as string[]) {
-      process.env[key] = `UPLEVELED_PREFLIGHT_PLACEHOLDER`;
+      process.env[key] = 'UPLEVELED_PREFLIGHT_PLACEHOLDER';
     }
   }
 
