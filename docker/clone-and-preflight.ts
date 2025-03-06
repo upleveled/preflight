@@ -64,14 +64,23 @@ if (projectUsesPostgresql) {
   //
   // Example script:
   // https://github.com/upleveled/preflight-test-project-next-js-passing/blob/e65717f6951b5336bb0bd83c15bbc99caa67ebe9/scripts/alpine-postgresql-setup-and-start.sh
-  const postgresUid = Number((await execa`id -u postgres`).stdout);
-  await execa({
+  const postgresProcess = await execa({
     // postgres user, for initdb and pg_ctl
-    uid: postgresUid,
+    uid: Number((await execa`id -u postgres`).stdout),
     // Show output to simplify debugging
-    stdout: 'inherit',
-    stderr: 'inherit',
+    stdout: ['inherit', 'pipe'],
+    stderr: ['inherit', 'pipe'],
   })`bash ./scripts/alpine-postgresql-setup-and-start.sh`;
+
+  const preflightEnvironmentVariables = postgresProcess.stdout.match(
+    /PREFLIGHT_ENVIRONMENT_VARIABLES:\n(\[[^\]]+\])/,
+  )?.[1];
+
+  if (preflightEnvironmentVariables) {
+    for (const name of JSON.parse(preflightEnvironmentVariables) as string[]) {
+      process.env[name] = 'UPLEVELED_PREFLIGHT_PLACEHOLDER';
+    }
+  }
 
   console.log('Running migrations...');
   await execa`pnpm migrate up`;
