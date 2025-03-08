@@ -11,6 +11,7 @@ export default async function noUnusedAndMissingDependencies() {
 
     // Tailwind CSS
     '@tailwindcss/jit',
+    '@tailwindcss/postcss',
     'autoprefixer',
     'postcss',
     'tailwindcss',
