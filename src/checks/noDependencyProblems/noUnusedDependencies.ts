@@ -63,6 +63,7 @@ export default async function noUnusedAndMissingDependencies() {
     // Expo
     '@babel/core',
     'expo-build-properties',
+    'expo-dev-client',
     'expo-splash-screen',
     'expo-system-ui',
     'react-dom',
