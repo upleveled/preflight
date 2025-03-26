@@ -59,6 +59,14 @@ export default async function noUnusedAndMissingDependencies() {
 
     // Next.js
     'sharp',
+
+    // Expo
+    '@babel/core',
+    'expo-build-properties',
+    'expo-splash-screen',
+    'expo-system-ui',
+    'react-dom',
+    'react-native-gesture-handler',
   ].join(',');
 
   try {
