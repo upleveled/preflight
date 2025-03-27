@@ -28,7 +28,7 @@
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
   },
   "dependencies": {
-    "algoliasearch": "5.21.0",
+    "algoliasearch": "5.23.0",
     "chalk": "5.4.1",
     "cheerio": "1.0.0",
     "depcheck": "1.4.7",
@@ -39,23 +39,23 @@
     "p-reduce": "3.0.0",
     "readdirp": "4.1.2",
     "semver": "7.7.1",
-    "top-user-agents": "2.1.40",
+    "top-user-agents": "2.1.41",
     "tsx": "4.19.3"
   },
   "devDependencies": {
-    "@types/node": "22.13.10",
+    "@types/node": "22.13.14",
     "@types/p-map": "2.0.0",
-    "@types/semver": "7.5.8",
-    "eslint": "9.22.0",
-    "eslint-config-upleveled": "9.2.1",
+    "@types/semver": "7.7.0",
+    "eslint": "9.23.0",
+    "eslint-config-upleveled": "9.2.3",
     "p-map": "7.0.3",
     "prettier": "3.5.3",
-    "stylelint": "16.16.0",
+    "stylelint": "16.17.0",
     "typescript": "5.8.2",
-    "typescript-eslint": "8.27.0",
+    "typescript-eslint": "8.28.0",
     "vitest": "3.0.9"
   },
-  "packageManager": "pnpm@10.6.5+sha512.cdf928fca20832cd59ec53826492b7dc25dc524d4370b6b4adbf65803d32efaa6c1c88147c0ae4e8d579a6c9eec715757b50d4fa35eea179d868eada4ed043af",
+  "packageManager": "pnpm@10.7.0+sha512.6b865ad4b62a1d9842b61d674a393903b871d9244954f652b8842c2b553c72176b278f64c463e52d40fff8aba385c235c8c9ecf5cc7de4fd78b8bb6d49633ab6",
   "engines": {
     "node": ">=18"
   },
