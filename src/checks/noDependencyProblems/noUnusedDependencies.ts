@@ -28,8 +28,8 @@ export default async function noUnusedAndMissingDependencies() {
     'libpg-query',
 
     // TODO: Remove this once depcheck issue is fixed:
-    // PR: https://github.com/depcheck/depcheck/pull/790
-    // Issue: https://github.com/depcheck/depcheck/issues/791
+    // - PR: https://github.com/depcheck/depcheck/pull/790
+    // - Issue: https://github.com/depcheck/depcheck/issues/791
     //
     // Stylelint configuration
     'stylelint',
@@ -42,15 +42,15 @@ export default async function noUnusedAndMissingDependencies() {
     'playwright',
 
     // `expect` required for proper types with `@testing-library/jest-dom` with `@jest/globals` and pnpm
-    // https://github.com/testing-library/jest-dom/issues/123#issuecomment-1536828385
+    // - https://github.com/testing-library/jest-dom/issues/123#issuecomment-1536828385
     // TODO: Remove when we switch from Jest to Vitest
     'expect',
 
-    // `ts-node` required for jest.config.ts
-    // https://jestjs.io/docs/29.6/configuration#:~:text=To%20read%20TypeScript%20configuration%20files%20Jest%20requires%20ts%2Dnode.%20Make%20sure%20it%20is%20installed%20in%20your%20project
+    // `esbuild-register` required for jest.config.ts
+    // - https://jestjs.io/docs/next/configuration#:~:text=To%20read%20TypeScript%20configuration%20files%20Jest%20by%20default%20requires%20ts%2Dnode.%20You%20can%20override%20this%20behavior%20by%20adding%20a%20%40jest%2Dconfig%2Dloader%20docblock%20at%20the%20top%20of%20the%20file.%20Currently%2C%20ts%2Dnode%20and%20esbuild%2Dregister%20is%20supported.
     // TODO: Remove when usage of tsx is allowed
-    // https://github.com/jestjs/jest/issues/11989
-    'ts-node',
+    // - https://github.com/jestjs/jest/issues/11989
+    'esbuild-register',
 
     // TypeScript
     'typescript',
