@@ -42,8 +42,8 @@ importers:
         specifier: 7.7.2
         version: 7.7.2
       top-user-agents:
-        specifier: 2.1.58
-        version: 2.1.58
+        specifier: 2.1.59
+        version: 2.1.59
       tsx:
         specifier: 4.20.3
         version: 4.20.3
@@ -2897,8 +2897,8 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  top-user-agents@2.1.58:
-    resolution: {integrity: sha512-PGrUmoaGZvQI4MGFPpwooXy1XnNvA/O4Mvh6FCqHHJ+Nl/VB/bJBDQPBfzxEFC6+RHeSVZWDIxhE0obnoHOr2Q==}
+  top-user-agents@2.1.59:
+    resolution: {integrity: sha512-nux9jVCETEtcoPEcs0P8bK5Xij+hmuLnGgeeymA+LC6xKFaIiiU/KFxBiEy+1ZUERWHOQUUaaFYMxg6nxi4/DA==}
 
   ts-api-utils@2.1.0:
     resolution: {integrity: sha512-CUgTZL1irw8u29bzrOD/nH85jqyc74D6SshFgujOIA7osm2Rz7dYH77agkx7H4FBNxDq7Cjf+IjaX/8zwFW+ZQ==}
@@ -6297,7 +6297,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  top-user-agents@2.1.58: {}
+  top-user-agents@2.1.59: {}
 
   ts-api-utils@2.1.0(typescript@5.8.3):
     dependencies:
