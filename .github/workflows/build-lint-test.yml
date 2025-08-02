@@ -64,15 +64,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Upgrade to at least corepack@0.31.0 to avoid
-      # `Cannot find matching keyid` error
-      # https://github.com/karlhorky/upleveled.io/pull/850#issuecomment-2646349719
-      #
-      # Uses `--force` to overwrite Yarn v1 binary
-      #
-      # TODO: Remove when GitHub Actions runners have corepack@>=0.31.0
-      - run: npm install --global --force corepack@>=0.31.0
-
       - run: corepack enable
 
       # Set up PNPM_HOME directory to avoid errors such
@@ -98,7 +89,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: '22.18.0'
           cache: 'pnpm'
 
       - name: Install dependencies
