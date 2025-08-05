@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-exec node --input-type=module --eval '
+exec node --disable-warning=ExperimentalWarning --input-type=module --eval '
 import { readFileSync } from "node:fs";
 import { registerHooks, stripTypeScriptTypes } from "node:module";
 import { dirname, resolve } from "node:path";
