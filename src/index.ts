@@ -3,7 +3,7 @@ import {
   type ListrContext,
   type ListrDefaultRenderer,
   type ListrTask,
-  ListrTaskWrapper,
+  type ListrTaskWrapper,
 } from 'listr2';
 import * as allChangesCommittedToGit from './checks/allChangesCommittedToGit.ts';
 import * as eslint from './checks/eslint.ts';
