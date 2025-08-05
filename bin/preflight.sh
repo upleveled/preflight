@@ -5,7 +5,6 @@ set -o nounset
 set -o pipefail
 
 exec node --disable-warning=ExperimentalWarning --input-type=module --eval '
-import { readFileSync } from "node:fs";
 import { registerHooks, stripTypeScriptTypes } from "node:module";
 import { dirname, resolve } from "node:path";
 import { argv } from "node:process";
@@ -20,7 +19,7 @@ registerHooks({
     if (tsRegex.test(url)) {
       return {
         format: "module",
-        source: stripTypeScriptTypes(readFileSync(fileURLToPath(url), "utf8"), {
+        source: stripTypeScriptTypes(nextLoad(url).source.toString(), {
           mode: "transform",
           sourceUrl: url,
         }),
