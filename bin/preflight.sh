@@ -1,15 +1,44 @@
 #!/usr/bin/env bash
 
-script_dir="$(cd "$(dirname "$0")" && pwd)"
+set -o errexit
+set -o nounset
+set -o pipefail
 
-# Workaround for incorrect path in pnpm shim
-# https://github.com/pnpm/pnpm/issues/8704#issuecomment-2439618363
-#
-# TODO: Remove and switch back to "$script_dir/../node_modules/.bin/tsx"
-# when the issue above is resolved
-tsx_shim="$script_dir/../node_modules/.bin/tsx"
-exec_command=$(awk '/^else$/{flag=1;next}/^fi$/{flag=0}flag' "$tsx_shim" | grep 'exec node')
-cli_path=$(echo "$exec_command" | sed -E 's/^[[:space:]]*exec node[[:space:]]+"[^"]+(node_modules\/tsx\/[^"]+)".*/\1/')
-cli_path="$(pnpm bin --global)/global/5/.pnpm/$cli_path"
+exec node --disable-warning=ExperimentalWarning --input-type=module --eval '
+import { readFileSync } from "node:fs";
+import { registerHooks, stripTypeScriptTypes } from "node:module";
+import { dirname, resolve } from "node:path";
+import { argv } from "node:process";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-node "$cli_path" "$script_dir/../src/index.ts"
+const tsRegex = /^file:.*(?<!\.d)\.m?ts$/;
+
+// Intercept .ts / .mts files (skipping .d.ts files) and
+// transpile to JS, returning ES module
+registerHooks({
+  load(url, context, nextLoad) {
+    if (tsRegex.test(url)) {
+      return {
+        format: "module",
+        source: stripTypeScriptTypes(readFileSync(fileURLToPath(url), "utf8"), {
+          mode: "transform",
+          sourceUrl: url,
+        }),
+        shortCircuit: true,
+      };
+    }
+
+    return nextLoad(url, context);
+  },
+});
+
+await import(
+  pathToFileURL(
+    resolve(
+      dirname(argv[1]),
+      // Path to entry point
+      "../src/index.ts",
+    ),
+  ).href
+);
+' "$0" "$@"
