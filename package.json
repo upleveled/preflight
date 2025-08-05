@@ -23,7 +23,7 @@
     "docker-build-run": "pnpm docker-build && pnpm docker-run",
     "docker-run": "docker run preflight",
     "lint": "eslint . --max-warnings 0",
-    "start": "tsx watch ./src/index.ts",
+    "start": "node --watch ./src/index.ts",
     "test": "vitest run",
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
   },
@@ -39,8 +39,7 @@
     "p-reduce": "3.0.0",
     "readdirp": "4.1.2",
     "semver": "7.7.2",
-    "top-user-agents": "2.1.61",
-    "tsx": "4.20.3"
+    "top-user-agents": "2.1.61"
   },
   "devDependencies": {
     "@types/node": "24.1.0",
