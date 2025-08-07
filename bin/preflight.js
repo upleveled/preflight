@@ -21,7 +21,6 @@ registerHooks({
             sourceUrl: url,
           },
         ),
-        shortCircuit: true,
       };
     }
 
