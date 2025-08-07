@@ -12,10 +12,9 @@
   "module": "./src/index.ts",
   "types": "./src/index.ts",
   "bin": {
-    "preflight": "./bin/preflight.sh"
+    "preflight": "./bin/preflight.js"
   },
   "files": [
-    "./bin/preflight.js",
     "src"
   ],
   "scripts": {
