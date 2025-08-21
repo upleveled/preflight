@@ -28,32 +28,32 @@
   },
   "dependencies": {
     "algoliasearch": "5.35.0",
-    "chalk": "5.5.0",
+    "chalk": "5.6.0",
     "cheerio": "1.1.2",
     "depcheck": "1.4.7",
     "domhandler": "5.0.3",
     "execa": "9.6.0",
-    "listr2": "9.0.1",
+    "listr2": "9.0.2",
     "node-fetch": "3.3.2",
     "p-reduce": "3.0.0",
     "readdirp": "4.1.2",
     "semver": "7.7.2",
-    "top-user-agents": "2.1.64"
+    "top-user-agents": "2.1.65"
   },
   "devDependencies": {
-    "@types/node": "24.2.1",
+    "@types/node": "24.3.0",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.7.0",
     "eslint": "9.33.0",
-    "eslint-config-upleveled": "9.2.13",
+    "eslint-config-upleveled": "9.2.14",
     "p-map": "7.0.3",
     "prettier": "3.6.2",
     "stylelint": "16.23.1",
     "typescript": "5.9.2",
-    "typescript-eslint": "8.39.1",
+    "typescript-eslint": "8.40.0",
     "vitest": "3.2.4"
   },
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.0",
   "engines": {
     "node": ">=18"
   },
