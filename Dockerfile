@@ -4,6 +4,9 @@ WORKDIR /preflight
 
 COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
 
+# Avoid interactive prompts eg. from `pnpm install`
+ENV CI=true
+
 # Install dependencies:
 # - env to enable -S flag for custom shebang (coreutils) https://forum.gitlab.com/t/error-usr-bin-env-unrecognized-option-s-with-alpine-linux-image-causes-ci-script-to-fail/64063
 # - Git to allow `git clone` in the clone-and-preflight script (git)
