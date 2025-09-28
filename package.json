@@ -45,7 +45,7 @@
     "@types/p-map": "2.0.0",
     "@types/semver": "7.7.1",
     "eslint": "9.35.0",
-    "eslint-config-upleveled": "9.2.15",
+    "eslint-config-upleveled": "9.3.0",
     "p-map": "7.0.3",
     "prettier": "3.6.2",
     "stylelint": "16.24.0",
@@ -56,11 +56,5 @@
   "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a",
   "engines": {
     "node": ">=18"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "unrs-resolver"
-    ]
   }
 }
