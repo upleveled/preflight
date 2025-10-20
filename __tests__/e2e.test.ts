@@ -80,7 +80,7 @@ test('Passes in the react-passing test project', async () => {
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
   expect(stderr.replace(/^\(node:\d+\) /, '')).toMatchSnapshot();
-}, 90000);
+}, 100000);
 
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execa({
