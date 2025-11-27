@@ -27,7 +27,7 @@
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
   },
   "dependencies": {
-    "algoliasearch": "5.43.0",
+    "algoliasearch": "5.44.0",
     "chalk": "5.6.2",
     "cheerio": "1.1.2",
     "depcheck": "1.4.7",
@@ -38,7 +38,7 @@
     "p-reduce": "3.0.0",
     "readdirp": "4.1.2",
     "semver": "7.7.3",
-    "top-user-agents": "2.1.79"
+    "top-user-agents": "2.1.80"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
@@ -50,10 +50,10 @@
     "prettier": "3.6.2",
     "stylelint": "16.25.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.4",
-    "vitest": "4.0.8"
+    "typescript-eslint": "8.47.0",
+    "vitest": "4.0.12"
   },
-  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
+  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b",
   "engines": {
     "node": ">=18"
   }
