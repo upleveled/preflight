@@ -41,7 +41,7 @@
     "top-user-agents": "2.1.84"
   },
   "devDependencies": {
-    "@types/node": "24.10.1",
+    "@types/node": "25.0.1",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.7.1",
     "eslint": "9.39.1",
