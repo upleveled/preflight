@@ -38,7 +38,7 @@
     "p-reduce": "3.0.0",
     "readdirp": "5.0.0",
     "semver": "7.7.3",
-    "top-user-agents": "2.1.87"
+    "top-user-agents": "2.1.88"
   },
   "devDependencies": {
     "@types/node": "25.0.3",
@@ -50,7 +50,7 @@
     "prettier": "3.7.4",
     "stylelint": "16.26.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.51.0",
+    "typescript-eslint": "8.52.0",
     "vitest": "4.0.16"
   },
   "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48",
