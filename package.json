@@ -37,7 +37,7 @@
     "node-fetch": "3.3.2",
     "p-reduce": "3.0.0",
     "readdirp": "5.0.0",
-    "semver": "7.7.3",
+    "semver": "7.7.4",
     "top-user-agents": "2.1.93"
   },
   "devDependencies": {
