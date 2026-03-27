@@ -45,7 +45,7 @@
     "@types/p-map": "2.0.0",
     "@types/semver": "7.7.1",
     "eslint": "9.39.2",
-    "eslint-config-upleveled": "9.4.7",
+    "eslint-config-upleveled": "10.0.0",
     "p-map": "7.0.4",
     "prettier": "3.8.1",
     "stylelint": "17.2.0",
