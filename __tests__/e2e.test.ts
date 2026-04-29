@@ -1,4 +1,3 @@
-import { stripVTControlCharacters } from 'node:util';
 import { execa as execaBind } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
@@ -7,6 +6,10 @@ const execa = execaBind({
   // Use Bash also on Windows, to avoid path issues
   shell: 'bash',
 });
+
+const preflightCommandEnvironment = {
+  FORCE_COLOR: '1',
+};
 
 const fixturesTempDir = '__tests__/fixtures/__temp';
 
@@ -63,7 +66,7 @@ beforeAll(
 );
 
 function sortStdoutAndStripVersionNumber(stdout: string) {
-  return stripVTControlCharacters(stdout)
+  return stdout
     .replace(/(UpLeveled Preflight) v\d+\.\d+\.\d+(-\d+)?/, '$1')
     .split('\n')
     .sort((a: string, b: string) => {
@@ -77,6 +80,7 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 test('Passes in the react-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
+    env: preflightCommandEnvironment,
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
@@ -86,6 +90,7 @@ test('Passes in the react-passing test project', async () => {
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/next-js-passing`,
+    env: preflightCommandEnvironment,
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
