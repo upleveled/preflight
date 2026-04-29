@@ -49,7 +49,7 @@
     "p-map": "7.0.4",
     "prettier": "3.8.1",
     "stylelint": "17.2.0",
-    "typescript": "5.9.3",
+    "typescript": "6.0.3",
     "typescript-eslint": "8.55.0",
     "vitest": "4.0.18"
   },
