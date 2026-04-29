@@ -1,3 +1,4 @@
+import { stripVTControlCharacters } from 'node:util';
 import { execa as execaBind } from 'execa';
 import pMap from 'p-map';
 import { beforeAll, expect, test } from 'vitest';
@@ -62,7 +63,7 @@ beforeAll(
 );
 
 function sortStdoutAndStripVersionNumber(stdout: string) {
-  return stdout
+  return stripVTControlCharacters(stdout)
     .replace(/(UpLeveled Preflight) v\d+\.\d+\.\d+(-\d+)?/, '$1')
     .split('\n')
     .sort((a: string, b: string) => {
