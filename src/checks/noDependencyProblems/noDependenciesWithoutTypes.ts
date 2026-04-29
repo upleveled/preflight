@@ -1,5 +1,5 @@
 import { existsSync, promises as fs } from 'node:fs';
-import { algoliasearch } from 'algoliasearch';
+import { algoliasearch, type Hit } from 'algoliasearch';
 import pReduce from 'p-reduce';
 import { commandExample } from '../../util/commandExample.ts';
 import { projectPackageJson } from '../../util/packageJson.ts';
@@ -11,12 +11,6 @@ const client = algoliasearch(
   'OFCNCOG2CU', // Application ID
   'ec73550aa8b2936dab436d4e02144784', // API Key
 );
-
-interface AlgoliaObj {
-  types?: {
-    definitelyTyped?: string;
-  };
-}
 
 export const title = 'No dependencies without types';
 
@@ -60,14 +54,18 @@ export default async function noDependenciesWithoutTypes() {
         return filteredDependencies;
       }
 
-      let results: AlgoliaObj;
+      let results: Hit<{
+        types?: {
+          definitelyTyped?: string;
+        };
+      }>;
 
       try {
-        results = (await client.getObject({
+        results = await client.getObject({
           indexName: 'npm-search',
           objectID: dependency,
           attributesToRetrieve: ['types'],
-        })) as AlgoliaObj;
+        });
       } catch (error) {
         // Show dependency name if Algolia's `client.getObject()` throws with an
         // error message (such as the error message "ObjectID does not exist"
