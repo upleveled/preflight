@@ -7,10 +7,6 @@ const execa = execaBind({
   shell: 'bash',
 });
 
-const preflightCommandEnvironment = {
-  FORCE_COLOR: '1',
-};
-
 const fixturesTempDir = '__tests__/fixtures/__temp';
 
 beforeAll(
@@ -80,7 +76,7 @@ function sortStdoutAndStripVersionNumber(stdout: string) {
 test('Passes in the react-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/react-passing`,
-    env: preflightCommandEnvironment,
+    env: { FORCE_COLOR: '1' },
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
@@ -90,7 +86,7 @@ test('Passes in the react-passing test project', async () => {
 test('Passes in the next-js-passing test project', async () => {
   const { stdout, stderr } = await execa({
     cwd: `${fixturesTempDir}/next-js-passing`,
-    env: preflightCommandEnvironment,
+    env: { FORCE_COLOR: '1' },
   })`preflight`;
 
   expect(sortStdoutAndStripVersionNumber(stdout)).toMatchSnapshot();
