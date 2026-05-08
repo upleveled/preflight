@@ -8,11 +8,7 @@ minimumReleaseAgeExclude:
   - stylelint-config-upleveled
 
 # Allow build scripts for trusted dependencies
-# - https://pnpm.io/settings#onlybuiltdependencies
-onlyBuiltDependencies:
-  - esbuild
-  - unrs-resolver
-
-# Fail on pnpm ignored build scripts
-# - https://pnpm.io/settings#strictdepbuilds
-strictDepBuilds: true
+# - https://pnpm.io/settings#allowbuilds
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true

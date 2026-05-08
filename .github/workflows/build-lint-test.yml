@@ -76,6 +76,7 @@ jobs:
       #
       # - https://github.com/pnpm/pnpm/issues/9191#issuecomment-2687756396
       - name: Set up pnpm global bin directory for `pnpm add --global`
+        shell: bash
         run: |
           if [ "$RUNNER_OS" == "Windows" ]; then
             PNPM_HOME=/c/Program\ Files/Git/home/runner/.local/share/pnpm
@@ -83,8 +84,7 @@ jobs:
             PNPM_HOME=/home/runner/.local/share/pnpm
           fi
           echo "PNPM_HOME=$PNPM_HOME" >> "$GITHUB_ENV"
-          echo "$PNPM_HOME" >> "$GITHUB_PATH"
-        shell: bash
+          echo "$PNPM_HOME/bin" >> "$GITHUB_PATH"
 
       - name: Use Node.js
         uses: actions/setup-node@v6
