@@ -38,22 +38,22 @@
     "p-reduce": "3.0.0",
     "readdirp": "5.0.0",
     "semver": "7.8.0",
-    "top-user-agents": "2.1.111"
+    "top-user-agents": "2.1.112"
   },
   "devDependencies": {
-    "@types/node": "25.8.0",
+    "@types/node": "25.9.1",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.7.1",
-    "eslint": "10.3.0",
+    "eslint": "10.4.0",
     "eslint-config-upleveled": "10.0.0",
     "p-map": "7.0.4",
     "prettier": "3.8.3",
-    "stylelint": "17.11.1",
+    "stylelint": "17.12.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.59.3",
-    "vitest": "4.1.6"
+    "typescript-eslint": "8.59.4",
+    "vitest": "4.1.7"
   },
-  "packageManager": "pnpm@11.1.2",
+  "packageManager": "pnpm@11.2.2",
   "engines": {
     "node": ">=22"
   }
