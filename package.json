@@ -38,19 +38,19 @@
     "p-reduce": "3.0.0",
     "readdirp": "5.0.0",
     "semver": "7.8.5",
-    "top-user-agents": "2.1.118"
+    "top-user-agents": "2.1.121"
   },
   "devDependencies": {
     "@types/node": "25.9.3",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.7.1",
-    "eslint": "10.5.0",
+    "eslint": "10.6.0",
     "eslint-config-upleveled": "10.0.0",
-    "p-map": "7.0.4",
-    "prettier": "3.8.4",
+    "p-map": "7.0.5",
+    "prettier": "3.9.4",
     "stylelint": "17.14.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.62.0",
+    "typescript-eslint": "8.62.1",
     "vitest": "4.1.9"
   },
   "packageManager": "pnpm@11.9.0",
