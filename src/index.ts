@@ -95,7 +95,7 @@ const listrTasks: ListrTask[] = [
 
 const tasks = new Listr(listrTasks, {
   exitOnError: false,
-  collectErrors: 'minimal',
+  collectErrors: true,
   rendererOptions: {
     collapseErrors: false,
     removeEmptyLines: false,
@@ -107,6 +107,6 @@ const tasks = new Listr(listrTasks, {
 
 await tasks.run();
 
-if (tasks.errors.length > 0) {
+if (tasks.errors && tasks.errors.length > 0) {
   process.exit(1);
 }
