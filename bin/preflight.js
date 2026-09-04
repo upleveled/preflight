@@ -17,7 +17,7 @@ registerHooks({
             nextLoad(url).source
           ).toString(),
           {
-            mode: 'transform',
+            mode: 'strip',
             sourceUrl: url,
           },
         ),
