@@ -33,7 +33,7 @@
     "depcheck": "1.4.7",
     "domhandler": "6.0.1",
     "execa": "10.0.1",
-    "listr2": "10.2.2",
+    "listr2": "11.0.1",
     "node-fetch": "3.3.2",
     "p-reduce": "3.0.0",
     "readdirp": "5.1.1",
