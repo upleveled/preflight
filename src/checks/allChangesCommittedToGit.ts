@@ -1,4 +1,3 @@
-import { promises as fs } from 'node:fs';
 import { execa } from 'execa';
 import { commandExample } from '../util/commandExample.ts';
 import { isDrone } from '../util/drone.ts';
@@ -6,14 +5,6 @@ import { isDrone } from '../util/drone.ts';
 export const title = 'All changes committed to Git';
 
 export default async function allChangesCommittedToGit() {
-  const { stdout: replSlug } = await execa`echo $REPL_SLUG`;
-
-  const isRunningInReplIt = replSlug !== '';
-
-  if (isRunningInReplIt) {
-    await fs.writeFile('.git/info/exclude', '.replit\n');
-  }
-
   const { stdout } = await execa`git status --porcelain`;
 
   if (stdout !== '') {

@@ -2,7 +2,6 @@ import { load } from 'cheerio';
 import type { Element } from 'domhandler';
 import { execa } from 'execa';
 import fetch from 'node-fetch';
-import { randomUserAgent } from '../util/randomUserAgent.ts';
 
 export const title = 'GitHub repo has deployed project link under About';
 
@@ -32,16 +31,11 @@ export default async function linkOnGithubAbout() {
 
   if (!urlInAboutSection) {
     throw new Error(
-      `Deployed project link not found in About section on ${repoUrl}. Click on the cog symbol to the right of the About heading and paste the Replit / Netlify / Fly.io link in the Website box.`,
+      `Deployed project link not found in About section on ${repoUrl}. Click on the gear symbol to the right of the About heading and paste the StackBlitz / Netlify / Fly.io / Vercel link in the Website box.`,
     );
   }
 
-  const response = await fetch(urlInAboutSection, {
-    headers: {
-      // For Replit
-      'user-agent': randomUserAgent(),
-    },
-  });
+  const response = await fetch(urlInAboutSection);
 
   if (!response.ok) {
     throw new Error(
