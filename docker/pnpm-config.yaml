@@ -1,0 +1,7 @@
+# Prevents installation of packages newer than 7 days
+# to mitigate supply chain risks, excluding UpLeveled packages so that
+# `pnpm add --global @upleveled/preflight@latest` installs the newest release
+# - https://pnpm.io/settings#minimumreleaseage
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - '@upleveled/*'
