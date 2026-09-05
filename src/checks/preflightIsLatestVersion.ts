@@ -19,7 +19,7 @@ export default async function preflightIsLatestVersion() {
         ${commandExample(
           `${
             os.platform() === 'linux' ? 'sudo ' : ''
-          }pnpm add --global @upleveled/preflight`,
+          }pnpm add --global @upleveled/preflight@${remoteVersion}`,
         )}
       `,
     );
