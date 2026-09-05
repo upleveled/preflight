@@ -19,9 +19,10 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm install --frozen-lockfile
 
 # Enable `pnpm add --global` on Alpine Linux by setting
-# home location environment variable to a location already in $PATH
+# a dedicated pnpm home directory and adding its bin directory to $PATH
 # https://github.com/pnpm/pnpm/issues/784#issuecomment-1518582235
-ENV PNPM_HOME=/usr/local
+ENV PNPM_HOME=/pnpm
+ENV PATH="$PNPM_HOME/bin:$PATH"
 
 RUN pnpm add --global --allow-build=esbuild @upleveled/preflight@latest
 
