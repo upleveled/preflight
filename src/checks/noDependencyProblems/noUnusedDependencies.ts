@@ -1,6 +1,6 @@
+import { fileURLToPath } from 'node:url';
 import { execa } from 'execa';
 import { commandExample } from '../../util/commandExample.ts';
-import { preflightBinPath } from '../../util/preflightBinPath.ts';
 
 export const title = 'No unused dependencies';
 
@@ -71,7 +71,7 @@ export default async function noUnusedAndMissingDependencies() {
   ].join(',');
 
   try {
-    await execa`${preflightBinPath}/depcheck --ignores="${ignoredPackagePatterns}"`;
+    await execa`node ${fileURLToPath(import.meta.resolve('depcheck/bin/depcheck.js'))} --ignores="${ignoredPackagePatterns}"`;
   } catch (error) {
     const { stdout } = error as { stdout: string };
     if (
