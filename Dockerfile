@@ -24,6 +24,13 @@ ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm install --frozen-lockfile
 
+# Apply pnpm's minimumReleaseAge settings to the global install below:
+# pnpm reads global settings from ~/.config/pnpm/config.yaml on Linux and
+# `pnpm add --global` ignores pnpm-workspace.yaml
+# - https://pnpm.io/settings#minimumreleaseage
+# - https://pnpm.io/cli/config
+COPY ./docker/pnpm-global-config.yaml /root/.config/pnpm/config.yaml
+
 RUN pnpm add --global --allow-build=esbuild @upleveled/preflight@latest
 
 COPY ./docker/clone-and-preflight.ts ./

@@ -2,11 +2,8 @@
 # to mitigate supply chain risks
 # - https://pnpm.io/settings#minimumreleaseage
 minimumReleaseAge: 10080
+# Exclude Preflight from minimumReleaseAge so that
+# `pnpm add --global @upleveled/preflight@latest`
+# installs latest version
 minimumReleaseAgeExclude:
-  - '@upleveled/*'
-  - eslint-config-upleveled
-  - stylelint-config-upleveled
-
-# Fail on pnpm ignored build scripts
-# - https://pnpm.io/settings#strictdepbuilds
-strictDepBuilds: true
+  - '@upleveled/preflight'
