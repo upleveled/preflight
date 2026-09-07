@@ -1,0 +1,66 @@
+name: Test pnpm installer image sizes
+on:
+  push:
+    branches:
+      - reduce-pnpm-docker-image-size
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: '${{ matrix.installer }}: Build and inspect image'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - installer: wget-latest
+            dockerfile: .github/docker-size-tests/Dockerfile.wget
+          - installer: wget-version
+            dockerfile: .github/docker-size-tests/Dockerfile.wget-version
+          - installer: npx-version
+            dockerfile: .github/docker-size-tests/Dockerfile.npx-version
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build image
+        run: |
+          docker buildx build \
+            --file "${{ matrix.dockerfile }}" \
+            --load \
+            --tag "preflight:${{ matrix.installer }}" \
+            .
+
+      - name: Verify pnpm and Preflight
+        run: |
+          expected_pnpm_version="$(node --print "require('./docker/package.json').devEngines.packageManager.version")"
+          actual_pnpm_version="$(docker run --rm --entrypoint pnpm "preflight:${{ matrix.installer }}" --version)"
+          echo "Expected pnpm version: $expected_pnpm_version"
+          echo "Actual pnpm version: $actual_pnpm_version"
+          test "$actual_pnpm_version" = "$expected_pnpm_version"
+          docker run --rm --entrypoint sh "preflight:${{ matrix.installer }}" -c 'command -v preflight'
+
+      - name: Export compressed image
+        run: |
+          docker buildx build \
+            --file "${{ matrix.dockerfile }}" \
+            --output "type=oci,dest=${RUNNER_TEMP}/${{ matrix.installer }}.oci.tar" \
+            --provenance=false \
+            .
+
+      - name: Inspect compressed image size
+        run: |
+          mkdir "${RUNNER_TEMP}/${{ matrix.installer }}-oci"
+          tar \
+            --extract \
+            --file "${RUNNER_TEMP}/${{ matrix.installer }}.oci.tar" \
+            --directory "${RUNNER_TEMP}/${{ matrix.installer }}-oci"
+          manifest_digest="$(jq --raw-output '.manifests[0].digest' "${RUNNER_TEMP}/${{ matrix.installer }}-oci/index.json")"
+          manifest_path="${RUNNER_TEMP}/${{ matrix.installer }}-oci/blobs/sha256/${manifest_digest#sha256:}"
+          compressed_layer_bytes="$(jq '[.layers[].size] | add' "$manifest_path")"
+          echo "Compressed layer bytes: $compressed_layer_bytes"
+          jq --raw-output '.layers[] | "\(.size)\t\(.digest)"' "$manifest_path"
