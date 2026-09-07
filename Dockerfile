@@ -2,8 +2,6 @@ FROM node:lts-alpine
 
 WORKDIR /preflight
 
-COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
-
 # Avoid interactive prompts eg. from `pnpm install`
 ENV CI=true
 
@@ -21,7 +19,10 @@ RUN apk add --no-cache coreutils git postgresql python3 py3-pip build-base bash
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME/bin:$PATH"
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm
+
+COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
+
 RUN pnpm install --frozen-lockfile
 
 # Apply pnpm's minimumReleaseAge settings to the global install below:
