@@ -8,7 +8,7 @@ export const title = 'Preflight is latest version';
 
 export default async function preflightIsLatestVersion() {
   const { stdout: remoteVersion } =
-    await execa`npm show @upleveled/preflight version`;
+    await execa`pnpm show @upleveled/preflight version`;
 
   if (semver.gt(remoteVersion, preflightPackageJson.version)) {
     throw new Error(

@@ -10,14 +10,13 @@ export const title = 'ESLint config is latest version';
 
 export default async function eslintConfigIsValid() {
   const { stdout: remoteVersion } =
-    await execa`npm show eslint-config-upleveled version`;
+    await execa`pnpm show eslint-config-upleveled version`;
 
   let localVersion: string | undefined;
 
   try {
-    const eslintConfigPackageJsonPath = require.resolve(
-      'eslint-config-upleveled/package.json',
-    );
+    const eslintConfigPackageJsonPath =
+      require.resolve('eslint-config-upleveled/package.json');
 
     localVersion =
       // Type assertion because we swallow the error anyway if

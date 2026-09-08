@@ -11,14 +11,13 @@ export const title = 'Stylelint config is latest version';
 
 export default async function stylelintConfigIsValid() {
   const { stdout: remoteVersion } =
-    await execa`npm show stylelint-config-upleveled version`;
+    await execa`pnpm show stylelint-config-upleveled version`;
 
   let localVersion: string | undefined;
 
   try {
-    const stylelintConfigPackageJsonPath = require.resolve(
-      'stylelint-config-upleveled/package.json',
-    );
+    const stylelintConfigPackageJsonPath =
+      require.resolve('stylelint-config-upleveled/package.json');
 
     localVersion =
       // Type assertion because we swallow the error anyway if
