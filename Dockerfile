@@ -23,7 +23,8 @@ COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
 
 RUN cd / \
   && ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm \
-    "$(node --print "require('/preflight/package.json').devEngines.packageManager.version")"
+    "$(node --input-type=module --eval \
+      'console.log((await import("/preflight/package.json", { with: { type: "json" } })).default.devEngines.packageManager.version)')"
 
 RUN pnpm install --frozen-lockfile
 
