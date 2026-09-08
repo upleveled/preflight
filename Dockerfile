@@ -19,9 +19,12 @@ RUN apk add --no-cache coreutils git postgresql python3 py3-pip build-base bash
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME/bin:$PATH"
 
-RUN ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm
-
 COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
+
+RUN cd / \
+  && ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm \
+    "$(node --input-type=module --eval \
+      'console.log((await import("/preflight/package.json", { with: { type: "json" } })).default.devEngines.packageManager.version)')"
 
 RUN pnpm install --frozen-lockfile
 
