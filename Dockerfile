@@ -19,7 +19,7 @@ RUN apk add --no-cache coreutils git postgresql python3 py3-pip build-base bash
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME/bin:$PATH"
 
-COPY ./docker/package.json ./docker/pnpm-lock.yaml /preflight/
+COPY ./docker/package.json ./docker/pnpm-lock.yaml ./docker/pnpm-workspace.yaml /preflight/
 
 RUN ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm \
     "$(node --input-type=module --eval \
