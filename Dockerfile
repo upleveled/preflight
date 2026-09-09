@@ -1,6 +1,6 @@
 FROM node:lts-alpine
 
-WORKDIR /preflight
+WORKDIR /
 
 # Avoid interactive prompts eg. from `pnpm install`
 ENV CI=true
@@ -19,12 +19,13 @@ RUN apk add --no-cache coreutils git postgresql python3 py3-pip build-base bash
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME/bin:$PATH"
 
-COPY ./docker/package.json ./docker/pnpm-lock.yaml ./
+COPY ./docker/package.json ./docker/pnpm-lock.yaml ./docker/pnpm-workspace.yaml /preflight/
 
-RUN cd / \
-  && ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm \
+RUN ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm \
     "$(node --input-type=module --eval \
       'console.log((await import("/preflight/package.json", { with: { type: "json" } })).default.devEngines.packageManager.version)')"
+
+WORKDIR /preflight
 
 RUN pnpm install --frozen-lockfile
 
