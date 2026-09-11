@@ -15,17 +15,15 @@ ENV CI=true
 RUN apk update
 RUN apk add --no-cache coreutils git postgresql python3 py3-pip build-base bash
 
+COPY ./docker/package.json ./docker/pnpm-lock.yaml ./docker/pnpm-workspace.yaml /preflight/
 # Enable `pnpm add --global` on Alpine Linux by setting
 # a dedicated pnpm home directory and adding its bin directory to $PATH
 # https://github.com/pnpm/pnpm/issues/784#issuecomment-1518582235
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME/bin:$PATH"
-
-COPY ./docker/package.json ./docker/pnpm-lock.yaml ./docker/pnpm-workspace.yaml /preflight/
-
 RUN ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm \
-    "$(node --input-type=module --eval \
-      'console.log((await import("/preflight/package.json", { with: { type: "json" } })).default.devEngines.packageManager.version)')"
+  "$(node --input-type=module --eval \
+    'console.log((await import("/preflight/package.json", { with: { type: "json" } })).default.devEngines.packageManager.version)')"
 
 WORKDIR /preflight
 
