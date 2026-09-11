@@ -1,5 +1,7 @@
 FROM node:lts-alpine
 
+# Prevent npx get-pnpm EBADDEVENGINES failure from
+# devEngines.packageManager in /preflight/package.json
 WORKDIR /
 
 # Avoid interactive prompts eg. from `pnpm install`
