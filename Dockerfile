@@ -15,10 +15,11 @@ ENV CI=true
 RUN apk update
 RUN apk add --no-cache coreutils git postgresql python3 py3-pip build-base bash
 
+# Install pnpm on Alpine Linux using get-pnpm
+# https://github.com/pnpm/pnpm/issues/784#issuecomment-1518582235
 COPY ./docker/package.json ./docker/pnpm-lock.yaml ./docker/pnpm-workspace.yaml /preflight/
 # Enable `pnpm add --global` on Alpine Linux by setting
 # a dedicated pnpm home directory and adding its bin directory to $PATH
-# https://github.com/pnpm/pnpm/issues/784#issuecomment-1518582235
 ENV PNPM_HOME=/pnpm
 ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN ENV="$HOME/.shrc" SHELL=/bin/sh npx --yes get-pnpm \
