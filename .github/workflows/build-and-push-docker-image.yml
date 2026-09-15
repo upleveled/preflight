@@ -45,6 +45,9 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           flavor: |
             latest=true
+      - name: Wait for @upleveled/preflight to become installable
+        run: ./scripts/wait-for-npm-availability.ts
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
