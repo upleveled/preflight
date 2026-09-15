@@ -31,6 +31,9 @@ jobs:
 
       - run: pnpm install
 
+      - name: Wait for npm publish
+        run: ./scripts/waitForNpmPublish.ts
+
       # Publish to container registry
       - name: Log in to the Container registry
         uses: docker/login-action@v4
@@ -45,9 +48,6 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           flavor: |
             latest=true
-      - name: Wait for @upleveled/preflight to become installable
-        run: ./scripts/waitForNpmPublish.ts
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
