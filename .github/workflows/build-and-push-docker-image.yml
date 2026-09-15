@@ -46,7 +46,7 @@ jobs:
           flavor: |
             latest=true
       - name: Wait for @upleveled/preflight to become installable
-        run: ./scripts/wait-for-npm-availability.ts
+        run: ./scripts/waitForNpmPublish.ts
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
