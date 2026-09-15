@@ -31,7 +31,7 @@ jobs:
 
       - run: pnpm install
 
-      - name: Wait for npm publish
+      - name: Wait for npm publish of package.json version
         run: ./scripts/waitForNpmPublish.ts
 
       # Publish to container registry
