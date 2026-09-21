@@ -1,7 +1,7 @@
 #!/usr/bin/env -S node --experimental-strip-types
 
 import { argv, cwd, exit } from 'node:process';
-import { execa as bindExeca } from 'execa';
+import { execa as bindExeca, ExecaError } from 'execa';
 
 if (
   !argv[2] ||
@@ -25,7 +25,22 @@ await execa({
 } --single-branch ${argv[2]} ${projectPath} --config core.autocrlf=input`;
 
 console.log('Installing dependencies...');
-await execa`pnpm install`;
+try {
+  await execa`pnpm install`;
+} catch (error) {
+  // TODO: Remove pnpm 10 Alpine workaround after student material supports
+  // only pnpm 11 and 12
+  const pnpmVersionWithoutAlpineNativeBinary =
+    error instanceof ExecaError
+      ? error.message.match(
+          /Cannot run @pnpm\/exe@([\d.]+) on this host: it ships no native binary for linux-x64-musl/,
+        )?.[1]
+      : undefined;
+
+  if (!pnpmVersionWithoutAlpineNativeBinary) throw error;
+
+  await execa`npm exec --yes --package=pnpm@${pnpmVersionWithoutAlpineNativeBinary} -- pnpm install`;
+}
 
 // Exit code of grep will be 0 if the `"postgres":`
 // string is found in package.json, indicating that
