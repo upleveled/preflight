@@ -18,7 +18,8 @@ const execa = bindExeca({ cwd: projectPath });
 
 console.log(`Cloning ${argv[2]}...`);
 await execa({
-  // Reset default for the `git clone` command before projectPath exists
+  // Reset default for the `git clone` command before projectPath
+  // exists
   cwd: cwd(),
 })`git clone --depth 1 ${
   !argv[3] ? [] : ['--branch', argv[3]]
@@ -28,8 +29,8 @@ console.log('Installing dependencies...');
 try {
   await execa`pnpm install`;
 } catch (error) {
-  // TODO: Remove pnpm 10 Alpine workaround after student material supports
-  // only pnpm 11 and 12
+  // TODO: Remove pnpm 10 Alpine workaround after student
+  // material no longer supports pnpm 10
   const pnpmVersionWithoutAlpineNativeBinary =
     error instanceof ExecaError
       ? error.message.match(
@@ -42,10 +43,9 @@ try {
   await execa`npm exec --yes --package=pnpm@${pnpmVersionWithoutAlpineNativeBinary} -- pnpm install`;
 }
 
-// Exit code of grep will be 0 if the `"postgres":`
-// string is found in package.json, indicating that
-// Postgres.js is installed and the project uses
-// a PostgreSQL database
+// Exit code of grep will be 0 if the `"postgres":` string is
+// found in package.json, indicating that Postgres.js is
+// installed and the project uses a PostgreSQL database
 const projectUsesPostgresql =
   (
     await execa({
