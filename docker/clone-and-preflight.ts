@@ -40,7 +40,9 @@ try {
 
   if (!pnpmVersionWithoutAlpineNativeBinary) throw error;
 
-  await execa`npm exec --yes --package=pnpm@${pnpmVersionWithoutAlpineNativeBinary} -- pnpm install`;
+  await execa`npm install --global --prefix=/tmp/preflight-pnpm pnpm@${pnpmVersionWithoutAlpineNativeBinary}`;
+  process.env.PATH = `/tmp/preflight-pnpm/bin:${process.env.PATH}`;
+  await execa`pnpm install`;
 }
 
 // Exit code of grep will be 0 if the `"postgres":` string is
