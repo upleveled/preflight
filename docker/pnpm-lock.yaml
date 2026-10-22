@@ -167,8 +167,8 @@ importers:
   .:
     dependencies:
       execa:
-        specifier: 10.1.0
-        version: 10.1.0
+        specifier: 10.1.1
+        version: 10.1.1
 
 packages:
 
@@ -179,8 +179,8 @@ packages:
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
 
-  execa@10.1.0:
-    resolution: {integrity: sha512-5HT/600HqXEtmkb9mK/PkTWw+bQSCzPnWiZ4/87wD3Hi0wFzCapOuNT9p4M08PDd+KLHdHvFhKjOWmNx/npRNQ==}
+  execa@10.1.1:
+    resolution: {integrity: sha512-yJAC9ulsE6fU0K6wzJBIH+wI+KAtMeu6Ck8rs23OVzvEhqXjGADdI6K+YNIDAjcQQ6AwXTD96cKExJo6xFJXyg==}
     engines: {node: '>=22'}
 
   figures@6.1.0:
@@ -250,7 +250,7 @@ snapshots:
 
   '@sindresorhus/merge-streams@4.0.0': {}
 
-  execa@10.1.0:
+  execa@10.1.1:
     dependencies:
       '@sindresorhus/merge-streams': 4.0.0
       figures: 6.1.0
