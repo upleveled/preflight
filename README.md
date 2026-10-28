@@ -31,8 +31,6 @@ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-te
 
 The Docker image generates Next.js types with `pnpm next typegen` for projects
 with a `next` dependency before setting up PostgreSQL and running Preflight.
-The image checks `pnpm next --help` for command support and skips type generation
-on Next.js versions before 15.5, which do not include `next typegen`.
 This generates `PageProps` and typed routes needed by ESLint in a fresh clone,
 without building the app. See the [Next.js type generation documentation](https://nextjs.org/docs/app/api-reference/cli/next#next-typegen-options).
 

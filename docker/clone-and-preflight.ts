@@ -50,11 +50,8 @@ try {
 if (
   (await execa({ reject: false })`grep package.json -e "next":`).exitCode === 0
 ) {
-  // Next.js versions before 15.5 do not support typegen
-  if ((await execa`pnpm next --help`).stdout.includes('typegen')) {
-    console.log('Generating Next.js types...');
-    await execa`pnpm next typegen`;
-  }
+  console.log('Generating Next.js types...');
+  await execa`pnpm next typegen`;
 }
 
 // Exit code of grep will be 0 if the `"postgres":` string is
