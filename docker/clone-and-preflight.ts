@@ -50,23 +50,16 @@ const projectPackageJson = JSON.parse(
   await readFile(`${projectPath}/package.json`, 'utf-8'),
 ) as {
   dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
 };
 
 // Generate PageProps and typed routes before ESLint checks a fresh clone
 // https://nextjs.org/docs/app/api-reference/cli/next#next-typegen-options
-if (
-  projectPackageJson.dependencies?.next ||
-  projectPackageJson.devDependencies?.next
-) {
+if (projectPackageJson.dependencies?.next) {
   console.log('Generating Next.js types...');
   await execa`pnpm next typegen`;
 }
 
-if (
-  projectPackageJson.dependencies?.postgres ||
-  projectPackageJson.devDependencies?.postgres
-) {
+if (projectPackageJson.dependencies?.postgres) {
   console.log('Setting up PostgreSQL database...');
 
   // Create directory for PostgreSQL socket
