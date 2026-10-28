@@ -29,18 +29,6 @@ docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-te
 docker run ghcr.io/upleveled/preflight https://github.com/upleveled/preflight-test-project-react-passing fix-tests
 ```
 
-The Docker image generates Next.js types with `pnpm next typegen` for projects
-with a `next` dependency before setting up PostgreSQL and running Preflight.
-This generates `PageProps` and typed routes needed by ESLint in a fresh clone,
-without building the app. See the [Next.js type generation documentation](https://nextjs.org/docs/app/api-reference/cli/next#next-typegen-options).
-
-When running Preflight locally in a Next.js 15.5 or later project, generate these types first:
-
-```bash
-pnpm next typegen
-preflight
-```
-
 ## Run Preflight with GitHub Actions workflow
 
 To run Preflight on every commit in your repository, you can use the following GitHub Actions workflow:
