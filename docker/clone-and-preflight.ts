@@ -1,5 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
 
+import { readFile } from 'node:fs/promises';
 import { argv, cwd, exit } from 'node:process';
 import { execa as bindExeca, ExecaError } from 'execa';
 
@@ -45,27 +46,27 @@ try {
   await execa`pnpm install`;
 }
 
+const projectPackageJson = JSON.parse(
+  await readFile(`${projectPath}/package.json`, 'utf-8'),
+) as {
+  dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
+};
+
 // Generate PageProps and typed routes before ESLint checks a fresh clone
 // https://nextjs.org/docs/app/api-reference/cli/next#next-typegen-options
 if (
-  (await execa({ reject: false })`grep package.json -e "next":`).exitCode === 0
+  projectPackageJson.dependencies?.next ||
+  projectPackageJson.devDependencies?.next
 ) {
   console.log('Generating Next.js types...');
   await execa`pnpm next typegen`;
 }
 
-// Exit code of grep will be 0 if the `"postgres":` string is
-// found in package.json, indicating that Postgres.js is
-// installed and the project uses a PostgreSQL database
-const projectUsesPostgresql =
-  (
-    await execa({
-      // Avoid crashing when `grep` doesn't find the string
-      reject: false,
-    })`grep package.json -e "postgres":`
-  ).exitCode === 0;
-
-if (projectUsesPostgresql) {
+if (
+  projectPackageJson.dependencies?.postgres ||
+  projectPackageJson.devDependencies?.postgres
+) {
   console.log('Setting up PostgreSQL database...');
 
   // Create directory for PostgreSQL socket
