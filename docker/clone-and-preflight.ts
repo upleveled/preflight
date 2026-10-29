@@ -52,7 +52,7 @@ const projectPackageJson = JSON.parse(
   dependencies?: Record<string, string>;
 };
 
-// Generate Next.js types needed for ESLint and TypeScript
+// Generate Next.js types needed for ESLint and TypeScript compiler
 // https://nextjs.org/docs/app/api-reference/cli/next#next-typegen-options
 if (projectPackageJson.dependencies?.next) {
   console.log('Generating Next.js types...');
