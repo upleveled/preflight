@@ -9,7 +9,7 @@
   ],
   "type": "module",
   "dependencies": {
-    "execa": "10.1.1"
+    "execa": "10.2.0"
   },
   "devEngines": {
     "packageManager": {
