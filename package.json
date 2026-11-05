@@ -27,12 +27,12 @@
     "test-local": "rm -rf ./__tests__/fixtures/__temp && pnpm test"
   },
   "dependencies": {
-    "algoliasearch": "5.60.0",
+    "algoliasearch": "5.61.0",
     "chalk": "6.0.1",
     "cheerio": "1.2.0",
     "depcheck": "1.4.7",
     "domhandler": "6.0.1",
-    "execa": "10.2.0",
+    "execa": "10.2.1",
     "listr2": "11.4.0",
     "node-fetch": "3.3.2",
     "p-reduce": "3.0.0",
@@ -40,16 +40,16 @@
     "semver": "7.8.5"
   },
   "devDependencies": {
-    "@types/node": "26.6.5",
+    "@types/node": "26.6.6",
     "@types/p-map": "2.0.0",
     "@types/semver": "7.8.0",
     "eslint": "10.13.0",
-    "eslint-config-upleveled": "11.0.2",
+    "eslint-config-upleveled": "11.0.3",
     "p-map": "7.1.1",
     "prettier": "3.9.10",
     "stylelint": "17.16.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.72.0",
+    "typescript-eslint": "8.72.1",
     "vitest": "4.1.11"
   },
   "engines": {
